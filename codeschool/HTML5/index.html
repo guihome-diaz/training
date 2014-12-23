@@ -1,0 +1,129 @@
+<!Doctype html>
+<head>
+	<meta charset="UTF-8" />
+	<link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+	
+	<!-- ## Section ## 
+		 definition: it's used for grouping together thematically related content. 
+		 Section VS div: ask yourself "is all of the content related?", if so use a *section*.
+	-->
+
+
+	<!-- ## Header || Footer ##
+	     definition header: a group of introductory or navigational aids
+	     usage: there can be many headers || footers in a page. 
+	            'header' usually appears at the top of a document or section
+	            'footer' usually appears at the end of a document or section
+	            However a 'header' or 'footer' is defined by its content rather than its position
+	-->
+
+	<!-- ## Aside ##
+		 definition: 'aside' is used to reprensent content that is NOT the primary focus of an article or page,
+		             but it is still RELATED TO the current article or page.
+		 usage: 
+		 	* When used WITHIN an 'article' element: 'aside' contents should be related to the current article
+		 	* When used OUTSIDE an 'article' element: 'aside' contents should be related to the site
+		 	                                           == 'aside' acts like a web-site's sidebar
+	-->
+
+	<!-- ## Nav ##
+	     definition: it represents a section of a page that links to other pages or to parts within the page.
+	                 == a web-site navigation menu
+	     usage: <nav> <ul> <li> ... </li> </ul> </nav>
+	-->
+
+	<!-- ## Article ##
+	     definition: the 'article' is another type of 'section'.
+	                 It is used for self-contained | primary "block" of related content 
+	                 == It's content can be syndicate within a RSS feed
+	     usage: Blog post
+	            News story
+	            Comment on a post
+	            Review 
+	            ...
+	-->
+
+	<!-- ## Main ##
+	     definition: it represents the main content of the body of a document or application
+	     usage: 
+            * Only 1 main tag per document
+            * Do NOT include 'main' within a Section, Article, Aside, Header, Footer or Nav. 
+	-->
+
+	<!-- ## Figure/figcaption ##
+	     usage: it's mainly used to display images + related caption (if any)
+	     <figure>
+	     	<img src="image.png" alt="My picture" />
+	     	<figcaption>This is a caption for the picture.</figcaption>
+	     </figure>
+	-->
+
+
+	<!-- #################### FORMS ##################### -->
+	<!-- ## datalist ##
+	     definition: it represents a set of option elements that predefined options for other controls 
+                     == It brings auto-completion
+                     == It can be used to restricted a set of value (~ old 'select' in HTML4)
+	     usage: 
+	     	<input type="text" list="browsers" />
+	     	<datalist id="browsers">
+	     		<option value="Chrome" />
+	     		<option value="Firefox" />
+	     		<option value="Opera" />
+	     		<option value="Internet Explorer" />
+	     		<option value="Safari" />
+	     	</datalist>
+	-->
+
+	<!--
+		Some new form attributes:
+			* Placeholder: it allows you to specify a message that is shown inside the input,
+			               the message will be hidden when the user starts typing. 
+			* Autofocus: target element will be automatically focus when the page is rendered
+			            <input type="text" autofocus />
+			* Autocomplete
+			* Required: when the form is submitted, the user will be notified of an error if the 
+			            field is left blank
+			            <input type="text" required />
+			* Pattern: it accepts a JavaScript regular expression and validate the form field to match 
+			           that pattern
+			            <input type="text" pattern="[0-9]{3}" />
+			* List
+			* Multiple
+			* novalidate
+			* formnovalidate
+			* form
+			* formaction
+			* formenctype
+			* formmethod
+			* formtarget
+	-->
+
+	<!-- Default input type: text -->
+	<input type="text" />
+
+	<!-- All the following inputs are VERY VERY helpful on mobile devices -->
+	<input type="search" />
+	<input type="email" />
+	<input type="url" />
+
+	<input type="date" /> 		 <!-- Even useful on computers! It brings a date picker! -->
+	<input type="month" />
+	<input type="week" />
+	<input type="time" />		            <!-- Time HH:mm:SS only -->
+	<input type="datetime-local" />         <!-- Date + time -->
+	<input type="datetime" />               <!-- Date + time + timezone -->
+
+	<input type="tel" />
+	<input type="number" />
+	<input type="range" />
+
+	<input type="color" />
+
+	<script src="file.js"></script>
+</body>
+
+</html>
