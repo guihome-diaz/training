@@ -245,3 +245,91 @@ var MYFILENAMESPACE = {
 // Reminder:
 MYFILENAMESPACE.list  !=  MYFILENAMESPACE.BIOGRAPHIES.list
 
+
+
+
+// =========== Object attributes and methods scope ===========
+//          private | public elements within namespace
+// ===========================================================
+
+// You can have the same notion as JAVA in JS:
+//     ==> you can create public | private attributes and methods using closure
+
+// 1. the namespace should be an immediate function
+var ARMORY = (function(){ ... })();
+
+// 2. Each "private" attribute or method will be bound to the function scope
+//    using the 'var' keyword.
+//    All "private" elements should be at the top.
+
+// 3. Everything that is "public" must be in the return{ ... } element
+
+// NOTE: private elements ==> var ... ;
+//       public elements  ==> object style notation
+
+
+var ARMORY = (function(){
+
+  // private attributes
+  var weaponList = ["excalibur", "sword", "claymore"];
+  var armorList = ["helmet", "chain mail", "leather", "plate"];
+
+  // private methods
+  var removeWeapon = function(){...};
+  var replaceWeapon = function(){...};
+  var removeArmor = function(){...};
+  var replaceArmor = function(){...};
+
+  // public elements
+  return {
+      makeWeaponRequest: function(){...},
+      markeArmorRequest: function(){...}
+  };
+
+})();
+
+
+// RULE:
+// Private properties are created in the local scope of the function expression.
+// Public properties are built within the object which is then returned to 
+// become the namespace. Access to private data is thus possible only because
+// of closure within the larger module.
+
+
+
+
+// You can also add some imports
+
+var wartime = false;
+var ARMORY = (function(war){
+
+  // private attributes
+  var weaponList = ["excalibur", "sword", "claymore"];
+  var armorList = ["helmet", "chain mail", "leather", "plate"];
+
+  // private methods
+  var removeWeapon = function(){...};
+  var replaceWeapon = function(){...};
+  var removeArmor = function(){...};
+  var replaceArmor = function(){...};
+
+  // public elements
+  return {
+      makeWeaponRequest: function(){
+        if(war) {
+          // allow citizens to be armed 
+        }
+        ...
+      },
+      markeArmorRequest: function(){...}
+  };
+
+})(wartime);
+
+// Your namespace ensures clarity of globals within a file.
+// By using a parameter, you protect the imported data that might have been
+// inaccessible. All imported data becomes immediately scoped to the closure,
+// to be used in private data. Thus, when compared with importing the entire 
+// application, declared variables are both clearer and faster.
+
+
