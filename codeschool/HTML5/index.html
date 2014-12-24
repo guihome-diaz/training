@@ -123,7 +123,19 @@
 
 	<input type="color" />
 
-	<script src="file.js"></script>
+
+	<!-- SCRIPTS should ALWAYS be last because browsers cannot load anything in parralel with a script. -->
+	<script type="text/javascript" src="file.js"></script>
+
+	<!-- In HTML5 you can:
+		 * allow async loading of a script.
+		   No matter where the <script></script> is, it will be loaded last!
+		 * skip 'text/javascript' since JS is the default script language
+
+	 -->
+	<script src="file.js" async></script>
+
+
 </body>
 
 </html>
