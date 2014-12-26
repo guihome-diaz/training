@@ -204,6 +204,8 @@ parseInt(021, 10);
 if (typeof data is "number" && !isNaN(data)) { ... }
 
 
+// You can also cast a String into a number using +
+var price = +$(this).data('price');
 
 
 // =========== Namespace ===========
