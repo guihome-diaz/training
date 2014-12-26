@@ -9,6 +9,13 @@ jQuery(document).ready(function(){
 }); 
 
 
+// OR 
+
+$(document).ready(function(){
+    <code>
+}); 
+
+
 
 // ======== Selector ========
 
@@ -17,6 +24,13 @@ jQuery("h1");   ==    $("h1");				// Get by HTML tag(s)
                       $("p span");
                       $("#myId");			// Get by element ID
                       $(".myClass");		// Get by element class
+
+
+
+// To count the number of elements
+$("li").length;
+
+
 
 // ======== Searching the DOM ========
 // Use 'traversing' when you can: it's faster on runtime!
@@ -49,9 +63,11 @@ $(".vacation").filter(".onSale");		// Only return elements .vacation.onSale
 
 // Get element content 
 $("h1").text();
+$(".myField").val();
 
 // Set element content 
 $("h1").text("my text");
+$(".myField").val("my value");
 
 
 // ======== Manipulating the DOM ========
@@ -86,7 +102,7 @@ $(".myClass").removeClass(<class>);
 
 
 
-// ======== Watch for click ========
+// ======== Listen for click ========
 
 $(".myButton").on('click', "button", function() {			// Child listener
 $(".myButton").on('click', function() {						// Global listener
@@ -103,6 +119,12 @@ $(".myButton").on('click', function() {						// Global listener
 });
 
 
+// ======== Listen for keyboard event ========
+
+$(".vacation").on('keyup', ".quantity", function() { ... });
+
+
+
 // ======== jQuery and HTML bind ========
 
 <li class="myClass" data-price="$399.99"> ... </li>
@@ -111,6 +133,33 @@ $(".myButton").on('click', function() {						// Global listener
 //    .data(<dataName>,<value>);
 	  var amount = $("li").data('price');
 	  $("li").data('price', "$999");
+
+
+
+// ======== jQuery hide | display content ========
+
+
+.slideDown();			// To HIDE content
+.slideUp();				// To SHOW content
+.slideToggle();			// To switch between the 2 states
+
+
+
+// ======== jQuery and function args ========
+
+
+// 1.Functions should be declared above the document.ready
+// 2.Function as argument do NOT need parentheses, otherwise it will be an 
+//   immediate execution.
+
+function showTicket() {
+	$(this).closest(".confirmation").find(".ticket").slideToggle();
+}
+$(document).ready(function() {
+	$(".confirmation").on("click", 'button', showTicket); 
+});
+
+
 
 
 

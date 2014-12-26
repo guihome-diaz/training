@@ -1,0 +1,11 @@
+.photos {
+	/* Hint to display something on click */
+	display: none;
+}
+.photos span {
+	display: none;
+}
+
+.comments {
+	display: none;
+}
