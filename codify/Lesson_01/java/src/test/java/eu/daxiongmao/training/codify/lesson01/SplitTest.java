@@ -1,7 +1,9 @@
-package eu.daxiongmao.training.codify.lesson01.split;
+package eu.daxiongmao.training.codify.lesson01;
 
 import org.junit.Assert;
 import org.junit.Test;
+
+import eu.daxiongmao.training.codify.lesson01.Split;
 
 public class SplitTest {
 
