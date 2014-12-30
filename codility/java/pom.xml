@@ -1,0 +1,103 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<!-- MAVEN minimum required version -->
+	<prerequisites>
+		<maven>3.0.3</maven>
+	</prerequisites>
+
+	<!-- Project definition -->
+	<groupId>eu.daxiongmao.training</groupId>
+	<artifactId>codify-lessons</artifactId>
+	<version>1.0</version>
+
+	<properties>		
+		<!-- ## JVM settings ## -->
+		<java.version>1.8</java.version>
+		<default.encoding>utf-8</default.encoding>
+		<project.build.sourceEncoding>utf-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>utf-8</project.reporting.outputEncoding>
+		<project.build.sourceEncoding>${default.encoding}</project.build.sourceEncoding>
+		<project.report.outputEncoding>${default.encoding}</project.report.outputEncoding>
+
+		<!-- ## MAVEN settings ## -->
+		<maven.compiler.plugin>3.1</maven.compiler.plugin>
+		<maven.jar.plugin>2.5</maven.jar.plugin>
+        <maven.source.plugin>2.3</maven.source.plugin>
+
+		<!-- ## Other settings ## -->
+		<!-- Logging -->
+		<org.slf4j.version>1.7.7</org.slf4j.version>
+		<ch.qos.logback.version>1.1.2</ch.qos.logback.version>
+
+		<!-- Testing frameworks / libraries -->
+		<junit.version>4.11</junit.version>		
+	</properties>
+
+
+	<build>
+
+		<plugins>
+			<!-- MAVEN common build settings -->
+			<!-- == Always use the same settings for compilation == -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven.compiler.plugin}</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<maxmem>128m</maxmem>
+					<optimize>true</optimize>
+					<showDeprecation>true</showDeprecation>
+					<showWarnings>true</showWarnings>
+				</configuration>
+			</plugin>
+
+			<!-- upload the source to simplify debugging -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>${maven.source.plugin}</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<!-- dependencies listed here are made available to every sub-project -->
+	<dependencies>
+		<!-- Logging -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${org.slf4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${ch.qos.logback.version}</version>
+		</dependency>
+
+		<!-- ########################### -->
+		<!-- # Tests dependencies # -->
+		<!-- ########################### -->
+		<!-- Test dependencies -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+
+</project>

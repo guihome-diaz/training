@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+     
+    <!-- ==================================================================== -->
+    <!-- Patterns examples                                                    -->
+    <!-- PROD log: messages only                                              -->
+    <!--     %date{dd.MM.yyyy HH:mm:ss.SSS} [%-5p] %m%n                       -->
+    <!--DEV log: class                                                        -->
+    <!--     %date{dd.MM.yyyy HH:mm:ss.SSS} [%-5p] - %30c{0} - %m%n           -->
+    <!--DEBUG log: thread + class + line number                               -->
+    <!--     %date{dd.MM.yyyy HH:mm:ss.SSS} [%-5p] - %t - %30c{0} %4L - %m%n  -->
+    <!-- ==================================================================== -->
+        
+    
+    <!-- Append messages to the console -->
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+            <Pattern>[%-5p] %25t - %c - %m%n</Pattern>
+		</encoder>
+	</appender>
+	
+    <!-- Set default log-level for each appender -->
+    <root level="DEBUG">
+      <appender-ref ref="STDOUT"/>
+    </root>
+    
+</configuration>
