@@ -3,18 +3,24 @@ package eu.daxiongmao.training.codify.lesson01;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * To process min(|leftPart - rightPart|)
- * 
+ *
  * @author Guillaume Diaz
  * @version 1.0 - January 2015
  */
 public class Split {
+
+	/** Class logger. */
+	private static final Logger LOGGER = LoggerFactory.getLogger(Split.class);
 	
 	/**
 	 * Compute the result of min(|leftPart - rightPart|). <br/>
 	 * This is a GOOD solution since it produces a result in O(n)
-	 * 
+	 *
 	 * @param array
 	 *            array to process
 	 * @return min(|leftPart - rightPart|)
@@ -46,7 +52,7 @@ public class Split {
 		for (final Map.Entry<Integer, Long> entry : leftSums.entrySet()) {
 			final long sumRight = total - entry.getValue();
 			final long temp = Math.abs(entry.getValue() - sumRight);
-			System.out.println(String.format("Good solution:  P = %s ==> |%s- %s| ==> %s", entry.getKey(), entry.getValue(), sumRight, temp));
+			LOGGER.debug(String.format("Good solution:  P = %s ==> |%s- %s| ==> %s", entry.getKey(), entry.getValue(), sumRight, temp));
 			if (result == null || temp < result) {
 				result = temp;
 			}
@@ -58,7 +64,7 @@ public class Split {
 	/**
 	 * Compute the result of min(|leftPart - rightPart|). <br/>
 	 * This is a BAD solution since it produces a result in O(n^2) due to the 2 for inside each other.
-	 * 
+	 *
 	 * @param array
 	 *            array to process
 	 * @return min(|leftPart - rightPart|)
@@ -94,7 +100,7 @@ public class Split {
 			}
 		}
 		final int result = Math.abs(sumLeft - sumRight);
-		System.out.println(String.format("bad solution:  P = %s ==> |%s- %s| ==> %s", split, sumLeft, sumRight, result));
+		LOGGER.debug(String.format("bad solution:  P = %s ==> |%s- %s| ==> %s", split, sumLeft, sumRight, result));
 		return result;
 	}
 	
