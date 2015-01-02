@@ -22,6 +22,12 @@ $(document).ready(function(){
   	$("#total").text(price * quantity);
   });
   
-  
+  $("#tourAjax").on("click", "button", function() {
+    $.ajax('./photos.html', {
+      success: function(response) {
+        $('.photosAjax').html(response).fadeIn();
+      }
+    });
+  });
 
 });
