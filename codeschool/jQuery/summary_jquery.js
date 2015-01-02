@@ -47,6 +47,7 @@ $("#myId li:even");		// Get even indexs of 'li' (0,2,4,6,8,...)
 $(".france, #myId");	// Select both #myId and .france
 
 
+
 // ======== Traversing the DOM ========
 $("#myId").find("li");						// Get all 'li'
 $("#myId").find("li").first();	
@@ -68,6 +69,7 @@ $(".myField").val();
 // Set element content 
 $("h1").text("my text");
 $(".myField").val("my value");
+
 
 
 // ======== Manipulating the DOM ========
@@ -96,12 +98,6 @@ myValue.insertAfter($(".vacation"));
 
 
 
-// ======== CSS changes ========
-$(".myClass").addClass(<class>);
-$(".myClass").removeClass(<class>);
-
-
-
 // ======== Listen for click ========
 
 $(".myButton").on('click', "button", function() {			// Child listener
@@ -117,6 +113,7 @@ $(".myButton").on('click', function() {						// Global listener
 	//    + it might not always work...	
 
 });
+
 
 
 // ======== Listen for keyboard event ========
@@ -138,15 +135,26 @@ $(".vacation").on('keyup', ".quantity", function() { ... });
 
 // ======== jQuery hide | display content ========
 
-
 .slideDown();			// To HIDE content
 .slideUp();				// To SHOW content
 .slideToggle();			// To switch between the 2 states
 
 
+.fadeIn();
+.fadeOut();
+.fadeToggle();
+
+// You can also use the .show() and .hide() to switch between CSS without effects
+// "display:block" to "display:none"
+.show();
+.hide();
+
+// You can also add a speed argument in all of these methods
+// default speed=400ms | 'fast'=200ms | 'slow'=600ms
+
+
 
 // ======== jQuery and function args ========
-
 
 // 1.Functions should be declared above the document.ready
 // 2.Function as argument do NOT need parentheses, otherwise it will be an 
@@ -161,5 +169,133 @@ $(document).ready(function() {
 
 
 
+// ======== Manage event propagation | do NOT redirect to the top of the page ========
 
+$(document).ready(function() {
+	$(".confirmation").on("click", 'button', function(event) {
+		// Do NOT redirect to the top of the page if the link is <a href='#'>...</a>
+		event.preventDefault();
+		
+		// Do NOT call the other events (= end process)
+		event.stopPropagation();		
+		...
+	});	
+});
+
+// Example of use
+$(document).ready(function() {
+	$(".see-photos").on("click", function(event) {
+		event.stopPropagation();
+		event.preventDefault();
+		$(this).closest(".tour").find(".photos").slideToggle();
+	});
+	
+	$(".tour").on("click", function() {
+		alert("This should not be called");
+	});
+});
+
+
+
+// ======== CSS class ========
+
+// Check if the selection has a specific class
+.hasClass(<class>)   			// return boolean
+
+// ---- GOOD way to do it
+$(".myClass").addClass(<class>);
+$(".myClass").removeClass(<class>);
+$(".myClass").toggleClass(<class>);
+	
+	
+// ------ !! BAD: CSS in JavaScript !! ------
+// jQuery can set some CSS attributes and values
+.css(<attr>, <value>);
+.css(<object>);
+
+// [VERY BAD] set attributes through method chain
+$(document).ready(function() {
+	$(".see-photos").on("click", function(event) {		
+		$(this).css('background-color', '#252b30');
+		$(this).css('border-color', '1px solid #967');
+	});
+});
+
+// [BETTER but BAD still] set attributes through object
+$(document).ready(function() {
+	$(".see-photos").on("click", function(event) {		
+		$(this).css({'background-color': '#252b30',
+		'border-color': '1px solid #967'});
+	});
+});
+
+
+
+// ======== CSS animations ========
+
+// ----- GOOD way -----
+// Set CSS attribute for transitions:
+.vacation {
+	/* Old browsers and specifics */
+	-moz-transition: top 0.2s;
+	-o-transition: top 0.2s;
+	-webkit-transition: top 0.2s;
+	/* All modern browsers */
+	transition: top 0.2s;
+}
+
+// In JS use add | remove | toggle class
+
+
+// ----- BAD way to do -----
+$(".myClass").animate(<css object>, speed_in_ms);	
+	
+	// <css object> is similar to the .css() method
+	// default speed=400ms | 'fast'=200ms | 'slow'=600ms
+
+
+	
+// ======== AJAX ========
+
+// ------- Complete call ---------
+$('.confirmation').on('click','button', function() {
+	$.ajax('myURL', {
+		// JSON keys|values to send along the request
+		data: { "confNum": 1234, "airCompany": $(".ticket").data("airCompany") },
+		// Success case
+		success: function(response) {
+			// Here the response content is a HTML snippet
+			$('.ticket').html(response).slideDown();
+		}
+	});
+}); 
+
+/* Notes:
+    * To run ajax: 
+		$.ajax('myURL', { 
+			data: {<JSON>},
+			success:function(response){...}, 
+			error:function(response){...} }
+		);
+		
+    * myURL can be:
+		- complete 'http://mydomain.com/mySite/confirmation.html' 
+		- relative (if you are on the same domain + root URL) 'confirmation.html'
+		
+	* You can retrieve data dynamically if the HTML item has a jQuery <div data-XXX=""> attribute
+		ex: <div class="ticket" data-airCompany="Air China">...</div>
+*/
+
+
+
+// ------- Simpler call (only success handling)---------
+
+// Instead of $.ajax(...) you can use:   $.get('url', success);
+
+$('.confirmation').on('click', 'button', function() {
+	$.get('myURL', function(response) {
+		// Here the response content is a HTML snippet
+		$('.ticket').html(response).slideDown();
+	});
+}); 
 

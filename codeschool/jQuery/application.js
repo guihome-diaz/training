@@ -15,11 +15,13 @@ $(document).ready(function(){
   $(".photos").on("mouseleave", "li", showPhotos);
 
 
-
+  // Problem with that: the event always redirect to the top of the page!
   $(".vacations").on('keyup', ".quantity", function() { 
   	var price = +$(this).closest(".vacations").data('price');
   	var quantity = +$(this).val();
   	$("#total").text(price * quantity);
   });
+  
+  
 
 });
