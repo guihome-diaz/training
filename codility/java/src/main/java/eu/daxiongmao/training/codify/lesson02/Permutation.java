@@ -3,12 +3,10 @@ package eu.daxiongmao.training.codify.lesson02;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import eu.daxiongmao.training.codify.lesson01.Split;
-
 public class Permutation {
 
   /** Class logger. */
-  private static final Logger LOGGER = LoggerFactory.getLogger(Split.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(Permutation.class);
 
   /**
    * To check if the given array is a <i>permutation</i> or not. <br>
