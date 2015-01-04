@@ -1,0 +1,10 @@
+Copyright 2009–2015 by Codility Limited. 
+All Rights Reserved. Unauthorized copying, publication or disclosure prohibited. 
+See https://codility.com/programmers/ 
+
+--------------------
+The following copy is for my personal use and reference only!
+Do NOT use it for anything else!
+--------------------
+
+
