@@ -55,11 +55,6 @@ public class MinPositiveIntMissing {
   }
 
   /**
-   * To look for the minimal positive integer missing in the given array.<br/>
-   * As a reminder, positive integers start at value "1".
-   *
-   * @param array the array to inspect. This array can have values from Integer.MIN to Integer.MAX
-   * @return the minimal positive integer that is missing, starting at 1.
    * @deprecated do not use that function! It's too slow.<br/>
    *             This is an algorithm performance O(n^2)
    */

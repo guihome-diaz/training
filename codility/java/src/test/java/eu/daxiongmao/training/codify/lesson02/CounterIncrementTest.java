@@ -23,7 +23,6 @@ public class CounterIncrementTest {
       Assert.assertEquals(String.format("Expected: [%s]=%s", i, expectedResults[i]),
           expectedResults[i], outputResult[i]);
     }
-
   }
 
 }
