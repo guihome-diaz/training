@@ -18,28 +18,43 @@ public class MinPositiveIntMissing {
    * @param array the array to inspect. This array can have values from Integer.MIN to Integer.MAX
    * @return the minimal positive integer that is missing, starting at 1.
    */
-  int getMissingPositiveInteger(final int[] array) {
+  public int getMissingPositiveInteger(final int[] array) {
     // Check arguments
     if (array.length == 0) {
       return 1;
     }
 
-    // FIXME transform that into O(n) instead of O(n^2)
+    final int arraySize = array.length;
 
-    // Look for minimal value
-    // This is O(n^2)
-    boolean minValueFound;
-    int minValue = 1;
-    do {
-      minValueFound = false;
-      for (int i = 0; i < array.length; i++) {
-        if (array[i] == minValue) {
-          minValue++;
-          minValueFound = true;
-          break;
-        }
+    // Since array.length is limited to 1 000 000 ; while each value varies from (-) Integer.MAX
+    // The missing integer must be within [0...array.length]
+    // In worst case, if the array is a suite, then the missing integer will be (array.length + 1)
+
+    // According to these previous statements: we can use a count array
+    // Value "1" is represented in countArray[0]
+    final int countArray[] = new int[arraySize];
+
+
+    // Step 1: populate countArray
+    for (int i = 0; i < arraySize; i++) {
+      // Ignore negative and out-of-range values
+      if (array[i] > 0 && array[i] <= arraySize) {
+        // Save value in X-1 due to array zero index
+        countArray[array[i] - 1] = 1;
       }
-    } while (minValueFound);
+    }
+
+    // Step 2: check for missing values
+    int minValue = 1;
+    for (int i = 0; i < arraySize; i++) {
+      if (countArray[i] == 0) {
+        // Missing value has been found!
+        break;
+      } else {
+        // Increase next minimum value
+        minValue++;
+      }
+    }
 
     return minValue;
   }
