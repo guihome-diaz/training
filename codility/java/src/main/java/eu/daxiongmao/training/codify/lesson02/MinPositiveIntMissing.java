@@ -1,13 +1,8 @@
 package eu.daxiongmao.training.codify.lesson02;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 
 public class MinPositiveIntMissing {
-
-  /** Class logger. */
-  private static final Logger LOGGER = LoggerFactory.getLogger(MinPositiveIntMissing.class);
 
   /**
    * To look for the minimal positive integer missing in the given array.<br/>
