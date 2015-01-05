@@ -115,6 +115,23 @@ $(".myButton").on('click', function() {						// Global listener
 });
 
 
+// ---- Listen for click on an AJAX content
+// When you listen for a click on something that will be loaded later
+// you cannot make a hard reference to it on the left part! 
+// As the content does NOT exist when page is loaded the 1st time, you must
+// use a trick.
+
+// Assumption:
+// <a href="#" class=".view-boarding-pass">...</a> is loaded through AJAX call.
+
+// BAD [this will not work]
+$('.confirmation .view-boarding-pass').on('click', function(){...});
+
+// GOOD
+$('.confirmation').on('click', '.view-boarding-pass', function(){...});
+
+
+
 
 // ======== Listen for keyboard event ========
 
@@ -260,12 +277,32 @@ $(".myClass").animate(<css object>, speed_in_ms);
 // ------- Complete call ---------
 $('.confirmation').on('click','button', function() {
 	$.ajax('myURL', {
+		// Request type: post, get, ...
+		type: "post",
+		// Expected return format: html, xml, json...
+		dataType: "html",
 		// JSON keys|values to send along the request
 		data: { "confNum": 1234, "airCompany": $(".ticket").data("airCompany") },
+		// Before sending request
+		beforeSend: function() {
+			// usually you should put the loading symbol over here!
+			$('.confirmation').addClass('is-loading');
+		},
 		// Success case
 		success: function(response) {
 			// Here the response content is a HTML snippet
 			$('.ticket').html(response).slideDown();
+		},
+		// Error handling
+		error: function(request, errorType, errorMessage) {
+			alert('Error: ' + errorType + ' with message: ' + errorMessage);
+		},
+		// Set timeout (in ms) before error
+		timeout: 3000,
+		// Finaly do something after success | error
+		complete: function() {
+			// usually you should remove the loading symbol over here!
+			$('.confirmation').removeClass('is-loading');
 		}
 	});
 }); 
@@ -274,8 +311,12 @@ $('.confirmation').on('click','button', function() {
     * To run ajax: 
 		$.ajax('myURL', { 
 			data: {<JSON>},
-			success:function(response){...}, 
-			error:function(response){...} }
+			beforeSend: function() {...},
+			success: function(response){...}, 
+			error: function(request, errorType, errorMessage){...} ,
+			timeout: <timeInMs>,
+			complete: function() {...}
+			}
 		);
 		
     * myURL can be:
@@ -298,4 +339,8 @@ $('.confirmation').on('click', 'button', function() {
 		$('.ticket').html(response).slideDown();
 	});
 }); 
+
+
+
+
 

@@ -24,9 +24,14 @@ $(document).ready(function(){
   
   $("#tourAjax").on("click", "button", function() {
     $.ajax('./photos.html', {
+      	dataType: "html",
       success: function(response) {
         $('.photosAjax').html(response).fadeIn();
-      }
+      }, 
+      error: function(request, errorType, errorMessage) { 
+        $('.photos').html("<li>Error, something went wrong!<br>Error type: " + errorType + "<br>Error message: " + errorMessage + "</li>").fadeIn();
+		    // alert('Error: ' + errorType + ' with message: ' + errorMessage);
+	    }
     });
   });
 
