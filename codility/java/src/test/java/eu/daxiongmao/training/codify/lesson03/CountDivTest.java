@@ -14,7 +14,7 @@ public class CountDivTest {
 
     // Algo to test
     final CountDiv algo = new CountDiv();
-    final int nbOfDivisions = algo.countDiv(startTestRange, endTestRange, moduloTest);
+    final int nbOfDivisions = algo.solution(startTestRange, endTestRange, moduloTest);
 
     // Assertions
     Assert.assertEquals(3, nbOfDivisions);
@@ -29,7 +29,7 @@ public class CountDivTest {
 
     // Algo to test
     final CountDiv algo = new CountDiv();
-    final int nbOfDivisions = algo.countDiv(startTestRange, endTestRange, moduloTest);
+    final int nbOfDivisions = algo.solution(startTestRange, endTestRange, moduloTest);
 
     // Assertions
     Assert.assertEquals(12, nbOfDivisions);
@@ -44,7 +44,7 @@ public class CountDivTest {
 
     // Algo to test
     final CountDiv algo = new CountDiv();
-    final int nbOfDivisions = algo.countDiv(startTestRange, endTestRange, moduloTest);
+    final int nbOfDivisions = algo.solution(startTestRange, endTestRange, moduloTest);
 
     // Assertions
     Assert.assertEquals(2, nbOfDivisions);
@@ -59,7 +59,7 @@ public class CountDivTest {
 
     // Algo to test
     final CountDiv algo = new CountDiv();
-    final int nbOfDivisions = algo.countDiv(startTestRange, endTestRange, moduloTest);
+    final int nbOfDivisions = algo.solution(startTestRange, endTestRange, moduloTest);
 
     // Assertions
     Assert.assertEquals(1, nbOfDivisions);
@@ -74,7 +74,7 @@ public class CountDivTest {
 
     // Algo to test
     final CountDiv algo = new CountDiv();
-    final int nbOfDivisions = algo.countDiv(startTestRange, endTestRange, moduloTest);
+    final int nbOfDivisions = algo.solution(startTestRange, endTestRange, moduloTest);
 
     // Assertions
     Assert.assertEquals(1, nbOfDivisions);
@@ -89,7 +89,7 @@ public class CountDivTest {
 
     // Algo to test
     final CountDiv algo = new CountDiv();
-    final int nbOfDivisions = algo.countDiv(startTestRange, endTestRange, moduloTest);
+    final int nbOfDivisions = algo.solution(startTestRange, endTestRange, moduloTest);
 
     // Assertions
     Assert.assertEquals(2, nbOfDivisions);
@@ -104,7 +104,7 @@ public class CountDivTest {
 
     // Algo to test
     final CountDiv algo = new CountDiv();
-    final int nbOfDivisions = algo.countDiv(startTestRange, endTestRange, moduloTest);
+    final int nbOfDivisions = algo.solution(startTestRange, endTestRange, moduloTest);
 
     // Assertions
     Assert.assertEquals(0, nbOfDivisions);
@@ -119,7 +119,7 @@ public class CountDivTest {
 
     // Algo to test
     final CountDiv algo = new CountDiv();
-    final int nbOfDivisions = algo.countDiv(startTestRange, endTestRange, moduloTest);
+    final int nbOfDivisions = algo.solution(startTestRange, endTestRange, moduloTest);
 
     // Assertions
     Assert.assertEquals(0, nbOfDivisions);
@@ -134,7 +134,7 @@ public class CountDivTest {
 
     // Algo to test
     final CountDiv algo = new CountDiv();
-    final int nbOfDivisions = algo.countDiv(startTestRange, endTestRange, moduloTest);
+    final int nbOfDivisions = algo.solution(startTestRange, endTestRange, moduloTest);
 
     // Assertions
     Assert.assertEquals(1, nbOfDivisions);
@@ -150,7 +150,7 @@ public class CountDivTest {
 
     // Algo to test
     final CountDiv algo = new CountDiv();
-    final int nbOfDivisions = algo.countDiv(startTestRange, endTestRange, moduloTest);
+    final int nbOfDivisions = algo.solution(startTestRange, endTestRange, moduloTest);
 
     // Assertions
     Assert.assertEquals(1, nbOfDivisions);

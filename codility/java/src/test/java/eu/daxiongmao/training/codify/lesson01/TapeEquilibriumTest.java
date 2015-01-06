@@ -3,7 +3,7 @@ package eu.daxiongmao.training.codify.lesson01;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class SplitTest {
+public class TapeEquilibriumTest {
 
   @Test
   public void testFewElements() {
@@ -11,8 +11,8 @@ public class SplitTest {
     final int[] arrayToTest = new int[] {3};
 
     // Function to test
-    final Split algo = new Split();
-    final int result2 = algo.goodSolution(arrayToTest);
+    final TapeEquilibrium algo = new TapeEquilibrium();
+    final int result2 = algo.solution(arrayToTest);
 
     // Assertions
     Assert.assertEquals(0, result2);
@@ -24,8 +24,8 @@ public class SplitTest {
     final int[] arrayToTest = new int[] {3, 1, 2, 4, 3};
 
     // Function to test
-    final Split algo = new Split();
-    final int result2 = algo.goodSolution(arrayToTest);
+    final TapeEquilibrium algo = new TapeEquilibrium();
+    final int result2 = algo.solution(arrayToTest);
 
     // Assertions
     Assert.assertEquals(1, result2);
@@ -37,8 +37,8 @@ public class SplitTest {
     final int[] arrayToTest = new int[] {};
 
     // Function to test
-    final Split algo = new Split();
-    final int result2 = algo.goodSolution(arrayToTest);
+    final TapeEquilibrium algo = new TapeEquilibrium();
+    final int result2 = algo.solution(arrayToTest);
 
     // Assertions
     Assert.assertEquals(0, result2);
@@ -47,8 +47,8 @@ public class SplitTest {
   @Test
   public void testNull() {
     // Function to test
-    final Split algo = new Split();
-    final int result2 = algo.goodSolution(null);
+    final TapeEquilibrium algo = new TapeEquilibrium();
+    final int result2 = algo.solution(null);
 
     // Assertions
     Assert.assertEquals(0, result2);

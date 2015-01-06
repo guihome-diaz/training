@@ -3,10 +3,17 @@ package eu.daxiongmao.training.codify.lesson02;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Permutation {
+/**
+ * To process the "permutation check" algorithm. <br>
+ * see https://codility.com/demo/take-sample-test/perm_check
+ *
+ * @author Guillaume Diaz
+ * @version 1.0 - January 2015
+ */
+public class PermCheck {
 
   /** Class logger. */
-  private static final Logger LOGGER = LoggerFactory.getLogger(Permutation.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(PermCheck.class);
 
   /**
    * To check if the given array is a <i>permutation</i> or not. <br>

@@ -3,7 +3,7 @@ package eu.daxiongmao.training.codify.lesson02;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class FrogCrossTest {
+public class FrogRiverOneTest {
 
   @Test
   public void testNoCross() {
@@ -12,8 +12,8 @@ public class FrogCrossTest {
     final int riverSize = 0;
 
     // Algo to test
-    final FrogCross algo = new FrogCross();
-    final int timeRequired = algo.crossRiver(riverSize, testArray);
+    final FrogRiverOne algo = new FrogRiverOne();
+    final int timeRequired = algo.solution(riverSize, testArray);
 
     // Assertions
     Assert.assertEquals(0, timeRequired);
@@ -26,8 +26,8 @@ public class FrogCrossTest {
     final int riverSize = 5;
 
     // Algo to test
-    final FrogCross algo = new FrogCross();
-    final int timeRequired = algo.crossRiver(riverSize, testArray);
+    final FrogRiverOne algo = new FrogRiverOne();
+    final int timeRequired = algo.solution(riverSize, testArray);
 
     // Assertions
     Assert.assertEquals(5, timeRequired);
@@ -40,8 +40,8 @@ public class FrogCrossTest {
     final int riverSize = 5;
 
     // Algo to test
-    final FrogCross algo = new FrogCross();
-    final int timeRequired = algo.crossRiver(riverSize, testArray);
+    final FrogRiverOne algo = new FrogRiverOne();
+    final int timeRequired = algo.solution(riverSize, testArray);
 
     // Assertions
     Assert.assertEquals(6, timeRequired);
@@ -55,8 +55,8 @@ public class FrogCrossTest {
     final int riverSize = 5;
 
     // Algo to test
-    final FrogCross algo = new FrogCross();
-    final int timeRequired = algo.crossRiver(riverSize, testArray);
+    final FrogRiverOne algo = new FrogRiverOne();
+    final int timeRequired = algo.solution(riverSize, testArray);
 
     // Assertions
     Assert.assertEquals(6, timeRequired);
@@ -69,8 +69,8 @@ public class FrogCrossTest {
     final int riverSize = 7;
 
     // Algo to test
-    final FrogCross algo = new FrogCross();
-    final int timeRequired = algo.crossRiver(riverSize, testArray);
+    final FrogRiverOne algo = new FrogRiverOne();
+    final int timeRequired = algo.solution(riverSize, testArray);
 
     // Assertions
     Assert.assertEquals(8, timeRequired);
@@ -83,8 +83,8 @@ public class FrogCrossTest {
     final int riverSize = 2;
 
     // Algo to test
-    final FrogCross algo = new FrogCross();
-    final int timeRequired = algo.crossRiver(riverSize, testArray);
+    final FrogRiverOne algo = new FrogRiverOne();
+    final int timeRequired = algo.solution(riverSize, testArray);
 
     // Assertions
     Assert.assertEquals(-1, timeRequired);
@@ -97,8 +97,8 @@ public class FrogCrossTest {
     final int riverSize = 7;
 
     // Algo to test
-    final FrogCross algo = new FrogCross();
-    final int timeRequired = algo.crossRiver(riverSize, testArray);
+    final FrogRiverOne algo = new FrogRiverOne();
+    final int timeRequired = algo.solution(riverSize, testArray);
 
     // Assertions
     Assert.assertEquals(-1, timeRequired);
@@ -111,8 +111,8 @@ public class FrogCrossTest {
     final int riverSize = 6;
 
     // Algo to test
-    final FrogCross algo = new FrogCross();
-    final int timeRequired = algo.crossRiver(riverSize, testArray);
+    final FrogRiverOne algo = new FrogRiverOne();
+    final int timeRequired = algo.solution(riverSize, testArray);
 
     // Assertions
     Assert.assertEquals(-1, timeRequired);

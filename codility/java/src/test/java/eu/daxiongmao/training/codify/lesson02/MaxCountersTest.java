@@ -3,7 +3,7 @@ package eu.daxiongmao.training.codify.lesson02;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class CounterIncrementTest {
+public class MaxCountersTest {
 
   @Test
   public void testGivenExample() {
@@ -12,8 +12,8 @@ public class CounterIncrementTest {
     final int counter = 5;
 
     // Algo to test
-    final CounterIncrement algo = new CounterIncrement();
-    final int[] outputResult = algo.counterIncrement(counter, testArray);
+    final MaxCounters algo = new MaxCounters();
+    final int[] outputResult = algo.solution(counter, testArray);
 
     // Assertions
     Assert.assertEquals(counter, outputResult.length);

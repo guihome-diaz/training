@@ -3,7 +3,7 @@ package eu.daxiongmao.training.codify.lesson01;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class FrogTest {
+public class FrogJumpTest {
 
   @Test
   public void jumpTest() {
@@ -11,7 +11,7 @@ public class FrogTest {
     final int endPoint = 85;
     final int jumpSize = 30;
 
-    final Frog algo = new Frog();
+    final FrogJump algo = new FrogJump();
     final int resultFast = algo.fastSolution(startPoint, endPoint, jumpSize);
 
     Assert.assertEquals(3, resultFast);
@@ -23,7 +23,7 @@ public class FrogTest {
     final int endPoint = 15;
     final int jumpSize = 5;
 
-    final Frog algo = new Frog();
+    final FrogJump algo = new FrogJump();
     final int resultFast = algo.fastSolution(startPoint, endPoint, jumpSize);
 
     Assert.assertEquals(0, resultFast);
@@ -35,7 +35,7 @@ public class FrogTest {
     final int endPoint = 10;
     final int jumpSize = 30;
 
-    final Frog algo = new Frog();
+    final FrogJump algo = new FrogJump();
     final int resultFast = algo.fastSolution(startPoint, endPoint, jumpSize);
 
     Assert.assertEquals(0, resultFast);
@@ -47,7 +47,7 @@ public class FrogTest {
     final int endPoint = 85;
     final int jumpSize = 0;
 
-    final Frog algo = new Frog();
+    final FrogJump algo = new FrogJump();
     algo.fastSolution(startPoint, endPoint, jumpSize);
 
     // You should NOT reach that code!
@@ -60,7 +60,7 @@ public class FrogTest {
     final int endPoint = 85;
     final int jumpSize = -20;
 
-    final Frog algo = new Frog();
+    final FrogJump algo = new FrogJump();
     algo.fastSolution(startPoint, endPoint, jumpSize);
 
     // You should NOT reach that code!

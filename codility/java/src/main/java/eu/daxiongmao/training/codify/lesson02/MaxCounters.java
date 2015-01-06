@@ -3,50 +3,25 @@ package eu.daxiongmao.training.codify.lesson02;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class CounterIncrement {
+/**
+ * To process the "max counters" algorithm. <br>
+ * see https://codility.com/demo/take-sample-test/max_counters
+ *
+ * @author Guillaume Diaz
+ * @version 1.0 - January 2015
+ */
+public class MaxCounters {
 
   /** Class logger. */
-  private static final Logger LOGGER = LoggerFactory.getLogger(CounterIncrement.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(MaxCounters.class);
 
   /**
-   * <p>
-   * To compute the following algorithm:<br/>
-   * You are given N counters, initially set to 0, and you have two possible operations on them:
-   * <ul>
-   * <li>increase(X) − counter X is increased by 1</li>
-   * <li>max counter − all counters are set to the maximum value of any counter</li>
-   * </ul>
-   * A non-empty zero-indexed array A of M integers is given. <br/>
-   * This array represents consecutive operations:
-   * <ul>
-   * <li>if A[K] = X, such that 1 ≤ X ≤ N, then operation K is increase(X)</li>
-   * <li>if A[K] = N + 1 then operation K is max counter</li>
-   * </ul>
-   * </p>
-   * <p>
-   * For example, given integer N = 5 and array A such that:<br/>
-   * A[] = {3, 4, 4, 6, 1, 4, 4}<br/>
-   * the values of the counters after each consecutive operation will be:<br/>
-   * <ol>
-   * <li>round 1: (0, 0, 1, 0, 0)</li>
-   * <li>round 2: (0, 0, 1, 1, 0)</li>
-   * <li>round 3: (0, 0, 1, 2, 0)</li>
-   * <li>round 4: (2, 2, 2, 2, 2)</li>
-   * <li>round 5: (3, 2, 2, 2, 2)</li>
-   * <li>round 6: (3, 2, 2, 3, 2)</li>
-   * <li>round 7: (3, 2, 2, 4, 2)</li>
-   * </ol>
-   * </p>
-   * <p>
-   * <strong>This is a O(n+m) algorithm :-)</strong>
-   * </p>
-   *
-   * @param counterNumber number of counter to create in the output array. This also set the limit
-   *        between increase | max counter operations
+   * @param counterNumber number of counter to create in the output array. <br>
+   *        This also set the limit between increase | max counter operations
    * @param array array to analyze
    * @return new array with output results
    */
-  public int[] counterIncrement(final int counterNumber, final int[] array) {
+  public int[] solution(final int counterNumber, final int[] array) {
     if (counterNumber == 0) {
       return new int[0];
     }
@@ -97,7 +72,7 @@ public class CounterIncrement {
    * @deprecated this is not as efficient as it should be. Do not use it!
    */
   @Deprecated
-  int[] counterIncrement_slowAlgo(final int counterNumber, final int[] array) {
+  int[] slowSolution(final int counterNumber, final int[] array) {
     if (counterNumber == 0) {
       return new int[0];
     }

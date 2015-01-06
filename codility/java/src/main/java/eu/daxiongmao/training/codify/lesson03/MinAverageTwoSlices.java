@@ -3,81 +3,44 @@ package eu.daxiongmao.training.codify.lesson03;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class MinAverageSlice {
+/**
+ * To process the "min average two slices" algorithm. <br>
+ * see https://codility.com/demo/take-sample-test/min_avg_two_slice<br>
+ * <br>
+ * see also: http://codility-lessons.blogspot.se/2014/07/lesson-3-minavgtwoslice.html for
+ * Explanations.
+ *
+ * @author Guillaume Diaz
+ * @version 1.0 - January 2015
+ */
+public class MinAverageTwoSlices {
 
   /** Class logger. */
-  private static final Logger LOGGER = LoggerFactory.getLogger(MinAverageSlice.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(MinAverageTwoSlices.class);
 
   /**
-   * <p>
-   * This resolves the following algorithm: <br>
-   * <ul>
-   * <li>A non-empty zero-indexed array A consisting of N integers is given.</li>
-   * <li>A pair of integers (P, Q), such that 0 ≤ P < Q < N, is called a slice of array A <br>
-   * ... (notice that the slice contains at least two elements).</li>
-   * </ul>
-   * The average of a slice (P, Q) is:<br>
-   * <ul>
-   * <li>sum of A[P] + A[P + 1] + ... + A[Q] divided by the length of the slice.<br>
-   * To be precise, the average equals: <strong>(A[P] + A[P + 1] + ... + A[Q]) / (Q − P +
-   * 1)</strong></li>
-   * </ul>
-   * </p>
-   * <p>
-   * For example, given array A such that:<br>
-   * A[] = {4, 2, 2, 5, 1, 5, 8}<br>
+   * <strong>Mathematics explanation</strong><br>
+   * <a href="http://codility-lessons.blogspot.se/2014/07/lesson-3-minavgtwoslice.html">
+   * http://codility-lessons.blogspot.se/2014/07/lesson-3-minavgtwoslice.html</a> <br>
+   * To check the number of the slots that produce the minimum average, we only have to check the
+   * sum of the consecutive two or three slots.<br>
+   * This can be said to any slice of an arbitrary size.<br>
    * <br>
-   * This array contains the following example slices, among others:
-   * <ul>
-   * <li>slice (1, 2), whose average is (2 + 2) / 2 = 2</li>
-   * <li>slice (3, 4), whose average is (5 + 1) / 2 = 3</li>
-   * <li>slice (1, 4), whose average is (2 + 2 + 5 + 1) / 4 = 2.5</li>
-   * </ul>
-   * The minimum slice has an average of 1.
-   * </p>
-   * <p>
-   * <strong>The goal is to find the starting position of a slice whose average is minimal.</strong>
-   * </p>
-   * <p>
-   * Assume that:
-   * <ul>
-   * <li>N is an integer within the range [2..100,000]</li>
-   * <li>each element of array A is an integer within the range [−10,000..10,000]</li>
-   * </ul>
-   * </p>
-   * <p>
-   * Expectations:
-   * <ul>
-   * <li>expected worst-case time complexity is O(N)</li>
-   * <li>expected worst-case space complexity is O(N), beyond input storage</li>
-   * </ul>
-   * </p>
+   * If any sub-slice of a certain slice can produce a smaller average, then the original slice is
+   * not the slice that can produce a smaller portion. It the average values of the original slice
+   * and sub-slice are the same, we can simply take the index where the original slice starts, since
+   * what we need to return is the smallest index.
    *
    * @param array array to process
    * @return starting position of the slice with the minimal average. <br>
    *         If there is more than one slice with a minimal average, the smallest starting position
    *         will be return.
    */
-  public int getMinAverageSlice(final int[] array) {
+  public int solution(final int[] array) {
     // Assumptions: array not empty with, at least, 2 values
     if (array.length < 2) {
       return 0;
     }
-
-    /*
-     * Mathematics explanation:
-     * http://codility-lessons.blogspot.se/2014/07/lesson-3-minavgtwoslice.html
-     *
-     * To check the number of the slots that produce the minimum average, we only have to check the
-     * sum of the consecutive two or three slots.
-     *
-     * This can be said to any slice of an arbitrary size.
-     *
-     * If any sub-slice of a certain slice can produce a smaller average, then the original slice is
-     * not the slice that can produce a smaller portion. It the average values of the original slice
-     * and sub-slice are the same, we can simply take the index where the original slice starts,
-     * since what we need to return is the smallest index.
-     */
 
     final int arraySize = array.length;
 
@@ -114,7 +77,7 @@ public class MinAverageSlice {
    * @deprecated this algo has a complexity O(n^2). Do not use it.
    */
   @Deprecated
-  int getMinAverageSlice_slowAlgo(final int[] array) {
+  int slowSolution(final int[] array) {
     // Assumptions: array not empty with, at least, 2 values
     if (array.length < 2) {
       return 0;

@@ -3,7 +3,7 @@ package eu.daxiongmao.training.codify.lesson01;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class ArrayMissingElementTest {
+public class PermMissingElementTest {
 
 	@Test
 	public void testMissingEndElement() {
@@ -17,7 +17,7 @@ public class ArrayMissingElementTest {
 		testArray[5] = 6;
 		
 		// Algo to test
-		final ArrayMissingElement algo = new ArrayMissingElement();
+		final PermMissingElement algo = new PermMissingElement();
 		final int missingElement = algo.solution(testArray);
 		
 		// Assertions
@@ -37,7 +37,7 @@ public class ArrayMissingElementTest {
 		testArray[6] = 1;
 		
 		// Algo to test
-		final ArrayMissingElement algo = new ArrayMissingElement();
+		final PermMissingElement algo = new PermMissingElement();
 		final int missingElement = algo.solution(testArray);
 		
 		// Assertions
@@ -50,7 +50,7 @@ public class ArrayMissingElementTest {
 		final int[] testArray = new int[0];
 		
 		// Algo to test
-		final ArrayMissingElement algo = new ArrayMissingElement();
+		final PermMissingElement algo = new PermMissingElement();
 		final int missingElement = algo.solution(testArray);
 		
 		// Assertions

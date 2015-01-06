@@ -1,7 +1,14 @@
 package eu.daxiongmao.training.codify.lesson02;
 
 
-public class FrogCross {
+/**
+ * To process the "frog river one" algorithm. <br>
+ * see https://codility.com/demo/take-sample-test/frog_river_one
+ *
+ * @author Guillaume Diaz
+ * @version 1.0 - January 2015
+ */
+public class FrogRiverOne {
 
   /**
    * <p>
@@ -20,7 +27,7 @@ public class FrogCross {
    *        Leaves and time are represented in array[minute]=leaf_index
    * @return -1 if the frog cannot cross the river || else the required time in minute
    */
-  public int crossRiver(final int riverSize, final int[] leavesTime) {
+  public int solution(final int riverSize, final int[] leavesTime) {
     // Check args
     if (leavesTime == null || leavesTime.length == 0) {
       return -1;
@@ -63,7 +70,7 @@ public class FrogCross {
    * @deprecated do not use that function since it uses a bit too much memory
    */
   @Deprecated
-  int crossRiver_humanLogic(final int riverSize, final int[] leavesTime) {
+  int alternateSolution(final int riverSize, final int[] leavesTime) {
     // Check args
     if (leavesTime == null || leavesTime.length == 0) {
       return -1;

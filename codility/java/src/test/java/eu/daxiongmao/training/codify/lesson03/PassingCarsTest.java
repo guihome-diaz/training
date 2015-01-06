@@ -12,7 +12,7 @@ public class PassingCarsTest {
 
     // Algo to test
     final PassingCars algo = new PassingCars();
-    final int nbOfCarCrossing = algo.countPassingCars(testArray);
+    final int nbOfCarCrossing = algo.solution(testArray);
 
     // Assertions
     Assert.assertEquals(5, nbOfCarCrossing);
@@ -25,7 +25,7 @@ public class PassingCarsTest {
 
     // Algo to test
     final PassingCars algo = new PassingCars();
-    final int nbOfCarCrossing = algo.countPassingCars(testArray);
+    final int nbOfCarCrossing = algo.solution(testArray);
 
     // Assertions
     Assert.assertEquals(14, nbOfCarCrossing);
@@ -38,7 +38,7 @@ public class PassingCarsTest {
 
     // Algo to test
     final PassingCars algo = new PassingCars();
-    final int nbOfCarCrossing = algo.countPassingCars(testArray);
+    final int nbOfCarCrossing = algo.solution(testArray);
 
     // Assertions
     Assert.assertEquals(5, nbOfCarCrossing);
@@ -51,7 +51,7 @@ public class PassingCarsTest {
 
     // Algo to test
     final PassingCars algo = new PassingCars();
-    final int nbOfCarCrossing = algo.countPassingCars(testArray);
+    final int nbOfCarCrossing = algo.solution(testArray);
 
     // Assertions
     Assert.assertEquals(0, nbOfCarCrossing);
@@ -64,7 +64,7 @@ public class PassingCarsTest {
 
     // Algo to test
     final PassingCars algo = new PassingCars();
-    final int nbOfCarCrossing = algo.countPassingCars(testArray);
+    final int nbOfCarCrossing = algo.solution(testArray);
 
     // Assertions
     Assert.assertEquals(0, nbOfCarCrossing);
@@ -78,7 +78,7 @@ public class PassingCarsTest {
 
     // Algo to test
     final PassingCars algo = new PassingCars();
-    final int nbOfCarCrossing = algo.countPassingCars(testArray);
+    final int nbOfCarCrossing = algo.solution(testArray);
 
     // Assertions
     Assert.assertEquals(0, nbOfCarCrossing);
@@ -98,7 +98,7 @@ public class PassingCarsTest {
 
     // Algo to test
     final PassingCars algo = new PassingCars();
-    final int nbOfCarCrossing = algo.countPassingCars(testArray);
+    final int nbOfCarCrossing = algo.solution(testArray);
 
     // Assertions
     Assert.assertEquals(-1, nbOfCarCrossing);

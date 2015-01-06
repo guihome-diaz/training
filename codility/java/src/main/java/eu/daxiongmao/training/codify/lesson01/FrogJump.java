@@ -1,6 +1,13 @@
 package eu.daxiongmao.training.codify.lesson01;
 
-public class Frog {
+/**
+ * To process frog jump algorithm. <br>
+ * see https://codility.com/demo/take-sample-test/frog_jmp
+ *
+ * @author Guillaume Diaz
+ * @version 1.0 - January 2015
+ */
+public class FrogJump {
 
   /**
    * This solution is slightly faster than the previous one. <br/>

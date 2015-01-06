@@ -1,8 +1,13 @@
 package eu.daxiongmao.training.codify.lesson02;
 
-
-
-public class MinPositiveIntMissing {
+/**
+ * To process the "missing integer" algorithm. <br>
+ * see https://codility.com/demo/take-sample-test/missing_integer
+ *
+ * @author Guillaume Diaz
+ * @version 1.0 - January 2015
+ */
+public class MissingInteger {
 
   /**
    * To look for the minimal positive integer missing in the given array.<br/>
@@ -13,7 +18,7 @@ public class MinPositiveIntMissing {
    * @param array the array to inspect. This array can have values from Integer.MIN to Integer.MAX
    * @return the minimal positive integer that is missing, starting at 1.
    */
-  public int getMissingPositiveInteger(final int[] array) {
+  public int solution(final int[] array) {
     // Check arguments
     if (array.length == 0) {
       return 1;
@@ -59,7 +64,7 @@ public class MinPositiveIntMissing {
    *             This is an algorithm performance O(n^2)
    */
   @Deprecated
-  int getMissingPositiveInteger_slowAlgo(final int[] array) {
+  int slowSolution(final int[] array) {
     // Check arguments
     if (array.length == 0) {
       return 1;

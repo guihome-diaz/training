@@ -3,7 +3,7 @@ package eu.daxiongmao.training.codify.lesson02;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class PermutationTest {
+public class PermCheckTest {
 
   @Test
   public void testWrongCompleteArray() {
@@ -18,7 +18,7 @@ public class PermutationTest {
     testArray[6] = 5;
 
     // Algo to test
-    final Permutation algo = new Permutation();
+    final PermCheck algo = new PermCheck();
     final int missingElement = algo.solution(testArray);
 
     // Assertions
@@ -38,7 +38,7 @@ public class PermutationTest {
     testArray[6] = 5;
 
     // Algo to test
-    final Permutation algo = new Permutation();
+    final PermCheck algo = new PermCheck();
     final int missingElement = algo.solution(testArray);
 
     // Assertions
@@ -53,7 +53,7 @@ public class PermutationTest {
     testArray[1] = 3;
 
     // Algo to test
-    final Permutation algo = new Permutation();
+    final PermCheck algo = new PermCheck();
     final int missingElement = algo.solution(testArray);
 
     // Assertions
@@ -67,7 +67,7 @@ public class PermutationTest {
     testArray[0] = 1;
 
     // Algo to test
-    final Permutation algo = new Permutation();
+    final PermCheck algo = new PermCheck();
     final int missingElement = algo.solution(testArray);
 
     // Assertions
@@ -81,7 +81,7 @@ public class PermutationTest {
     testArray[0] = 8;
 
     // Algo to test
-    final Permutation algo = new Permutation();
+    final PermCheck algo = new PermCheck();
     final int missingElement = algo.solution(testArray);
 
     // Assertions
@@ -96,7 +96,7 @@ public class PermutationTest {
     testArray[1] = 1;
 
     // Algo to test
-    final Permutation algo = new Permutation();
+    final PermCheck algo = new PermCheck();
     final int missingElement = algo.solution(testArray);
 
     // Assertions
@@ -115,7 +115,7 @@ public class PermutationTest {
     testArray[5] = 7;
 
     // Algo to test
-    final Permutation algo = new Permutation();
+    final PermCheck algo = new PermCheck();
     final int missingElement = algo.solution(testArray);
 
     // Assertions
@@ -135,7 +135,7 @@ public class PermutationTest {
     testArray[6] = 1;
 
     // Algo to test
-    final Permutation algo = new Permutation();
+    final PermCheck algo = new PermCheck();
     final int missingElement = algo.solution(testArray);
 
     // Assertions
@@ -148,7 +148,7 @@ public class PermutationTest {
     final int[] testArray = new int[0];
 
     // Algo to test
-    final Permutation algo = new Permutation();
+    final PermCheck algo = new PermCheck();
     final int missingElement = algo.solution(testArray);
 
     // Assertions

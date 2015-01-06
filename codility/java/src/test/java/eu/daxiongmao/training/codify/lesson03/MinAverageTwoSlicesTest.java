@@ -3,7 +3,7 @@ package eu.daxiongmao.training.codify.lesson03;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class MinAverageSliceTest {
+public class MinAverageTwoSlicesTest {
 
   @Test
   public void testGivenExample() {
@@ -11,8 +11,8 @@ public class MinAverageSliceTest {
     final int testArray[] = new int[] {4, 2, 2, 5, 1, 5, 8};
 
     // Algo to test
-    final MinAverageSlice algo = new MinAverageSlice();
-    final int minAverageStartPoint = algo.getMinAverageSlice(testArray);
+    final MinAverageTwoSlices algo = new MinAverageTwoSlices();
+    final int minAverageStartPoint = algo.solution(testArray);
 
     // Assertions
     Assert.assertEquals(1, minAverageStartPoint);
@@ -24,8 +24,8 @@ public class MinAverageSliceTest {
     final int testArray[] = new int[] {1000, -250000, 150000, 200};
 
     // Algo to test
-    final MinAverageSlice algo = new MinAverageSlice();
-    final int minAverageStartPoint = algo.getMinAverageSlice(testArray);
+    final MinAverageTwoSlices algo = new MinAverageTwoSlices();
+    final int minAverageStartPoint = algo.solution(testArray);
 
     // Assertions
     Assert.assertEquals(0, minAverageStartPoint);
@@ -37,8 +37,8 @@ public class MinAverageSliceTest {
     final int testArray[] = new int[0];
 
     // Algo to test
-    final MinAverageSlice algo = new MinAverageSlice();
-    final int minAverageStartPoint = algo.getMinAverageSlice(testArray);
+    final MinAverageTwoSlices algo = new MinAverageTwoSlices();
+    final int minAverageStartPoint = algo.solution(testArray);
 
     // Assertions
     Assert.assertEquals(0, minAverageStartPoint);
@@ -50,8 +50,8 @@ public class MinAverageSliceTest {
     final int testArray[] = new int[] {1};
 
     // Algo to test
-    final MinAverageSlice algo = new MinAverageSlice();
-    final int minAverageStartPoint = algo.getMinAverageSlice(testArray);
+    final MinAverageTwoSlices algo = new MinAverageTwoSlices();
+    final int minAverageStartPoint = algo.solution(testArray);
 
     // Assertions
     Assert.assertEquals(0, minAverageStartPoint);

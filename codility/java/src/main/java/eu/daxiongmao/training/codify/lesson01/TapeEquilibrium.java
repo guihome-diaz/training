@@ -7,24 +7,24 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * To process min(|leftPart - rightPart|)
+ * To process tape equilibrium algorithm. <br>
+ * see https://codility.com/demo/take-sample-test/tape_equilibrium
  *
  * @author Guillaume Diaz
  * @version 1.0 - January 2015
  */
-public class Split {
+public class TapeEquilibrium {
 
   /** Class logger. */
-  private static final Logger LOGGER = LoggerFactory.getLogger(Split.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(TapeEquilibrium.class);
 
   /**
-   * Compute the result of min(|leftPart - rightPart|). <br/>
    * This is a GOOD solution since it produces a result in O(n)
    *
    * @param array array to process
    * @return min(|leftPart - rightPart|)
    */
-  public int goodSolution(final int[] array) {
+  public int solution(final int[] array) {
     if (array == null || array.length <= 1) {
       // Avoid NPE... Return 0 instead
       return 0;
@@ -61,7 +61,7 @@ public class Split {
   }
 
   /**
-   * @deprecated use {@link #goodSolution(int[])} instead
+   * @deprecated use {@link #solution(int[])} instead
    */
   @Deprecated
   int badSolution(final int[] array) {
