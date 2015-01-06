@@ -7,6 +7,9 @@ The following copy is for my personal use and reference only!
 Do NOT use it for anything else!
 --------------------
 
+Source: https://codility.com/demo/take-sample-test/missing_integer
+
+
 
 Write a function:
 

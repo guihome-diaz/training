@@ -8,6 +8,9 @@ Do NOT use it for anything else!
 --------------------
 
 
+Source: https://codility.com/demo/take-sample-test/max_counters
+
+
 
 You are given N counters, initially set to 0, and you have two possible operations on them:
 

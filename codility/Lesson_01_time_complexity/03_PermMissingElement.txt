@@ -8,6 +8,8 @@ Do NOT use it for anything else!
 --------------------
 
 
+Source: https://codility.com/demo/take-sample-test/perm_missing_elem
+
 
 A zero-indexed array A consisting of N different integers is given. The array contains integers in the range [1..(N + 1)], which means that exactly one element is missing.
 

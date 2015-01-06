@@ -7,6 +7,7 @@ The following copy is for my personal use and reference only!
 Do NOT use it for anything else!
 --------------------
 
+Source: https://codility.com/demo/take-sample-test/frog_river_one
 
 
 A small frog wants to get to the other side of a river. The frog is currently located at position 0, and wants to get to position X. Leaves fall from a tree onto the surface of the river.
