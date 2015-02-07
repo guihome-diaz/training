@@ -16,6 +16,27 @@ $(document).ready(function(){
 }); 
 
 
+// ======== Use JS objects !! ========
+// Use JS objects to improve the coding result
+
+// Best pratice: create an object to manage each feature of your website.
+// In that example we want to manage a ".confirmation" section
+var confirmation = {
+	init: function() {
+		$('.confirmation').on('click', 'button', this.loadConfirmation);
+		$('.confirmation').on('click', '.view-boarding-pass', this.showBoardingPass);
+	},
+	loadConfirmation: function() { ... },
+	showBoardingPass: function() { ... }
+};
+
+// Script initialization
+// The following method is called when the page is first loaded.
+$(document).ready(function() {
+	confirmation.init();
+});
+
+
 
 // ======== Selector ========
 
