@@ -2,10 +2,13 @@ package eu.daxiongmao.training.codify.lesson04sort;
 
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
+
 
 public class NbOfDiscIntersectionsTest {
 
+    @Ignore
     @Test
     public void exampleDataSet() {
         Integer[] unsortedArray = new Integer[] {1, 5, 2, 1, 4, 0};
