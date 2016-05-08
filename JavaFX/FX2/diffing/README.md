@@ -17,8 +17,7 @@ As a result you must do some tricks to use Maven + JavaFX.
 
 Use a `SYSTEM dependency` (= set the file path) and retrieve JavaFX from your JDK folder (`jfxrt.jar`)
 
-```
-  
+```xml  
     <properties>
         <javafx.version>2.2</javafx.version>
         <jdk7.home>/usr/lib/jvm/java-7-oracle</jdk7.home>
@@ -43,8 +42,7 @@ use a `project's repository` = setup a Maven repository inside the current proje
 
 * Create a root folder to host the repository `${project.basedir}/libs` 
 * Add the local repository declaration 
-```
-
+```xml
     <repositories>
         <repository>
             <id>in-project</id>
@@ -55,16 +53,16 @@ use a `project's repository` = setup a Maven repository inside the current proje
 ```
 
 * Manually add each dependency into the local repository:
+```bash
+mvn install:install-file -Dfile=/usr/lib/jvm/java-7-oracle/jre/lib/jfxrt.jar -DgroupId=com.oracle -DartifactId=javafx -Dversion=2.2 -Dpackaging=jar -DlocalRepositoryPath=libs
 
-`mvn install:install-file -Dfile=/usr/lib/jvm/java-7-oracle/jre/lib/jfxrt.jar -DgroupId=com.oracle -DartifactId=javafx -Dversion=2.2 -Dpackaging=jar -DlocalRepositoryPath=libs`
+mvn install:install-file -Dfile=/usr/lib/jvm/java-7-oracle/lib/ant-javafx.jar -DgroupId=com.oracle -DartifactId=ant-javafx -Dversion=2.2 -Dpackaging=jar -DlocalRepositoryPath=libs
 
-`mvn install:install-file -Dfile=/usr/lib/jvm/java-7-oracle/lib/ant-javafx.jar -DgroupId=com.oracle -DartifactId=ant-javafx -Dversion=2.2 -Dpackaging=jar -DlocalRepositoryPath=libs` 
-
-`mvn install:install-file -Dfile=javafx-dialogs-0.0.4.jar -DgroupId=ch.makery -DartifactId=javafx-dialogs -Dversion=0.0.4 -Dpackaging=jar -DlocalRepositoryPath=libs` 
-
+mvn install:install-file -Dfile=javafx-dialogs-0.0.4.jar -DgroupId=ch.makery -DartifactId=javafx-dialogs -Dversion=0.0.4 -Dpackaging=jar -DlocalRepositoryPath=libs
+```
 
 * You can now use these libraries as normal dependencies
-```
+```xml
 
     <dependencies>
         <dependency>
@@ -88,8 +86,7 @@ You must use some ANT script. This was originally designed to be used as standal
 #### 3. Resources
 
 You must tell Maven to include all FXML and other resources (css, images, ...). 
-```
-
+```xml
     <build>
         <!-- Artifact name -->
         <finalName>diffing</finalName>
