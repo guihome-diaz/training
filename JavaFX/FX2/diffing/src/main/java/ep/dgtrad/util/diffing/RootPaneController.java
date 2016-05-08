@@ -55,7 +55,13 @@ public class RootPaneController {
 		// JavaFX doesn't include Popup supports until Java8.40 ... In the meantime you must use a 3rd party dialog library.
 		// I'm using http://code.makery.ch/blog/javafx-2-dialogs/
 		// You'll find the library usage on the website.
-
-		Dialogs.showInformationDialog(App.getInstance().getPrimaryStage(), "v1.0 - 2016/05 - Cat4trad team", "About DIFFING application", "About");
+		
+		Double javaVersion = FileUtils.getJavaVersion();
+		if (javaVersion == 1.7) {
+			LOGGER.debug("Java7 detected, as expected");
+			Dialogs.showInformationDialog(App.getInstance().getPrimaryStage(), "v1.0 - 2016/05 - Cat4trad team", "About DIFFING application", "About");
+		} else {
+			LOGGER.warn("Java8 detected, cannot display JavaFX2 dialog. You need to use the native JavaFX8 dialogs");
+		}
 	}
 }

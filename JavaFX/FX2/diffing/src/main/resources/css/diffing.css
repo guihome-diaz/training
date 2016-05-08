@@ -1,6 +1,4 @@
-/** Main Pane layout */
 .root {
-    -fx-background-image: url("../img/background.jpg");
     -fx-padding: 0 0 0 0;
 }
 
