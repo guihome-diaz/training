@@ -1,250 +1,263 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+  <modelVersion>4.0.0</modelVersion>
 
-    <groupId>ep.dgtrad.util</groupId>
-    <artifactId>diffing-ui</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
-    <name>boldItalic</name>
-    
-    <repositories>
-        <repository>
-            <id>in-project</id>
-            <name>In Project Repository</name>
-            <url>file://${project.basedir}/libs</url>
-        </repository>
-    </repositories>
+  <groupId>ep.dgtrad.util</groupId>
+  <artifactId>diffing-ui-fx2</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  <name>diffing-ui-fx2</name>
+  <description>JavaFX 2 template</description>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>1.7</java.version>
-        
-        <!-- Program entry point -->
-        <exec.mainClass>ep.dgtrad.util.diffing.App</exec.mainClass>
-        
-        
-        <!-- JavaFX 2 (Java7) -->
-        <!-- Java7 requires JavaFX2 to be declared as a dependency + the JDK library must be exported for standalone execution -->
-        <!-- This has been removed in JavaFX 8 (java8). It works "out of the box" without dependency and inclusion -->
-        <javafx.version>2.2</javafx.version>
-        
-        <!-- If you're using SYSTEM dependencies -->
-        <!-- 
-        <jdk7.home>/usr/lib/jvm/java-7-oracle</jdk7.home>
-        <javafx.home>${jdk7.home}/jre/lib/jfxrt.jar</javafx.home>
-        <javafx.ant>${jdk7.home}/lib/ant-javafx.jar</javafx.ant>
-         -->
-        <!-- If you're using a Maven local repository -->
-        <javafx.home>${project.basedir}/libs/com/oracle/javafx/2.2/javafx-2.2.jar</javafx.home>
-        <javafx.ant>${project.basedir}/libs/com/oracle/ant-javafx/2.2/ant-javafx-2.2.jar</javafx.ant>        
-    </properties>
+  <developers>
+    <developer>
+      <name>Guillaume Diaz</name>
+      <email>guillaume@qin-diaz.com</email>
+    </developer>
+  </developers>
+
+  <organization>
+    <name>Daxiongmao.eu</name>
+    <url>http://daxiongmao.eu/</url>
+  </organization>
 
 
-    <build>
-        <!-- Artifact name -->
-        <finalName>diffing</finalName>
+  <repositories>
+    <repository>
+      <id>in-project</id>
+      <name>In Project Repository</name>
+      <url>file://${project.basedir}/libs</url>
+    </repository>
+  </repositories>
 
-        <!-- Include all resources in the output artifact (FXML, CSS, images, etc.) -->
-        <resources>
-            <resource>
-                <filtering>false</filtering>
-                <directory>${basedir}/src/main/java</directory>
-                <includes>
-                    <include>**/*.fxml</include>
-                </includes>
-            </resource>
-            <resource>
-                <filtering>false</filtering>
-                <directory>${basedir}/src/main/resources</directory>
-                <includes>
-                    <include>**/*.*</include>
-                </includes>
-            </resource>
-        </resources>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <java.version>1.7</java.version>
 
-        <plugins>
-            <!-- Global settings -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.3</version>
-                <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                    <optimize>true</optimize>
-                    <showDeprecation>true</showDeprecation>
-                    <showWarnings>true</showWarnings>
-                </configuration>
-            </plugin>
-
-            <!-- Generate and upload the source artifact to simplify debugging -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <version>2.2.1</version>
-                <executions>
-                    <execution>
-                        <id>attach-sources</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <!-- Copy all dependencies to target folder -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>2.9</version>
-                <executions>
-                    <execution>
-                        <id>copy-dependencies</id>
-                        <phase>package</phase>
-                        <configuration>
-                            <overWriteReleases>false</overWriteReleases>
-                            <overWriteSnapshots>false</overWriteSnapshots>
-                            <overWriteIfNewer>true</overWriteIfNewer>
-                            <outputDirectory>${project.build.directory}/lib</outputDirectory>
-                        </configuration>
-                        <goals>
-                            <goal>copy-dependencies</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <!-- Build JAR with some particular MANIFEST.MF attributes (JavaFx 2 support) -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>2.5</version>
-                <configuration>
-                    <descriptors>
-                        <descriptor>src/main/assembly/jar-with-dependencies.xml</descriptor>
-                    </descriptors>
-                    <archive>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                            <mainClass>${exec.mainClass}</mainClass>
-                            <classpathLayoutType>repository</classpathLayoutType>
-                            <classpathPrefix>lib/</classpathPrefix>
-                        </manifest>
-                        <manifestEntries>
-                            <JavaFX-Application-Class>${exec.mainClass}</JavaFX-Application-Class>
-                            <Main-Class>${exec.mainClass}</Main-Class>
-                            <JavaFX-Version>${javafx.version}+</JavaFX-Version>
-                            <implementation-version>1.0</implementation-version>
-                            <!-- <JavaFX-Class-Path> </JavaFX-Class-Path> -->
-                            <!-- The artifactId (name) of the jfxrt.jar ... see dependency system scope -->
-                            <Class-Path>javafx-${javafx.version}.jar</Class-Path>
-                        </manifestEntries>
-                    </archive>
-                </configuration>
-            </plugin>
-
-            <!-- Generate runnable jar -->
-            <plugin>
-                <artifactId>maven-antrun-plugin</artifactId>
-                <version>1.6</version>
-                <executions>
-                    <execution>
-                        <id>create-launcher-jar</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                        <configuration>
-                            <target xmlns:fx="javafx:com.sun.javafx.tools.ant">
-                                <taskdef uri="javafx:com.sun.javafx.tools.ant" resource="com/sun/javafx/tools/ant/antlib.xml" classpath="${javafx.ant}" />
-                                <fx:application id="fxApp" name="${project.name}" mainClass="${exec.mainClass}" />
-                                <fx:jar destfile="${project.build.directory}/${project.build.finalName}-launcher">
-                                    <fx:application refid="fxApp" />
-                                    <fx:fileset dir="${project.build.directory}/classes" />
-                                </fx:jar>
-                                <attachartifact file="${project.build.directory}/${project.build.finalName}-launcher.jar" classifier="launcher" />
-                            </target>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <!-- Package the runnable jar with its dependencies -->
-            <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <version>2.2.1</version>
-                <executions>
-                    <execution>
-                        <id>make-assembly</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <descriptors>
-                        <descriptor>src/main/assembly/jar-with-dependencies.xml</descriptor>
-                    </descriptors>
-                    <archive>
-                        <manifestEntries>
-                            <JavaFX-Version>${javafx.version}</JavaFX-Version>
-                            <JavaFX-Application-Class>${exec.mainClass}</JavaFX-Application-Class>
-                            <Main-Class>com/javafx/main/Main</Main-Class>
-                        </manifestEntries>
-                    </archive>
-                </configuration>
-            </plugin>
-
-        </plugins>
-    </build>
+    <!-- Program entry point -->
+    <exec.mainClass>ep.dgtrad.util.diffing.App</exec.mainClass>
 
 
-    <dependencies>
-        <!-- Requirements -->
-        
-        <!-- ######## JavaFX 2 ######## -->
-        <!-- In Java7 you must add a dependency to the JavaFX artifact. (i) This is not required with JavaFX8 (java8) -->
-        <!-- Either you specify the full path using a SYSTEM dependency [1] ; or you can use a project Maven repository [2] -->
-        <dependency>
-            <groupId>com.oracle</groupId>
-            <artifactId>javafx</artifactId>
-            <version>${javafx.version}</version>
-            <!-- If you do not want to use a local Maven repository: -->
-            <!-- 
-            <scope>system</scope>
-            <systemPath>${jdk7.home}/jre/lib/jfxrt.jar</systemPath>
-            -->
-        </dependency>
-        
-        <!-- ######## JavaFX Dialog ######## -->
-        <!-- JavaFX dialog. 3rd party library mandatory until Java8.40 ; Dialogs have been integrated last into the official bundle -->
-        <!-- This library comes from http://code.makery.ch/blog/javafx-2-dialogs/ -->
-        <!-- You should use a project Maven repository for that library to be included into the uber jar (assembly output) -->
-        <dependency>
-            <groupId>ch.makery</groupId>
-            <artifactId>javafx-dialogs</artifactId>
-            <version>0.0.4</version>
-            <!-- 
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/javafx-dialogs-0.0.4.jar</systemPath>
-             -->
-        </dependency>
+    <!-- JavaFX 2 (Java7) -->
+    <!-- Java7 requires JavaFX2 to be declared as a dependency + the JDK library must be exported for standalone execution -->
+    <!-- This has been removed in JavaFX 8 (java8). It works "out of the box" without dependency and inclusion -->
+    <javafx.version>2.2</javafx.version>
+
+    <!-- If you're using SYSTEM dependencies -->
+    <!-- <jdk7.home>/usr/lib/jvm/java-7-oracle</jdk7.home> <javafx.home>${jdk7.home}/jre/lib/jfxrt.jar</javafx.home> <javafx.ant>${jdk7.home}/lib/ant-javafx.jar</javafx.ant> -->
+    <!-- If you're using a Maven local repository -->
+    <javafx.home>${project.basedir}/libs/com/oracle/javafx/2.2/javafx-2.2.jar</javafx.home>
+    <javafx.ant>${project.basedir}/libs/com/oracle/ant-javafx/2.2/ant-javafx-2.2.jar</javafx.ant>
+  </properties>
 
 
-        <!-- Logging -->
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>1.1.7</version>
-        </dependency>
+  <build>
+    <!-- Artifact name -->
+    <finalName>diffing-ui-fx2</finalName>
 
-        <!-- Testing -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
+    <!-- Include all resources in the output artifact (FXML, CSS, images, etc.) -->
+    <resources>
+      <resource>
+        <filtering>false</filtering>
+        <directory>${basedir}/src/main/java</directory>
+        <includes>
+          <include>**/*.fxml</include>
+        </includes>
+      </resource>
+      <resource>
+        <filtering>false</filtering>
+        <directory>${basedir}/src/main/resources</directory>
+        <includes>
+          <include>**/*.*</include>
+        </includes>
+      </resource>
+      <resource>
+        <filtering>false</filtering>
+        <directory>${basedir}/src/main/launcher</directory>
+        <includes>
+          <include>**/*.bat</include>
+          <include>**/*.sh</include>
+        </includes>
+      </resource>
+    </resources>
+
+    <plugins>
+      <!-- Global settings -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.3</version>
+        <configuration>
+          <source>${java.version}</source>
+          <target>${java.version}</target>
+          <optimize>true</optimize>
+          <showDeprecation>true</showDeprecation>
+          <showWarnings>true</showWarnings>
+        </configuration>
+      </plugin>
+
+      <!-- Generate and upload the source artifact to simplify debugging -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>2.2.1</version>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- Copy all dependencies to target folder -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>2.9</version>
+        <executions>
+          <execution>
+            <id>copy-dependencies</id>
+            <phase>package</phase>
+            <configuration>
+              <overWriteReleases>false</overWriteReleases>
+              <overWriteSnapshots>false</overWriteSnapshots>
+              <overWriteIfNewer>true</overWriteIfNewer>
+              <outputDirectory>${project.build.directory}/lib</outputDirectory>
+            </configuration>
+            <goals>
+              <goal>copy-dependencies</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- Build JAR with some particular MANIFEST.MF attributes (JavaFx 2 support) -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>2.5</version>
+        <configuration>
+          <descriptors>
+            <descriptor>src/main/assembly/jar-with-dependencies.xml</descriptor>
+          </descriptors>
+          <archive>
+            <manifest>
+              <addClasspath>true</addClasspath>
+              <mainClass>${exec.mainClass}</mainClass>
+              <classpathLayoutType>repository</classpathLayoutType>
+              <classpathPrefix>lib/</classpathPrefix>
+            </manifest>
+            <manifestEntries>
+              <JavaFX-Application-Class>${exec.mainClass}</JavaFX-Application-Class>
+              <Main-Class>${exec.mainClass}</Main-Class>
+              <JavaFX-Version>${javafx.version}+</JavaFX-Version>
+              <implementation-version>1.0</implementation-version>
+              <!-- <JavaFX-Class-Path> </JavaFX-Class-Path> -->
+              <!-- The artifactId (name) of the jfxrt.jar ... see dependency system scope -->
+              <Class-Path>javafx-${javafx.version}.jar</Class-Path>
+            </manifestEntries>
+          </archive>
+        </configuration>
+      </plugin>
+
+      <!-- Generate runnable jar -->
+      <plugin>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>1.6</version>
+        <executions>
+          <execution>
+            <id>create-launcher-jar</id>
+            <phase>package</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <target xmlns:fx="javafx:com.sun.javafx.tools.ant">
+                <taskdef uri="javafx:com.sun.javafx.tools.ant" resource="com/sun/javafx/tools/ant/antlib.xml" classpath="${javafx.ant}" />
+                <fx:application id="fxApp" name="${project.name}" mainClass="${exec.mainClass}" />
+                <fx:jar destfile="${project.build.directory}/${project.build.finalName}-launcher">
+                  <fx:application refid="fxApp" />
+                  <fx:fileset dir="${project.build.directory}/classes" />
+                </fx:jar>
+                <attachartifact file="${project.build.directory}/${project.build.finalName}-launcher.jar" classifier="launcher" />
+              </target>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- Package the runnable jar with its dependencies -->
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>2.2.1</version>
+        <executions>
+          <execution>
+            <id>make-assembly</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <descriptors>
+            <descriptor>src/main/assembly/jar-with-dependencies.xml</descriptor>
+          </descriptors>
+          <archive>
+            <manifestEntries>
+              <JavaFX-Version>${javafx.version}</JavaFX-Version>
+              <JavaFX-Application-Class>${exec.mainClass}</JavaFX-Application-Class>
+              <Main-Class>com/javafx/main/Main</Main-Class>
+            </manifestEntries>
+          </archive>
+        </configuration>
+      </plugin>
+
+    </plugins>
+  </build>
+
+
+  <dependencies>
+    <!-- Requirements -->
+
+    <!-- ######## JavaFX 2 ######## -->
+    <!-- In Java7 you must add a dependency to the JavaFX artifact. (i) This is not required with JavaFX8 (java8) -->
+    <!-- Either you specify the full path using a SYSTEM dependency [1] ; or you can use a project Maven repository [2] -->
+    <dependency>
+      <groupId>com.oracle</groupId>
+      <artifactId>javafx</artifactId>
+      <version>${javafx.version}</version>
+      <!-- If you do not want to use a local Maven repository: -->
+      <!-- <scope>system</scope> <systemPath>${jdk7.home}/jre/lib/jfxrt.jar</systemPath> -->
+    </dependency>
+
+    <!-- ######## JavaFX Dialog ######## -->
+    <!-- JavaFX dialog. 3rd party library mandatory until Java8.40 ; Dialogs have been integrated last into the official bundle -->
+    <!-- This library comes from http://code.makery.ch/blog/javafx-2-dialogs/ -->
+    <!-- You should use a project Maven repository for that library to be included into the uber jar (assembly output) -->
+    <dependency>
+      <groupId>ch.makery</groupId>
+      <artifactId>javafx-dialogs</artifactId>
+      <version>0.0.4</version>
+      <!-- <scope>system</scope> <systemPath>${project.basedir}/lib/javafx-dialogs-0.0.4.jar</systemPath> -->
+    </dependency>
+
+
+    <!-- Logging -->
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>1.1.7</version>
+    </dependency>
+
+    <!-- Testing -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.12</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
 </project>
