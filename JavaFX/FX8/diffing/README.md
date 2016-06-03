@@ -6,12 +6,15 @@ This is a working JavaFX8 project with:
 * Launcher scripts
 
 
+The stand-alone application is in `/target/diffing-ui-fx-8` 
+
+
+
 ## Maven configuration
 
 ### Application packaging 
 
 JavaFX8 has a dedicated Maven plugin to create bundles.
-
 You can customize the output artifact (see https://javafx-maven-plugin.github.io/)
 
 

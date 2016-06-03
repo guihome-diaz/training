@@ -6,6 +6,10 @@ This is a working JavaFX2 project with:
 * Creation of a standalone uber jar + packaging scripts
 
 
+The stand-alone application is in `/target/diffing-ui-fx-2` 
+
+
+
 ## Maven configuration
 
 JavaFX2 is NOT designed for Maven. Only JavaFX8 is. 
