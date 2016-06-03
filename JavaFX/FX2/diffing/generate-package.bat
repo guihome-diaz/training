@@ -10,13 +10,13 @@ echo #  Packaging application  #
 echo ###########################
 echo.
 
-mkdir target\diffing
-mkdir target\diffing\lib
-copy target\lib\* target\diffing\lib\
-copy target\diffing-jar-with-dependencies.jar target\diffing\diffing.jar
+mkdir target\diffing-ui-fx2
+mkdir target\diffing-ui-fx2\lib
+copy target\lib\* target\diffing-ui-fx2\lib\
+copy target\diffing-ui-fx2-jar-with-dependencies.jar target\diffing-ui-fx2\diffing.jar
 copy src\main\launcher\* target\diffing\
 
 echo.
 echo #### Package complete ####
-echo Go to "target\diffing" and execute the .bat file
+echo Go to "target\diffing-ui-fx2" and execute the diffing.bat file
 echo.

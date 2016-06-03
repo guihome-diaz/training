@@ -6,12 +6,12 @@
 #
 
 echo "JavaFX2 application packager script..."
-mkdir target/package
-cp src/main/launcher/* target/package/
-cp -r target/lib/ target/package/
-cp target/diffing-jar-with-dependencies.jar target/package/diffing.jar
-chmod 755 target/package/*.sh
+mkdir target/diffing-ui-fx2
+cp src/main/launcher/* target/diffing-ui-fx2/
+cp -r target/lib/ target/diffing-ui-fx2/
+cp target/diffing-ui-fx2-jar-with-dependencies.jar target/diffing-ui-fx2/diffing.jar
+chmod 755 target/diffing-ui-fx2/*.sh
 echo "Package complete! To run the application:"
-echo "  cd target/package"
+echo "  cd target/diffing-ui-fx2"
 echo "  ./diffing.sh"
 echo " "
