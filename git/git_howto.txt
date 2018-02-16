@@ -1,0 +1,33 @@
+1. Create a local branch 
+git branch bug-fix-ticket123
+2. Switch workspace to the branch
+git checkout bug-fix-ticket123
+3. Push the branch (init)
+git push origin bug-fix-ticket123
+
+
+4. Do the changes and commit them
+
+5. Push again the changes
+git push origin bug-fix-ticket123
+
+
+6. Switch workspace to the branch
+git checkout master
+7. Merge branch on the branch
+git merge branch bug-fix-ticket123
+
+
+
+************** COOL THINGS *****************
+* Elements that are only for your LOCAL index [ex: configuration | profiles]
+* A stash is a 'photo' of the index. 
+*     1. It saves the status of each file
+*     2. Then when you call it back it will restore the files' states
+git stash
+
+
+* To create some tags
+git tag
+
+

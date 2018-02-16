@@ -1,0 +1,10 @@
+# Serve project (deploy locally)
+ionic serve -l
+
+# IONIC configuration
+sudo apt-get install oracle-java8-set-default
+export JAVA_HOME=/usr/lib/jvm/java-8-oracle/
+export ANDROID_HOME=/mnt/data/Dev/Android/
+
+# Launch application
+ionic cordova run android
