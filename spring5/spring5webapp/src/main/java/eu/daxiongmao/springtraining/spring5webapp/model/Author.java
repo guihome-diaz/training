@@ -12,6 +12,7 @@ public class Author implements Serializable {
     private static final long serialVersionUID = 20180309L;
 
     @Id
+    @Column(name = "AUTHOR_ID")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String firstName;
@@ -68,6 +69,7 @@ public class Author implements Serializable {
 
     @Override
     public boolean equals(Object o) {
+        // No business unique identifier: use technical ID instead
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Author author = (Author) o;
@@ -76,6 +78,7 @@ public class Author implements Serializable {
 
     @Override
     public int hashCode() {
+        // No business unique identifier: use technical ID instead
         return Objects.hash(id);
     }
 
