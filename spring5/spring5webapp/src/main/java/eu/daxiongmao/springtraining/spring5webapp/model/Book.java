@@ -29,18 +29,18 @@ public class Book implements Serializable {
     public Book() {
     }
 
-    public Book(String title, String isbn) {
+    public Book(final String title, final String isbn) {
         this.title = title;
         this.isbn = isbn;
     }
 
-    public Book(String title, String isbn, Publisher publisher) {
+    public Book(final String title, final String isbn, final Publisher publisher) {
         this.title = title;
         this.isbn = isbn;
         this.publisher = publisher;
     }
 
-    public Book(String title, String isbn, Publisher publisher, Set<Author> authors) {
+    public Book(final String title, final String isbn, final Publisher publisher, final Set<Author> authors) {
         this.title = title;
         this.isbn = isbn;
         this.publisher = publisher;
@@ -51,7 +51,7 @@ public class Book implements Serializable {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(final Long id) {
         this.id = id;
     }
 
@@ -59,7 +59,7 @@ public class Book implements Serializable {
         return title;
     }
 
-    public void setTitle(String title) {
+    public void setTitle(final String title) {
         this.title = title;
     }
 
@@ -67,7 +67,7 @@ public class Book implements Serializable {
         return isbn;
     }
 
-    public void setIsbn(String isbn) {
+    public void setIsbn(final String isbn) {
         this.isbn = isbn;
     }
 
@@ -75,7 +75,7 @@ public class Book implements Serializable {
         return publisher;
     }
 
-    public void setPublisher(Publisher publisher) {
+    public void setPublisher(final Publisher publisher) {
         this.publisher = publisher;
     }
 
@@ -83,16 +83,20 @@ public class Book implements Serializable {
         return authors;
     }
 
-    public void setAuthors(Set<Author> authors) {
+    public void setAuthors(final Set<Author> authors) {
         this.authors = authors;
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         // ISBN is an unique business identifier. No need to use technical ID here
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Book book = (Book) o;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        final Book book = (Book) o;
         return Objects.equals(isbn, book.isbn);
     }
 
