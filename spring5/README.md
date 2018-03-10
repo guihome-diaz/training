@@ -3,7 +3,7 @@ This section contains all the code related to the "Spring 5 beginner to guru" tr
 
 # Content
 * Lesson 2: very simple web-app with embedded database ([spring5webapp](spring5webapp))
-* Lesson 3: Spring IoC
+* Lesson 3: Spring IoC ([dependencies-injection](dependencies-injection))
 
 
 # Training notes
