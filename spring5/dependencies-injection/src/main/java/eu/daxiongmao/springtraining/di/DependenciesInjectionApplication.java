@@ -8,15 +8,15 @@ import org.springframework.context.ApplicationContext;
 @SpringBootApplication
 public class DependenciesInjectionApplication {
 
-	public static void main(String[] args) {
-		// Default Spring Boot launcher that returns the loaded context
-        ApplicationContext appContext  = SpringApplication.run(DependenciesInjectionApplication.class, args);
+    public static void main(final String[] args) {
+        // Default Spring Boot launcher that returns the loaded context
+        final ApplicationContext appContext = SpringApplication.run(DependenciesInjectionApplication.class, args);
 
         // ****** Basic dependency injection example **********
         // Retrieve instance by type
-        MyController myController1 = appContext.getBean(MyController.class);
+        final MyController myController1 = appContext.getBean(MyController.class);
         // retrieve instance by name (spring use camelCase by default)
-        MyController myController2 = (MyController) appContext.getBean("myController");
+        final MyController myController2 = (MyController) appContext.getBean("myController");
 
         // Control that both objects refers to the same instance
         if (myController1.hashCode() == myController2.hashCode()) {
@@ -24,6 +24,9 @@ public class DependenciesInjectionApplication {
         } else {
             throw new IllegalStateException("We expect the different references to point to the same object. Your configuration is wrong.");
         }
+
+        // ******** Advanced dependency injection *********
+
 
     }
 }
