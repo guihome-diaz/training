@@ -29,7 +29,7 @@ public class BookController {
     @RequestMapping("/books")
     public String getBooks(final Model model) {
         // retrieve DB data
-        final List<Book> books = bookRepository.findAll();
+        final List<Book> books = (List<Book>) bookRepository.findAll();
         // forward data to the client (=> put it into the Model DTO as 'books')
         model.addAttribute("books", books);
         // name of the view to display

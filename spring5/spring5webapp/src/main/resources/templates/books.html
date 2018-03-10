@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Books list</title>
+</head>
+<body>
+<h1>Spring 5 training</h1>
+<p>
+    This is part of the <a href="https://www.udemy.com/spring-framework-5-beginner-to-guru">Spring 5 'beginner to
+    Guru'</a>
+    training from <a href="https://springframework.guru/">John Tompson</a> on UDEMY.<br>
+</p>
+<ul>
+    <li>Lesson 2</li>
+    <li>Lecture 22: Thymeleaf template</li>
+</ul>
+<hr/>
+<h2>Books list</h2>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>ISBN</th>
+        <th>Title</th>
+        <th>Publisher</th>
+    </tr>
+    <!-- Iterate over the 'books' variable included in the Model returned by the controller -->
+    <tr th:each="book : ${books}">
+        <td th:text="${book.id}">default ID</td>
+        <td th:text="${book.isbn}">default ISBN</td>
+        <td th:text="${book.title}">default title</td>
+        <!-- Conditional display -->
+        <td th:if="${book.publisher != null && book.publisher.name != null}" th:text="${book.publisher.name}">
+            default publisher
+        </td>
+    </tr>
+
+</table>
+</body>
+</html>

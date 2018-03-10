@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Authors list</title>
+</head>
+<body>
+<h1>Spring 5 training</h1>
+<p>
+    This is part of the <a href="https://www.udemy.com/spring-framework-5-beginner-to-guru">Spring 5 'beginner to
+    Guru'</a>
+    training from <a href="https://springframework.guru/">John Tompson</a> on UDEMY.<br>
+</p>
+<ul>
+    <li>Lesson 2</li>
+    <li>Lecture 23: Assignment display list of authors</li>
+</ul>
+<hr/>
+<h2>Authors list</h2>
+<table>
+    <tr>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Books</th>
+    </tr>
+    <!-- Iterate over the 'books' variable included in the Model returned by the controller -->
+    <tr th:each="author : ${authors}">
+        <td th:if="${author.firstName != null}" th:text="${author.firstName}">first name</td>
+        <td th:unless="${author.firstName != null}"></td>
+
+        <td th:if="${author.lastName != null}" th:text="${author.lastName}">last name</td>
+        <td th:unless="${author.lastName != null}"></td>
+
+        <td th:if="${author.books != null && ! #sets.isEmpty(author.books)}">
+            <ul>
+                <li th:each="book : ${author.books}" th:text="${book.title}">book</li>
+            </ul>
+        </td>
+        <td th:unless="${author.books != null && ! #sets.isEmpty(author.books)}">- no publications -</td>
+    </tr>
+
+</table>
+</body>
+</html>
