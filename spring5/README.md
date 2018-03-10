@@ -16,7 +16,7 @@ This section contains all the code related to the "Spring 5 beginner to guru" tr
 
 
 # Links
- * Trainer: John Tompson
- ** Personal web-site: [Spring Guru website](https://springframework.guru/)
- ** GitHub account: [Spring Guru - gitHub](https://github.com/springframeworkguru)
- * Spring projects quick-start: [Spring Initializr](http://start.spring.io/)
+* Trainer: John Tompson
+** Personal web-site: [Spring Guru website](https://springframework.guru/)
+** GitHub account: [Spring Guru - gitHub](https://github.com/springframeworkguru)
+* Spring projects quick-start: [Spring Initializr](http://start.spring.io/)
