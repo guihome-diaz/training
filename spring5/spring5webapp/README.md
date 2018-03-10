@@ -1,5 +1,17 @@
-This section contains all the code related to the "Spring 5 'beginner to guru'" training.
+This section contains all the code related to the "Spring 5 'beginner to guru'" training - Lesson 2.
 
+# Content
+This section contains a small spring boot application that uses:
+* Spring boot 2
+* Spring 5 webMVC
+* JPA
+* Embedded H2 database
+
+
+# Build
+Just checkout the application and run:
+* ```mvn clean install```
+* ```mvn spring-boot:run```
 
 
 # Training notes
