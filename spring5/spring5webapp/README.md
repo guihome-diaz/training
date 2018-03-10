@@ -14,6 +14,13 @@ Just checkout the application and run:
 * ```mvn spring-boot:run```
 
 
+# Usage
+To use the application you can navigate to:
+* http://localhost:8080/h2-console
+* http://localhost:8080/books
+* http://localhost:8080/authors
+
+
 # Training notes
 * I put some comments and javadoc in the code
 * More details, notes and explanations are available on my wiki: [Daxiongmao.eu # Spring 5 training notes](http://www.daxiongmao.eu/wiki/index.php?title=Spring_5_training_(Spring_guru)_-_personal_notes#springMVC)
