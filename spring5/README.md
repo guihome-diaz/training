@@ -2,7 +2,7 @@ This section contains all the code related to the "Spring 5 'beginner to guru'"
 
 
 # Content
-* Lesson 2: very simple web-app with embedded database (spring5webapp) 
+* Lesson 2: very simple web-app with embedded database ([spring5webapp](spring5webapp))
 * Lesson 3: Spring IoC
 
 
