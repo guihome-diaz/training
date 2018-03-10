@@ -1,4 +1,4 @@
-This section contains all the code related to the "Spring 5 'beginner to guru'"
+This section contains all the code related to the "Spring 5 beginner to guru" training. 
 
 
 # Content
@@ -16,5 +16,7 @@ This section contains all the code related to the "Spring 5 'beginner to guru'"
 
 
 # Links
- * Trainer GitHub account (John Tompson): [Spring Guru - gitHub](https://github.com/springframeworkguru)
+ * Trainer: John Tompson
+ ** Personal web-site: [Spring Guru website](https://springframework.guru/)
+ ** GitHub account: [Spring Guru - gitHub](https://github.com/springframeworkguru)
  * Spring projects quick-start: [Spring Initializr](http://start.spring.io/)
