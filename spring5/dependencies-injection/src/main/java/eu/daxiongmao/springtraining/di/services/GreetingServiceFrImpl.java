@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 @Service("greetingServiceFr")
 public class GreetingServiceFrImpl implements GreetingService {
 
+    public static final String WELCOME_FR = "Bonjour! Bienvenue à la formation Spring 5";
+
     @Override
     public String sayHello() {
-        return "Bonjour! Bienvenue à la formation Spring 5";
+        return WELCOME_FR;
     }
 }
