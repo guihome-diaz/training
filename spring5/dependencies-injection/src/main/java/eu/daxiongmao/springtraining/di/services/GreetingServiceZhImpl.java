@@ -8,8 +8,9 @@ import org.springframework.stereotype.Service;
  * <h3>Technical note</h3>
  * <p>
  * This is the <strong>PRIMARY bean</strong>: it is the default bean for that interface.<br>
- * In case of multiple instances of the same interaface and no <code>@Qualifier</code> spring will use
- * the <code>@Primary</code> instance
+ * In case of multiple instances of the same interface and no <code>@Qualifier</code> spring will use
+ * the <code>@Primary</code> instance.
+ * You can only put 1 @primary bean for 1 interface - except if every @Primary is bind to a different @Profile
  * </p>
  */
 @Service("greetingServiceZh")

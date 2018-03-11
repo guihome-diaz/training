@@ -87,4 +87,5 @@ public class GreetingControllerIT {
         Assert.assertNotNull(greetingServiceZh.sayHello());
         Assert.assertEquals(GreetingServiceZhImpl.WELCOME_ZH, greetingServiceZh.sayHello());
     }
+
 }
