@@ -4,8 +4,8 @@ This section contains all the code related to the "Spring 5 beginner to guru" tr
 # Content
 * Lesson 2: very simple web-app with embedded database ([spring5webapp](spring5webapp))
 * Lesson 3: Spring IoC 
-** Custom code: [dependencies-injection](dependencies-injection)
-** Training assignment: [dependencies-injection-assignement](dependencies-injection-assignement)
+  * Custom code: [dependencies-injection](dependencies-injection)
+  * Training assignment: [dependencies-injection-assignement](dependencies-injection-assignement)
 
 
 # Training notes
@@ -19,6 +19,6 @@ This section contains all the code related to the "Spring 5 beginner to guru" tr
 
 # Links
 * Trainer: John Tompson
-** Personal web-site: [Spring Guru website](https://springframework.guru/)
-** GitHub account: [Spring Guru - gitHub](https://github.com/springframeworkguru)
+  * Personal web-site: [Spring Guru website](https://springframework.guru/)
+  * GitHub account: [Spring Guru - gitHub](https://github.com/springframeworkguru)
 * Spring projects quick-start: [Spring Initializr](http://start.spring.io/)
