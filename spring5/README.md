@@ -10,6 +10,7 @@ Training material is available for further reference inside [spring5-training-do
   * Introduction to IoC: Spring beans, @Qualifier, @Profile and @Primary: [dependencies-injection](dependencies-injection)
   * Demonstration of Spring's life-cycle: [beans-lifecycle](beans-lifecycle)
   * Training assignment: [dependencies-injection-assignement](dependencies-injection-assignement)
+* Lesson 4: [chuck-norris](chuck-norris) assignement
 
 
 # Training notes
