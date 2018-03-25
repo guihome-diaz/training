@@ -1,8 +1,8 @@
 package eu.daxiongmao.springtraining.di.controllers;
 
-import eu.daxiongmao.springtraining.di.services.GreetingService;
-import eu.daxiongmao.springtraining.di.services.GreetingServiceEnImpl;
-import eu.daxiongmao.springtraining.di.services.GreetingServiceFrImpl;
+import eu.daxiongmao.springtraining.injection.services.GreetingService;
+import eu.daxiongmao.springtraining.injection.services.GreetingServiceEnImpl;
+import eu.daxiongmao.springtraining.injection.services.GreetingServiceFrImpl;
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;

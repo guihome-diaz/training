@@ -4,8 +4,13 @@ import eu.daxiongmao.springtraining.di.controllers.MyController;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
+// By default spring boot's component scan search for beans in the package and sub-packages of the @springBootApplication
+// (i) To add other package you can use a custom component scan. You must add the same trick on the jUnits !
+// Be careful !! This is an override: you must add again the root package as well
+@ComponentScan(basePackages = {"eu.daxiongmao.springtraining.injection.services", "eu.daxiongmao.springtraining.di"})
 public class DependenciesInjectionApplication {
 
     public static void main(final String[] args) {

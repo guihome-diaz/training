@@ -1,7 +1,7 @@
 package eu.daxiongmao.springtraining.di.controllers;
 
-import eu.daxiongmao.springtraining.di.services.GreetingService;
-import eu.daxiongmao.springtraining.di.services.GreetingServiceSvImpl;
+import eu.daxiongmao.springtraining.injection.services.GreetingService;
+import eu.daxiongmao.springtraining.injection.services.GreetingServiceSvImpl;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

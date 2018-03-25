@@ -1,4 +1,4 @@
-package eu.daxiongmao.springtraining.di.services;
+package eu.daxiongmao.springtraining.injection.services;
 
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;

@@ -18,4 +18,4 @@
  * </ul>
  * </p>
  */
-package eu.daxiongmao.springtraining.di.services;
+package eu.daxiongmao.springtraining.injection.services;

@@ -1,5 +1,6 @@
-package eu.daxiongmao.springtraining.di.services;
+package eu.daxiongmao.springtraining.injection.services;
 
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
  */
 @Service("greetingServiceSv")
 @Profile("sv")
+@Primary
 public class GreetingServiceSvImpl implements GreetingService {
 
 

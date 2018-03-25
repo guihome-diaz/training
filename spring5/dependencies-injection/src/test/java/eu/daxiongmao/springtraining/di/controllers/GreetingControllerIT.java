@@ -1,9 +1,9 @@
 package eu.daxiongmao.springtraining.di.controllers;
 
-import eu.daxiongmao.springtraining.di.services.GreetingService;
-import eu.daxiongmao.springtraining.di.services.GreetingServiceEnImpl;
-import eu.daxiongmao.springtraining.di.services.GreetingServiceFrImpl;
-import eu.daxiongmao.springtraining.di.services.GreetingServiceZhImpl;
+import eu.daxiongmao.springtraining.injection.services.GreetingService;
+import eu.daxiongmao.springtraining.injection.services.GreetingServiceEnImpl;
+import eu.daxiongmao.springtraining.injection.services.GreetingServiceFrImpl;
+import eu.daxiongmao.springtraining.injection.services.GreetingServiceZhImpl;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

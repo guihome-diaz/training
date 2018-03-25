@@ -1,6 +1,6 @@
 package eu.daxiongmao.springtraining.di.controllers;
 
-import eu.daxiongmao.springtraining.di.services.GreetingService;
+import eu.daxiongmao.springtraining.injection.services.GreetingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
