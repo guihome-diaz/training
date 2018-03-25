@@ -9,9 +9,20 @@ import org.springframework.stereotype.Service;
 @Service
 public class ChuckNorrisJokeService implements JokeService {
 
+    private final ChuckNorrisQuotes chuckNorrisQuotes;
+
+    /**
+     * To autowired the spring bean that is declared in the Java config class.
+     * @param chuckNorrisQuotes spring bean to inject
+     */
+    public ChuckNorrisJokeService(ChuckNorrisQuotes chuckNorrisQuotes) {
+        this.chuckNorrisQuotes = chuckNorrisQuotes;
+    }
+
     @Override
     public String getJoke() {
-        ChuckNorrisQuotes chuckNorrisQuotes = new ChuckNorrisQuotes();
+        // You can either instantiate the class manually (cf below) or use a Spring bean (current code)
+        //ChuckNorrisQuotes chuckNorrisQuotes = new ChuckNorrisQuotes();
         return chuckNorrisQuotes.getRandomQuote();
     }
 }
