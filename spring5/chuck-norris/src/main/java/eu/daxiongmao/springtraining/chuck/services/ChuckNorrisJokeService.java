@@ -1,6 +1,7 @@
 package eu.daxiongmao.springtraining.chuck.services;
 
 import guru.springframework.norris.chuck.ChuckNorrisQuotes;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 /**
@@ -15,7 +16,7 @@ public class ChuckNorrisJokeService implements JokeService {
      * To autowired the spring bean that is declared in the Java config class.
      * @param chuckNorrisQuotes spring bean to inject
      */
-    public ChuckNorrisJokeService(ChuckNorrisQuotes chuckNorrisQuotes) {
+    public ChuckNorrisJokeService(@Qualifier("chuckNorrisQuotesXmlConfig") ChuckNorrisQuotes chuckNorrisQuotes) {
         this.chuckNorrisQuotes = chuckNorrisQuotes;
     }
 
