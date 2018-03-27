@@ -1,5 +1,7 @@
 package eu.daxiongmao.springtraining.di;
 
+import eu.daxiongmao.springtraining.injection.services.GreetingService;
+import eu.daxiongmao.springtraining.injection.services.GreetingServiceZhImpl;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,6 +18,12 @@ public class DependenciesInjectionApplicationTests {
     @Autowired
     private ApplicationContext appContext;
 
+    /**
+     * We expect the CHINESE bean to be inject (because it has the @Primary on the 'default' profile).
+     */
+    @Autowired
+    private GreetingService greetingService;
+
     @Test
     public void contextLoads() {
     }
@@ -30,5 +38,11 @@ public class DependenciesInjectionApplicationTests {
         } catch (final NoSuchBeanDefinitionException e) {
             // success case! No bean has been found!
         }
+    }
+
+    @Test
+    public void testPrimaryZh() {
+        Assert.assertNotNull(greetingService.sayHello());
+        Assert.assertEquals(GreetingServiceZhImpl.WELCOME_ZH, greetingService.sayHello());
     }
 }

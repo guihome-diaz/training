@@ -23,11 +23,24 @@ public class DependenciesInjectionApplicationProfileSvIT {
     @Autowired
     private ApplicationContext appContext;
 
+
+    /**
+     * We expect the SWEDISH bean to be inject.
+     */
+    @Autowired
+    private GreetingService greetingService;
+
     @Test
     public void testGreetingServiceSv() {
         final GreetingService greetingServiceSv = (GreetingService) appContext.getBean("greetingServiceSv");
         LOGGER.debug("Swedish welcome: {}", greetingServiceSv.sayHello());
         Assert.assertNotNull(greetingServiceSv.sayHello());
         Assert.assertEquals(GreetingServiceSvImpl.WELCOME_SV, greetingServiceSv.sayHello());
+    }
+
+    @Test
+    public void testPrimarySv() {
+        Assert.assertNotNull(greetingService.sayHello());
+        Assert.assertEquals(GreetingServiceSvImpl.WELCOME_SV, greetingService.sayHello());
     }
 }
