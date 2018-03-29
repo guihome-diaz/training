@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -23,6 +24,10 @@ public class DependenciesInjectionApplicationTests {
      */
     @Autowired
     private GreetingService greetingService;
+
+
+    @Value("${developer.mood}")
+    private String developerMood;
 
     @Test
     public void contextLoads() {
@@ -44,5 +49,11 @@ public class DependenciesInjectionApplicationTests {
     public void testPrimaryZh() {
         Assert.assertNotNull(greetingService.sayHello());
         Assert.assertEquals(GreetingServiceZhImpl.WELCOME_ZH, greetingService.sayHello());
+    }
+
+    @Test
+    public void testDefaultPropertiesFileLoad() {
+        Assert.assertNotNull(developerMood);
+        Assert.assertEquals("happy", developerMood);
     }
 }

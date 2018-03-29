@@ -1,19 +1,39 @@
 package eu.daxiongmao.springtraining.di.config;
 
 import eu.daxiongmao.springtraining.di.repositories.FakeDatasource;
+import eu.daxiongmao.springtraining.di.repositories.FakeJms;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.PropertySources;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.core.env.Environment;
 
 /**
  * Configuration class to interact with application's properties files: embedded or external.<br>
- * You need to add in "propertySource" all embedded properties to load from src∕main∕resources
+ * You need to add in "propertySource" all embedded properties to load from src∕main∕resources.<br>
+ * <br>
+ * You don't need to add the default spring's "application.properties" file: this will be loaded
+ * automatically - no matter what!
  */
 @Configuration
-@PropertySource("classpath:/custom-properties.properties")
+//@PropertySource({"classpath:/custom-properties.properties", "classpath:jms.properties"})
+@PropertySources({
+        @PropertySource("classpath:custom-properties.properties"),
+        @PropertySource("classpath:jms.properties")
+})
 public class PropertyConfig {
+
+    /**
+     * to access OS environment variables, if need be.
+     */
+    @Autowired
+    Environment env;
+
+    // Important note!
+    // Each property "db.datasource.username" can be override by the O.S environment variable DB_DATASOURCE_USERNAME.
 
     @Value("${db.datasource.username}")
     private String dbDatasourceUsername;
@@ -24,6 +44,18 @@ public class PropertyConfig {
     @Value("${db.datasource.url}")
     private String dbDatasourceUrl;
 
+
+    @Value("${jms.username}")
+    private String jmsUsername;
+
+    @Value("${jms.password}")
+    private String jmsPassword;
+
+    @Value("${jms.url}")
+    private String jmsUrl;
+
+    @Value("${developer.mood}")
+    private String developerMood;
 
     /**
      * <p>
@@ -54,5 +86,13 @@ public class PropertyConfig {
     @Bean
     public FakeDatasource getFakeDatasource() {
         return new FakeDatasource(dbDatasourceUrl, dbDatasourcePassword, dbDatasourceUsername);
+    }
+
+    /**
+     * @return fake JMS that relies on external file's properties
+     */
+    @Bean
+    public FakeJms getFakeJms() {
+        return new FakeJms(jmsUrl, jmsPassword, jmsUsername);
     }
 }
