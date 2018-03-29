@@ -1,6 +1,7 @@
 package eu.daxiongmao.springtraining.di;
 
 import eu.daxiongmao.springtraining.di.controllers.MyController;
+import eu.daxiongmao.springtraining.di.repositories.FakeDatasource;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -17,7 +18,7 @@ public class DependenciesInjectionApplication {
         // Default Spring Boot launcher that returns the loaded context
         final ApplicationContext appContext = SpringApplication.run(DependenciesInjectionApplication.class, args);
 
-        // ****** Basic dependency injection example **********
+        // ****** Basic dependency injection example: get annotated beans **********
         // Retrieve instance by type
         final MyController myController1 = appContext.getBean(MyController.class);
         // retrieve instance by name (spring use camelCase by default)
@@ -29,6 +30,12 @@ public class DependenciesInjectionApplication {
         } else {
             throw new IllegalStateException("We expect the different references to point to the same object. Your configuration is wrong.");
         }
+
+
+        // ******** Another example: get beans that are declared in the @Configuration class *********
+        final FakeDatasource fakeDatasource = (FakeDatasource) appContext.getBean(FakeDatasource.class);
+        System.out.println(fakeDatasource.toString());
+
 
         // ******** Advanced dependency injection *********
 
