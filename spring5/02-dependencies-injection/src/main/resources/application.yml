@@ -1,2 +1,11 @@
 developer:
   name: Guillaume
+
+
+# Set "---" to simulate a new file
+---
+spring:
+  profiles: sv
+
+developer:
+  name: GuiHome
