@@ -1,7 +1,7 @@
 package eu.daxiongmao.springtraining.di.repositories;
 
 /**
- * This represents a fake datasource that rely on custom properties defined in #{@link classpath:custom-properties.properties} file.
+ * This represents a fake datasource that rely on custom properties defined in #{@link classpath:datasource.properties} file.
  *
  * @author Guillaume Diaz, based on Spring 5 "beginner to Guru" training for John Tompson
  * @version 1.0

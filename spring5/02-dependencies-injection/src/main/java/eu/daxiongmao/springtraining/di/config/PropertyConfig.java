@@ -15,13 +15,13 @@ import org.springframework.core.env.Environment;
  * Configuration class to interact with application's properties files: embedded or external.<br>
  * You need to add in "propertySource" all embedded properties to load from src∕main∕resources.<br>
  * <br>
- * You don't need to add the default spring's "application.properties" file: this will be loaded
+ * You don't need to add the default spring's "application.properties" and "application.yml" files: they will be loaded
  * automatically - no matter what!
  */
 @Configuration
-//@PropertySource({"classpath:/custom-properties.properties", "classpath:jms.properties"})
+//@PropertySource({"classpath:/datasource.properties", "classpath:jms.properties"})
 @PropertySources({
-        @PropertySource("classpath:custom-properties.properties"),
+        @PropertySource("classpath:datasource.properties"),
         @PropertySource("classpath:jms.properties")
 })
 public class PropertyConfig {

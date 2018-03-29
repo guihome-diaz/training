@@ -1,0 +1,36 @@
+# YAML file example
+
+name: Guillaume
+
+websites:
+  - Daxiongmao.eu
+  - Qin-diaz.com
+  - guihome.fr
+
+# Object creation
+book:
+  author: Joe Buck
+  publisher: random house
+
+# Boolean
+truth: yes
+another_truth: True
+more_truth: true
+beliver: no # no, false, False
+
+# String
+string_val: "This isn't a random text"
+pound_sign: "#"
+
+# Multiple lines String, the "|" char is very important. This will keep the new lines
+long_string_include_new_lines: |
+  Once upon a time
+  A developer learnt a technology
+  That he works with for 7 years
+
+# Very long String, the ">" char is very important. This will put all String into 1 line!
+long_string_ignore_new_lines: >
+  I am not a fan
+  of very long line
+  that is why I cut this one
+  in many - just for the display.

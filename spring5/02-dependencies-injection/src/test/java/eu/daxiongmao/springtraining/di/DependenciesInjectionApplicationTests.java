@@ -29,6 +29,9 @@ public class DependenciesInjectionApplicationTests {
     @Value("${developer.mood}")
     private String developerMood;
 
+    @Value("${developer.name}")
+    private String developerName;
+
     @Test
     public void contextLoads() {
     }
@@ -52,8 +55,11 @@ public class DependenciesInjectionApplicationTests {
     }
 
     @Test
-    public void testDefaultPropertiesFileLoad() {
+    public void testDefaultPropertiesFilesLoaded() {
         Assert.assertNotNull(developerMood);
         Assert.assertEquals("happy", developerMood);
+
+        Assert.assertNotNull(developerName);
+        Assert.assertEquals("Guillaume", developerName);
     }
 }
