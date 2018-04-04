@@ -1,0 +1,76 @@
+// Script for JDL Studio online data modeling
+// https://start.jhipster.tech/jdl-studio/
+// Version 1.0 - 2018-04-04
+
+
+/** Cooking recipe
+  * @author John Tompson (Spring Guru)
+  * @author Guillaume Diaz (student)
+  */
+entity Recipe {
+    id Long,
+    name String required,
+    description String,
+	preparationTime Integer,
+    cookingTime Integer,
+    nbOfservings Integer,
+    source String,
+    url String,
+    directions String required,
+    difficulty Difficulty required,
+    image Byte[]
+}
+
+/** To express the recipe's difficulty. */
+enum Difficulty {
+    EASY, MODERATE, HARD
+}
+
+entity Ingredient {
+	name String required,
+    description String,
+    amount BigDecimal required,
+    unit UnitOfMeasure
+}
+
+/** To express the ingredient's mesure. */
+enum UnitOfMeasure {
+    LITER, WEIGHT
+}
+
+/** Additional notes related to a recipe
+  * @author John Tompson (Spring Guru)
+  * @author Guillaume Diaz (student)
+  */
+entity Notes {
+	notes String
+}
+
+
+/** Recipes' categories
+  * @author John Tompson (Spring Guru)
+  * @author Guillaume Diaz (student)
+  */
+entity Category {
+    id Long,
+    name String required,
+    description String
+}
+
+/** 1 recipe can have some notes ;
+  * 1 note always belong to a recipe. */
+relationship OneToOne {
+	Recipe{notes} to Notes{recipe}
+}
+
+/** 1 recipe can belong to many categories ;
+  * 1 category has many recipes
+  */
+relationship ManyToMany {
+	Recipe{categories} to Category{recipes}
+}
+
+/** 1 recipe have many ingredients. */
+relationship OneToMany {
+	Recipe{ingredients} to Ingredient
+}
