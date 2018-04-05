@@ -74,6 +74,7 @@
                     </additionalClasspathElements>
                 </configuration>
             </plugin>
+
         </plugins>
     </build>
 
