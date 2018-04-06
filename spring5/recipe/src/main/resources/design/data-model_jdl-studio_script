@@ -2,7 +2,6 @@
 // https://start.jhipster.tech/jdl-studio/
 // Version 1.0 - 2018-04-04
 
-
 /** Cooking recipe
   * @author John Tompson (Spring Guru)
   * @author Guillaume Diaz (student)
@@ -10,10 +9,9 @@
 entity Recipe {
     id Long,
     name String required,
-    description String,
-	preparationTime Integer,
-    cookingTime Integer,
-    nbOfservings Integer,
+	preparationTime Integer required,
+    cookingTime Integer required,
+    nbOfServings Integer required,
     source String,
     url String,
     directions String required,
@@ -27,15 +25,16 @@ enum Difficulty {
 }
 
 entity Ingredient {
+    id Long,
 	name String required,
     description String,
-    amount BigDecimal required,
-    unit UnitOfMeasure
+    amount BigDecimal required
 }
 
 /** To express the ingredient's mesure. */
-enum UnitOfMeasure {
-    LITER, WEIGHT
+entity UnitOfMeasure {
+    id Long,
+    unit String
 }
 
 /** Additional notes related to a recipe
@@ -43,6 +42,7 @@ enum UnitOfMeasure {
   * @author Guillaume Diaz (student)
   */
 entity Notes {
+    id Long,
 	notes String
 }
 
@@ -63,6 +63,12 @@ relationship OneToOne {
 	Recipe{notes} to Notes{recipe}
 }
 
+/** 1 recipe can have some notes ;
+  * 1 note always belong to a recipe. */
+relationship OneToOne {
+	Ingredient{unit} to UnitOfMeasure
+}
+
 /** 1 recipe can belong to many categories ;
   * 1 category has many recipes
   */
@@ -70,7 +76,12 @@ relationship ManyToMany {
 	Recipe{categories} to Category{recipes}
 }
 
-/** 1 recipe have many ingredients. */
+/** 1 recipe have many ingredients (== OneToMany). */
 relationship OneToMany {
 	Recipe{ingredients} to Ingredient
+}
+
+/** Many ingredients can be use in 1 recipe (== ManyToOne). */
+relationship ManyToOne {
+	 Ingredient{recipe} to Recipe
 }
