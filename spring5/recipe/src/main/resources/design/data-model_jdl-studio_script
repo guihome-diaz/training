@@ -53,8 +53,7 @@ entity Notes {
   */
 entity Category {
     id Long,
-    name String required,
-    description String
+    name String required
 }
 
 /** 1 recipe can have some notes ;

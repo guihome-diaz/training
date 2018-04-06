@@ -17,9 +17,6 @@ public class Category implements Serializable {
     @Column(name = "NAME", length = 200, nullable = false)
     private String name;
 
-    @Column(name = "DESCRIPTION", length = 2000)
-    private String description;
-
 
     /**
      * Recipe's categories.<br>
@@ -50,14 +47,6 @@ public class Category implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public Set<Recipe> getRecipes() {
