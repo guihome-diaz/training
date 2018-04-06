@@ -11,13 +11,14 @@ import java.io.Serializable;
  * @author John Tompson (spring guru, trainer)
  * @author Guillaume Diaz (student)
  */
-@Entity(name = "UNIT_MEASURE")
+@Entity
+@Table(name = "UNIT_MEASURE")
 public class UnitOfMeasure implements Serializable {
 
     // ***** database specific (ID rely of the underlining database system) *****
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "UNIT_MEASURE_ID")
+    @Column(name = "UNIT_MEASURE_ID", updatable = false, nullable = false)
     private Long id;
 
     @Column(name = "UNIT", length = 100, nullable = false, unique = true)

@@ -10,13 +10,14 @@ import java.util.Set;
  * @author John Tompson (spring guru, trainer)
  * @author Guillaume Diaz (student)
  */
-@Entity(name = "RECIPE")
+@Entity
+@Table(name = "RECIPE")
 public class Recipe implements Serializable {
 
     // ***** database specific (ID rely of the underlining database system) *****
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "RECIPE_ID")
+    @Column(name = "RECIPE_ID", updatable = false, nullable = false)
     private Long id;
 
     // ***** mandatory attributes *****
@@ -74,7 +75,7 @@ public class Recipe implements Serializable {
      * </ul>
      */
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "NOTE_ID")
+    @JoinColumn(name = "NOTE_ID", foreignKey = @ForeignKey(name = "FK_RECIPE_NOTES"))
     private Notes note;
 
     /**
@@ -89,7 +90,6 @@ public class Recipe implements Serializable {
      */
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe", fetch = FetchType.LAZY)
     private Set<Ingredient> ingredients = new HashSet<>();
-
 
     /**
      * Recipe's categories.<br>
@@ -107,8 +107,8 @@ public class Recipe implements Serializable {
     @ManyToMany
     @JoinTable(
             name = "RECIPE_CATEGORY",
-            joinColumns = @JoinColumn(name = "RECIPE_ID", referencedColumnName = "RECIPE_ID"),
-            inverseJoinColumns = @JoinColumn(name = "CATEGORY_ID", referencedColumnName = "CATEGORY_ID"))
+            joinColumns = @JoinColumn(name = "RECIPE_ID", referencedColumnName = "RECIPE_ID", foreignKey = @ForeignKey(name = "FK_RECIPE_CATEGORIES")),
+            inverseJoinColumns = @JoinColumn(name = "CATEGORY_ID", referencedColumnName = "CATEGORY_ID", foreignKey = @ForeignKey(name = "FK_CATEGORY_RECIPES")))
     private Set<Category> categories = new HashSet<>();
 
     public Recipe() {

@@ -9,13 +9,14 @@ import java.io.Serializable;
  * @author John Tompson (spring guru, trainer)
  * @author Guillaume Diaz (student)
  */
-@Entity(name = "INGREDIENT")
+@Entity
+@Table(name = "INGREDIENT")
 public class Ingredient implements Serializable {
 
     // ***** database specific (ID rely of the underlining database system) *****
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "INGREDIENT_ID")
+    @Column(name = "INGREDIENT_ID", updatable = false, nullable = false)
     private Long id;
 
     private String name;
@@ -32,7 +33,7 @@ public class Ingredient implements Serializable {
      * </ul>
      */
     @OneToOne
-    @JoinColumn(name = "UNIT_MEASURE_ID")
+    @JoinColumn(name = "UNIT_MEASURE_ID", foreignKey = @ForeignKey(name = "FK_INGREDIENT_MEASURE"))
     private UnitOfMeasure measure;
 
     // ***** Relationships *****
@@ -48,7 +49,7 @@ public class Ingredient implements Serializable {
      * </ul>
      */
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "RECIPE_ID")
+    @JoinColumn(name = "RECIPE_ID", foreignKey = @ForeignKey(name = "FK_INGREDIENT_RECIPE"))
     private Recipe recipe;
 
     public Long getId() {

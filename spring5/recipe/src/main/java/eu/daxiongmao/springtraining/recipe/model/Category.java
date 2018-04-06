@@ -5,12 +5,13 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+@Entity(name = "CATEGORY")
 public class Category implements Serializable {
 
     // ***** database specific (ID rely of the underlining database system) *****
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "CATEGORY_ID")
+    @Column(name = "CATEGORY_ID", updatable = false, nullable = false)
     private Long id;
 
     @Column(name = "NAME", length = 200, nullable = false)

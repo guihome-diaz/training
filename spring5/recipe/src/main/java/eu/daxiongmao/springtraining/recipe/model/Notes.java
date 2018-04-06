@@ -9,13 +9,14 @@ import java.io.Serializable;
  * @author John Tompson (Spring Guru)
  * @author Guillaume Diaz (student)
  */
-@Entity(name = "RECIPE_NOTES")
+@Entity
+@Table(name = "RECIPE_NOTES")
 public class Notes implements Serializable {
 
     // ***** database specific (ID rely of the underlining database system) *****
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "NOTE_ID")
+    @Column(name = "NOTE_ID", updatable = false, nullable = false)
     private Long id;
 
     /**
