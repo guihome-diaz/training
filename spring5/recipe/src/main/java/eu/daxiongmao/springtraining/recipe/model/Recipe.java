@@ -76,7 +76,7 @@ public class Recipe implements Serializable {
      */
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "NOTE_ID", foreignKey = @ForeignKey(name = "FK_RECIPE_NOTES"))
-    private Notes note;
+    private Notes notes;
 
     /**
      * Recipe's ingredients.<br>
@@ -204,12 +204,12 @@ public class Recipe implements Serializable {
         this.image = image;
     }
 
-    public Notes getNote() {
-        return note;
+    public Notes getNotes() {
+        return notes;
     }
 
-    public void setNote(Notes note) {
-        this.note = note;
+    public void setNotes(Notes notes) {
+        this.notes = notes;
     }
 
     public Set<Ingredient> getIngredients() {

@@ -45,7 +45,7 @@ public class Notes implements Serializable {
      * <li>Cascade: no cascade. You can change the note, only the content (attribute value) will be use by Recipe object</li>
      * </ul>
      */
-    @OneToOne(mappedBy = "note", fetch = FetchType.EAGER)
+    @OneToOne(mappedBy = "notes", fetch = FetchType.EAGER)
     private Recipe recipe;
 
     public Long getId() {

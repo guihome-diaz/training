@@ -27,11 +27,10 @@ enum Difficulty {
 entity Ingredient {
     id Long,
 	name String required,
-    description String,
     amount BigDecimal required
 }
 
-/** To express the ingredient's mesure. */
+/** To express the ingredient's measure. */
 entity UnitOfMeasure {
     id Long,
     unit String
