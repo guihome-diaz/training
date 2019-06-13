@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Recommended tags -->
+        <meta charset="utf-8">
+        <meta name="language" content="english"> 
+        <meta name="author" content="Guillaume Diaz">
+        <meta name="author" content="UDEMY - Vue JS 2 - The complete guide">
+
+        <!-- Search engine optimization -->
+        <meta name="keywords" content="HTML,CSS,XML,JavaScript,VueJS,training">
+        <meta name="description" content="VueJS training">
+        <meta name=”robots” content=”index,follow”>
+        <meta name="revisit-after" content="7 days">
+        <meta name="distribution" content="web">
+        <meta http-equiv="refresh" content="30">
+        <meta name=”robots” content=”noodp”>
+
+        <!--Meta Tags for HTML pages on Mobile-->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="format-detection" content="telephone=yes"/>
+        <meta name="HandheldFriendly" content="true"/> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+        <!--http-equiv Tags-->
+        <meta http-equiv="Content-Style-Type" content="text/css">
+        <meta http-equiv="Content-Script-Type" content="text/javascript">
+
+        <title>VueJS training</title>
+
+        <!-- Libraries and styles -->
+        <link rel="stylesheet" href="">
+        <script src="./../vue.js"></script>
+    </head>
+
+    <body>
+        <!-- Section managed by VueJS -->
+        <div id="app">
+            <input type="text" v-on:input="changeTitle">
+            <p>{{ title }}</p>
+        </div>
+
+
+        <!-- JavaScript area (VueJS code) -->
+        <script>
+            new Vue({
+                // Element "el" is the heart of VueJS
+                // This will manage the DIV "app"
+                el: '#app',
+                // Data binding. This will be displayed in HTML with {{ xy }}
+                data: {
+                    title: 'Test VueJs - Getting started'
+                },
+                // Methods that can be called by directives
+                methods: {
+                    changeTitle: function(event) {
+                        this.title = event.target.value;
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>
