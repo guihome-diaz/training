@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Recommended tags -->
+        <meta charset="utf-8">
+        <meta name="language" content="english"> 
+        <meta name="author" content="Guillaume Diaz">
+        <meta name="author" content="UDEMY - Vue JS 2 - The complete guide">
+
+        <!-- Search engine optimization -->
+        <meta name="keywords" content="HTML,CSS,XML,JavaScript,VueJS,training">
+        <meta name="description" content="VueJS training">
+        <meta name=”robots” content=”index,follow”>
+        <meta name="revisit-after" content="7 days">
+        <meta name="distribution" content="web">
+        <meta http-equiv="refresh" content="30">
+        <meta name=”robots” content=”noodp”>
+
+        <!--Meta Tags for HTML pages on Mobile-->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="format-detection" content="telephone=yes"/>
+        <meta name="HandheldFriendly" content="true"/> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+        <!--http-equiv Tags-->
+        <meta http-equiv="Content-Style-Type" content="text/css">
+        <meta http-equiv="Content-Script-Type" content="text/javascript">
+
+        <title>VueJS training</title>
+
+        <!-- Libraries and styles -->
+        <link rel="stylesheet" href="">
+        <script src="vue.js"></script>
+    </head>
+
+    <body>
+        <!-- Section managed by VueJS -->
+        <div id="app">
+            <!-- Display content and do no let it be changed afterwards (v-once) -->
+            <h1 v-once>{{ title }}</h1>
+
+            <p>
+                <!-- To display DOM content -->
+                <!-- Call VueJS method. It must return a simple object -->
+                {{ sayHello() }}
+            </p>
+
+            <h3>Dynamic change (REACTIVE)</h3>
+            <p>
+                <!-- To interact with DOM data-->
+                Type something to view changes: <input type="text" v-on:input="changeTitle">
+            </p>
+            <p>
+                <!-- Display default value and real-time changes -->
+                <ul>
+                <li><strong>Static attribute</strong> # Current "title" is: {{ title }}</li>
+                <li><strong>Method result</strong> # {{ sayHelloWithTitle() }}</li>
+                </ul>
+            </p>
+
+            <h3>Want to know more?</h3>
+            <p>
+                <ul>
+                    <!-- Generate link from data.attribute -->    
+                    <li>Link to my personal page: <a v-bind:href="myCustomLink">Daxiongmao wiki</a></li>
+                    <!-- Render given HTML # CAREFUL # Big security risks -->
+                    <li v-html="customHtml"></li>
+                </ul>
+                
+
+            </p>
+        </div>
+
+
+        <!-- JavaScript area (VueJS code) -->
+        <script>
+            new Vue({
+                // Element "el" is the heart of VueJS
+                // This will manage the DIV "app"
+                el: '#app',
+                // Data binding. This will be displayed in HTML with {{ xy }}
+                data: {
+                    title: 'Test VueJs - Getting started',
+                    myCustomLink: 'https://www.daxiongmao.eu/wiki',
+                    // BE CAREFUL we raw HTML: big security risks
+                    customHtml: '<a href="https://www.udemy.com/vuejs-2-the-complete-guide/">Udemy VueJS training</a>'
+                },
+                // Methods that can be called by directives
+                methods: {
+                    sayHello: function() {
+                        return 'Hello! Welcome to VueJS training';
+                    },
+                    // access data through "this" proxy
+                    sayHelloWithTitle: function() {
+                        return 'Hello, this is a custom method using local data: ' + this.title;
+                    },
+                    // update data through "this" proxy
+                    changeTitle: function(event) {
+                        this.title = event.target.value;
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>
