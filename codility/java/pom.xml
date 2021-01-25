@@ -33,7 +33,7 @@
 		<ch.qos.logback.version>1.1.2</ch.qos.logback.version>
 
 		<!-- Testing frameworks / libraries -->
-		<junit.version>4.11</junit.version>		
+		<junit.version>4.13.1</junit.version>		
 	</properties>
 
 
