@@ -7,8 +7,10 @@ Angular requires:
 
 Optional: 
 * [Visual Studio Code](https://code.visualstudio.com/)
-* IntelliJ Ultimate with Angular plugins. Then File | New | Module from existing sources..
-
+  * Add extension "Prettier — Code Formatter"  
+* [IntelliJ Ultimate](https://www.jetbrains.com/idea/download/#section=windows) 
+  * Install Angular plugins
+  * Then File | New | Module from existing sources
 
 Official tutorials are available at: https://angular.io/guide/setup-local
 
