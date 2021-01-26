@@ -4,12 +4,19 @@ OXIANE training application
 <ol>
   <li>Create login page (new component 'login', with validation inside)</li>
   <li>Adjust login form to send event to parent (login/password)</li>
-  <li>Adjust login form to:
+  <li>Adjust to:
     <ul>
       <li>send event to parent ONLY if login == password</li>
       <li>if login ok, display text + logout button</li>
       <li>if login ko, display error</li>
       <li>Add logout option to re-display the login form</li>
+    </ul>
+  </li>
+  <li>Adjust to:
+    <ul>
+      <li>Create new module session</li>
+      <li>move "login" _component_ to session _module_ (edit `app.module.ts` and `session.module.ts`, see "descriptions" and "imports/exports")</li>
+      <li>create new _component_ "logout" in session module</li>
     </ul>
   </li>
 </ol>
@@ -24,7 +31,7 @@ OXIANE training application
 <div *ngIf="isLogged">
   <h2>Access granted</h2>
   <p>
-    {{loginMessage}}<br><br>
-    <button (click)="logout()">Logout</button>
+    {{welcomeMessage}}<br><br>
   </p>
+  <app-logout (logoutEvent)="onLogout()"></app-logout>
 </div>

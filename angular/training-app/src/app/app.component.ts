@@ -8,21 +8,21 @@ import {Component, OnInit} from '@angular/core';
 export class AppComponent implements OnInit {
   title = 'training';
   isLogged: boolean;
-  loginMessage: string;
+  welcomeMessage: string;
 
   // Method call at every rendering
   ngOnInit() {
     this.isLogged = false;
   }
 
-  onLogin(login) {
+  onLogin(event) {
     this.isLogged = true;
-    this.loginMessage = 'Welcome to this application'
+    this.welcomeMessage = 'Welcome to this application, ' + event.login;
   }
 
-  logout() {
+  onLogout() {
     this.isLogged = false;
-    this.loginMessage = undefined;
+    this.welcomeMessage = undefined;
   }
 
 }
