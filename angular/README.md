@@ -1,9 +1,9 @@
-#Angular training
+# Angular training
 
-##Angular setup
+## Angular setup
 Angular requires: 
 * [Node JS LTS version](https://nodejs.org/en/) - version x64
-* 
+
 
 Optional: 
 * [Visual Studio Code](https://code.visualstudio.com/)
@@ -14,7 +14,9 @@ Optional:
 
 Official tutorials are available at: https://angular.io/guide/setup-local
 
-### Google default application
+## Exercices
+
+* Create simple application (hello) and change the text - see dynamic loading
 
 ```bash
 # Install the Angular CLI
@@ -27,16 +29,16 @@ ng serve --open
 # Navigate to http://localhost:4200/.
 ```
 
-## Exercices
-
-* Create simple application (hello) and change the text - see dynamic loading
 * Create simple application with routing
   * Create login page (new component 'login', with validation inside)
+    
+```ng generate component login```
   * Adjust login form to send event to parent (login/password)
   * Adjust login form to: 
     * send event to parent ONLY if login == password
     * if login ok, display text + logout button
     * if login ko, display error
+  * Add logout option to re-display the login form
 
 ## Useful links
 
