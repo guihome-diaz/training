@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'training';
+  result: string;
+
+  onCredentials(credentials) {
+    this.result = (credentials.login === credentials.password ? 'Success: access granted' : 'Error: not allowed');
+  }
 }

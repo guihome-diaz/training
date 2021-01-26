@@ -1,3 +1,13 @@
-<app-login>
+<h1>Training app</h1>
+
+Welcome, please login:
+<hr/>
+
+<app-login [defaultLogin]="'sponge-bob'" (credentials)="onCredentials($event)">
   Default text that appears if component is not loaded.
 </app-login>
+
+<hr/>
+<p>
+  {{result}}
+</p>
