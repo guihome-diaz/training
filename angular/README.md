@@ -27,3 +27,17 @@ ng serve --open
 # Navigate to http://localhost:4200/.
 ```
 
+## Exercices
+
+* Create simple application (hello) and change the text - see dynamic loading
+* Create simple application with routing
+  * Create login page (new component 'login', with validation inside)
+  * Adjust login form to send event to parent (login/password)
+  * Adjust login form to: 
+    * send event to parent ONLY if login == password
+    * if login ok, display text + logout button
+    * if login ko, display error
+
+## Useful links
+
+* [PrimeNG components](https://github.com/primefaces/primeng)

@@ -1,15 +1,28 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'training';
-  result: string;
+  isLogged: boolean;
+  loginMessage: string;
 
-  onCredentials(credentials) {
-    this.result = (credentials.login === credentials.password ? 'Success: access granted' : 'Error: not allowed');
+  // Method call at every rendering
+  ngOnInit() {
+    this.isLogged = false;
   }
+
+  onLogin(login) {
+    this.isLogged = true;
+    this.loginMessage = 'Welcome to this application'
+  }
+
+  logout() {
+    this.isLogged = false;
+    this.loginMessage = undefined;
+  }
+
 }

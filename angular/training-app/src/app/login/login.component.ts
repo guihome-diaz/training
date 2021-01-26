@@ -8,9 +8,10 @@ import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 export class LoginComponent implements OnInit {
 
   login: string;
-  @Input()  defaultLogin: string;
-  @Output() credentials = new EventEmitter<any>();
   password: string;
+  loginError: string;
+  @Input()  defaultLogin: string;
+  @Output() credentialsEvent = new EventEmitter<any>();
 
   constructor() { }
 
@@ -20,17 +21,15 @@ export class LoginComponent implements OnInit {
     this.login = this.defaultLogin;
   }
 
-  validatePassword() {
+  validateCredentials() {
     // v1: check manuel
-    /*
+    // v2: send event to parent (login + password)
+    // v3: send event to parent, only login, if credentials are ok
     if (this.login === this.password) {
-      this.result = 'OK';
+      this.loginError = undefined;
+      this.credentialsEvent.emit({ login: this.login });
     } else {
-      this.result = 'KO - not authorized';
+      this.loginError = 'KO - not authorized';
     }
-    */
-
-    // v2: send event to parent
-    this.credentials.emit({login: this.login, password: this.password});
   }
 }

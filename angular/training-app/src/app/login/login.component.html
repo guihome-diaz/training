@@ -1,10 +1,14 @@
-<h1>Application access</h1>
+<h2>Access restricted</h2>
+
+<p *ngIf="loginError !== undefined">
+  <span class="ui-state-error">{{ loginError }}</span>
+</p>
 
 <p>
   <!-- to retrieve the input value, use EVENT.TARGET.VALUE -->
   <!-- Blur: to react on value change -->
   Login: <input type="text" [value]="defaultLogin" (blur)="login=$event.target.value" placeholder="user@mycompany.com"/><br>
-  Password: <input type="password" (blur)="password=$event.target.value" /><br>
-  <button (click)="validatePassword()">Submit</button>
+  Password: <input type="password" (blur)="password=$event.target.value" /><br><br>
+  <button (click)="validateCredentials()">Submit</button>
 </p>
 

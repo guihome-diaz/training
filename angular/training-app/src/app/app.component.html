@@ -1,13 +1,29 @@
 <h1>Training app</h1>
 
-Welcome, please login:
+OXIANE training application
+<ol>
+  <li>Create login page (new component 'login', with validation inside)</li>
+  <li>Adjust login form to send event to parent (login/password)</li>
+  <li>Adjust login form to:
+    <ul>
+      <li>send event to parent ONLY if login == password</li>
+      <li>if login ok, display text + logout button</li>
+      <li>if login ko, display error</li>
+    </ul>
+  </li>
+</ol>
 <hr/>
 
-<app-login [defaultLogin]="'sponge-bob'" (credentials)="onCredentials($event)">
+<!-- display component ONLY if not logged-in -->
+<app-login *ngIf="!isLogged" [defaultLogin]="'sponge-bob'" (credentialsEvent)="onLogin($event)">
   Default text that appears if component is not loaded.
 </app-login>
 
-<hr/>
-<p>
-  {{result}}
-</p>
+<!-- display component ONLY if logged-in -->
+<div *ngIf="isLogged">
+  <h2>Access granted</h2>
+  <p>
+    {{loginMessage}}<br><br>
+    <button (click)="logout()">Logout</button>
+  </p>
+</div>
