@@ -2,8 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {ContactService} from "./contact.service";
 import {HttpClientModule} from "@angular/common/http";
-import { ContactMgrComponent } from './contact/contact-mgr/contact-mgr.component';
-import { ContactItemComponent } from './contact/contact-item/contact-item.component';
+import { ContactMgrComponent } from './contact-mgr/contact-mgr.component';
+import { ContactItemComponent } from './contact-item/contact-item.component';
+import { ContactDetailsComponent } from './contact-details/contact-details.component';
 
 
 
@@ -11,7 +12,8 @@ import { ContactItemComponent } from './contact/contact-item/contact-item.compon
   // List available component(s)
   declarations: [
     ContactMgrComponent,
-    ContactItemComponent
+    ContactItemComponent,
+    ContactDetailsComponent
   ],
   // Public component(s)
   exports: [
