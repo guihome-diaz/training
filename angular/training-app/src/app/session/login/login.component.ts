@@ -10,9 +10,7 @@ export class LoginComponent implements OnInit {
 
   login: string;
   password: string;
-  loginError: string;
   @Input()  defaultLogin: string;
-  @Output() credentialsEvent = new EventEmitter<any>();
 
   constructor(public sharedData: SharedData) { }
 
@@ -26,16 +24,12 @@ export class LoginComponent implements OnInit {
     // v1: check manuel
     // v2: send event to parent (login + password)
     // v3: send event to parent, only login, if credentials are ok
+    // v4: adjust common shared data
     if (this.login === this.password) {
-      // v4 set sessionId
       this.sharedData.sessionId = 'fake session ID';
       this.sharedData.errorMessage = undefined;
-      // v3
-      this.loginError = undefined;
-      this.credentialsEvent.emit({ login: this.login });
     } else {
       this.sharedData.errorMessage = 'KO - not authorized (bad credentials)';
-      this.loginError = 'KO - not authorized';
     }
   }
 }

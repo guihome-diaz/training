@@ -8,8 +8,6 @@ import {SharedData} from "../../shared-data";
 })
 export class LogoutComponent implements OnInit {
 
-  @Output() logoutEvent = new EventEmitter<any>();
-
   constructor(public sharedData: SharedData) { }
 
   ngOnInit(): void {
@@ -17,6 +15,5 @@ export class LogoutComponent implements OnInit {
 
   logout() {
     this.sharedData.sessionId = undefined;
-    this.logoutEvent.emit();
   }
 }
