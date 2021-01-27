@@ -1,13 +1,20 @@
 <div>
-  <h3>Contact details</h3>
+  <h3><i class="fas fa-user"></i> Contact details</h3>
 
   <ng-container *ngIf="contact">
     <input type="hidden" [value]="contact?.id" id="id" />
-    <div><span class="label">First name</span><input type="text" [value]="contact.firstName"/></div>
-    <div><span class="label">Last name</span><input type="text" [value]="contact.lastName"/></div>
-    <div><span class="label">Profession</span><input type="text" [value]="contact.profession"/></div>
-    <div><span class="label">Social security number</span><input type="text" [value]="contact.socialSecurityNumber"/></div>
-    <div><span class="label">Bith date</span>{{contact.birthDate}}, {{contact.birthPlace}}</div>
+    <div><span class="label">First name</span><input class="input-medium-size" type="text" [value]="contact.firstName"/></div>
+    <div><span class="label">Last name</span><input class="input-medium-size" type="text" [value]="contact.lastName"/></div>
+    <br>
+    <div><span class="label">Profession</span><input class="input-medium-size" type="text" [value]="contact.profession"/></div>
+    <br>
+    <div><span class="label">Social security number</span><input class="input-medium-size" type="text" [value]="contact.socialSecurityNumber"/></div>
+    <br>
+    <div>
+      <span class="label">Birth date</span><input class="input-medium-size" type="text" [value]="contact.birthDate" readonly="true"/><br>
+      <span class="label">Birth place</span><input class="input-medium-size" type="text" [value]="contact.birthPlace" readonly="true"/>
+    </div>
+    <br>
     <div><span class="label">Address</span> {{contact.address?.streetAddress1}}, {{contact.address?.postalCode}} {{contact.address?.city}}</div>
   </ng-container>
 </div>

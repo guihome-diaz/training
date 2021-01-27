@@ -7,7 +7,9 @@
       <span style="color: red"><b>Error</b>: {{ sharedData.errorMessage}}</span>
   </div>
   <div *ngIf="sharedData.isLoggedIn()">
-      <span style="color: green">Welcome</span>, sessionId: {{ sharedData.sessionId}} &nbsp; <app-logout></app-logout>
+      <span style="color: green">Welcome</span>, sessionId: {{ sharedData.sessionId}}
+      &nbsp;|&nbsp; <button (click)="viewDashboard()">Dashboard</button>
+      &nbsp;|&nbsp;<app-logout></app-logout>
   </div>
   <div *ngIf="!sharedData.isLoggedIn() && !sharedData.errorMessage">
     Please log-in
