@@ -80,27 +80,11 @@
     </li>
     <li>
       <strong>Route management</strong><br>
-      Create simple CRUD - focus on GET for the moment.
+      Adjust application to use ROUTING for navigation: menu bar, between pages
       <ul>
-        <li>Create <strong>new module</strong> contact</li>
-        <li>create <strong>new service</strong> CRUD to manage contacts + classes to host corresponding values (contact, address)</li>
-        <li><strong>Create new components</strong> to manage, list and view contacts.</li>
-        <li>Summary:<br>
-          <code>
-            ng generate module contact<br>
-            ng generate service contact/contact<br>
-            ng generate class contact/contact<br>
-            ng generate class contact/address<br>
-            # root component for contact management<br>
-            ng generate component contact/contact-mgr<br>
-            # display 1 contact summary, within a list<br>
-            ng generate component contact/contact-item<br>
-            # view 1 contact in particular<br>
-            ng generate component contact/contact-details<br>
-          </code>
-        </li>
-        <li>Part 1: list the contacts. >> <u>Use CALLBACK function</u></li>
-        <li>Part 2: handle contact selection >> use <u>event handling</u> + display details</li>
+        <li>Adjust <code>app-routing.module.ts</code>: add routes to components</li>
+        <li>Adjust HTML templates accordingly with HTML link where applicable</li>
+        <li>Create <u>guard</u> to restrict access to certain pages</li>
       </ul>
     </li>
   </ol>
