@@ -90,6 +90,31 @@ You can access the mock at [http://localhost:5000/api/contact](http://localhost:
   * Adjust module configuration (session.module.ts)
   * Use this for login / logout
 
+
+### Exercise 7: create contact manager
+
+* Create new module contact
+* create new CRUD service to manage contacts + classes to host corresponding values (contact, address)
+* Use OXIANE mocks, see `ContactServices.js`
+* Create components to manage, list and view contacts
+
+```
+ng generate module contact
+ng generate service contact/contact
+ng generate class contact/contact
+ng generate class contact/address
+# root component for contact management
+ng generate component contact/contact-mgr
+# display 1 contact summary, within a list
+ng generate component contact/contact-item
+# view 1 contact in particular
+ng generate component contact/contact-details
+```
+
+* Part 1: list the contacts. >> Use CALLBACK function
+* Part 2: handle contact selection >> use event handling + display details
+
+
 ## Useful links
 
 * [PrimeNG components](https://github.com/primefaces/primeng)

@@ -69,6 +69,31 @@
         <li>Use this for login / logout in the whole application</li>
       </ul>
     </li>
+    <li>
+      <strong>Create contact manager</strong><br>
+      Create simple CRUD - focus on GET for the moment.
+      <ul>
+        <li>Create <strong>new module</strong> contact</li>
+        <li>create <strong>new service</strong> CRUD to manage contacts + classes to host corresponding values (contact, address)</li>
+        <li><strong>Create new components</strong> to manage, list and view contacts.</li>
+        <li>Summary:<br>
+          <code>
+            ng generate module contact<br>
+            ng generate service contact/contact<br>
+            ng generate class contact/contact<br>
+            ng generate class contact/address<br>
+            # root component for contact management<br>
+            ng generate component contact/contact-mgr<br>
+            # display 1 contact summary, within a list<br>
+            ng generate component contact/contact-item<br>
+            # view 1 contact in particular<br>
+            ng generate component contact/contact-details<br>
+          </code>
+        </li>
+        <li>Part 1: list the contacts. >> <u>Use CALLBACK function</u></li>
+        <li>Part 2: handle contact selection >> use <u>event handling</u> + display details</li>
+      </ul>
+    </li>
   </ol>
 
 </div>
