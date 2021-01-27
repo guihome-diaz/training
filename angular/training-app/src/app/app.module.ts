@@ -7,6 +7,7 @@ import {SessionModule} from "./session/session.module";
 import {SharedData} from "./shared-data";
 import { StatusBarComponent } from './status-bar/status-bar.component';
 import { FooterBarComponent } from './footer-bar/footer-bar.component';
+import {ContactModule} from "./contact/contact.module";
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { FooterBarComponent } from './footer-bar/footer-bar.component';
     BrowserModule,
     AppRoutingModule,
     // Import custom module to perform login
-    SessionModule
+    SessionModule,
+    ContactModule
   ],
   providers: [SharedData],
   bootstrap: [AppComponent]

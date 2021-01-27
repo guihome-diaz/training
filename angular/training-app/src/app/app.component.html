@@ -20,9 +20,12 @@
   <div *ngIf="sharedData.sessionId">
     <h2><span style="color: darkgreen">Access granted</span></h2>
     <p>
-      {{welcomeMessage}}<br><br>
+      {{welcomeMessage}}<br>
     </p>
     <app-logout></app-logout>
+
+    <app-contact-mgr></app-contact-mgr>
+
   </div>
 
   <hr/>
