@@ -1,4 +1,5 @@
 import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
+import {SharedData} from "../../shared-data";
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,7 @@ export class LoginComponent implements OnInit {
   @Input()  defaultLogin: string;
   @Output() credentialsEvent = new EventEmitter<any>();
 
-  constructor() { }
+  constructor(public sharedData: SharedData) { }
 
   ngOnInit(): void {
     // This method is called every time the component is render
@@ -26,9 +27,14 @@ export class LoginComponent implements OnInit {
     // v2: send event to parent (login + password)
     // v3: send event to parent, only login, if credentials are ok
     if (this.login === this.password) {
+      // v4 set sessionId
+      this.sharedData.sessionId = 'fake session ID';
+      this.sharedData.errorMessage = undefined;
+      // v3
       this.loginError = undefined;
       this.credentialsEvent.emit({ login: this.login });
     } else {
+      this.sharedData.errorMessage = 'KO - not authorized (bad credentials)';
       this.loginError = 'KO - not authorized';
     }
   }

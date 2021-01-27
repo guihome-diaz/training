@@ -56,6 +56,18 @@ ng serve --open
   
   ```ng generate component session/logout```
 
+### Exercise 5: create new class to handle session ID and error
+
+* Create new class, __at the root of the project__
+
+```ng generate class shared-data```
+
+* Add 2 attributes (sessionId, errorMessage)
+* Configure injection
+* Create components StatusBar (display user info) + Footer
+* Let user logout from banner
+
+
 ## Useful links
 
 * [PrimeNG components](https://github.com/primefaces/primeng)

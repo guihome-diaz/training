@@ -1,0 +1,15 @@
+
+<hr/>
+<div style="display: flex">
+  Status bar | &nbsp;
+  <div *ngIf="sharedData.errorMessage">
+      <span style="color: red"><b>Access error</b>: {{ sharedData.errorMessage}}</span>
+  </div>
+  <div *ngIf="sharedData.isLoggedIn()">
+      <span style="color: green">Welcome</span>, sessionId: {{ sharedData.sessionId}} &nbsp; <app-logout></app-logout>
+  </div>
+  <div *ngIf="!sharedData.isLoggedIn()">
+    Not logged-in
+  </div>
+</div>
+<hr/>

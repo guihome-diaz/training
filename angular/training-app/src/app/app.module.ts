@@ -4,10 +4,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {SessionModule} from "./session/session.module";
+import {SharedData} from "./shared-data";
+import { StatusBarComponent } from './status-bar/status-bar.component';
+import { FooterBarComponent } from './footer-bar/footer-bar.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    StatusBarComponent,
+    FooterBarComponent
   ],
   imports: [
     BrowserModule,
@@ -15,7 +20,7 @@ import {SessionModule} from "./session/session.module";
     // Import custom module to perform login
     SessionModule
   ],
-  providers: [],
+  providers: [SharedData],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
