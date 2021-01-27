@@ -22,11 +22,11 @@ export class SessionService {
       ).subscribe(
         data => {
           this.sharedData.sessionId = data['sessionId'];
-          this.sharedData.errorMessage = undefined;
+          this.sharedData.clearError();
         },
         err => {
-          this.sharedData.errorMessage = err.status + ' ' + err.statusText + ' | Not allowed';
-          this.sharedData.sessionId = undefined;
+          this.sharedData.setHttpError(err);
+          this.sharedData.clearError();
         }
       )
   }

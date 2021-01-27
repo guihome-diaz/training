@@ -6,5 +6,13 @@ export class SharedData {
   isLoggedIn() {
     return (this.sessionId !== undefined);
   }
-  
+
+  setHttpError(err: Error) {
+    this.errorMessage = err.message;
+  }
+
+  clearError() {
+    this.errorMessage = undefined;
+  }
+
 }
