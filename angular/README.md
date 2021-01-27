@@ -1,5 +1,23 @@
 # Angular training
 
+## Requirements
+
+This code uses:
+* Angular CLI: 11.1.1
+* Node: 14.15.4 (LTS)
+* typescript: 4.1.3
+
+Requirements based on `ng --version` at training time.
+
+
+## How to run ?
+
+* Checkout the project
+* Build it: 
+  * `npm install`
+  * `ng build`
+
+
 ## Angular setup
 Angular requires: 
 * [Node JS LTS version](https://nodejs.org/en/) - version x64
@@ -29,6 +47,13 @@ cd my-app
 ng serve --open
 # Navigate to http://localhost:4200/.
 ```
+
+(i) Windows users: __don't forget to update the PATH variable__
+* NODEJS = G:\Dev\Tools\nodejs\
+* PATH
+  * %NODEJS%
+  * C:\Users\guill\AppData\Roaming\npm
+  * C:\Users\guill\AppData\Roaming\npm\node_modules\@angular\cli
 
 ### Exercise 2: simple login form
 * Create simple application with routing
