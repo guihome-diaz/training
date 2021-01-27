@@ -8,12 +8,16 @@ import {SharedData} from "./shared-data";
 import { StatusBarComponent } from './status-bar/status-bar.component';
 import { FooterBarComponent } from './footer-bar/footer-bar.component';
 import {ContactModule} from "./contact/contact.module";
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     StatusBarComponent,
-    FooterBarComponent
+    FooterBarComponent,
+    DashboardComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,

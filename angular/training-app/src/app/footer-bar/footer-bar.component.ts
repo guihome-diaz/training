@@ -12,7 +12,7 @@ export class FooterBarComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.applicationVersion = 'Exercise 5';
+    this.applicationVersion = '2021 (c) - Oxiane training ; Student work';
   }
 
 }

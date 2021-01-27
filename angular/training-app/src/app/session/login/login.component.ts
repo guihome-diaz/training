@@ -1,5 +1,6 @@
 import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import {SessionService} from "../session.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ export class LoginComponent implements OnInit {
   password: string;
   @Input()  defaultLogin: string;
 
-  constructor(public sessionService: SessionService) { }
+  constructor(public sessionService: SessionService, private router: Router) { }
 
   ngOnInit(): void {
     // This method is called every time the component is render
@@ -26,6 +27,7 @@ export class LoginComponent implements OnInit {
     // v3: send event to parent, only login, if credentials are ok
     // v4: adjust common shared data
     // v5: call the dedicated service
-    this.sessionService.login(this.login, this.password);
+    // v6: redirect user to default page on success
+    this.sessionService.login(this.login, this.password, () => { this.router.navigate(["/dashboard"] )});
   }
 }

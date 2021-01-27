@@ -115,6 +115,26 @@ ng generate component contact/contact-details
 * Part 2: handle contact selection >> use event handling + display details
 
 
+### Exercise 8: route management
+
+PART 1: no security
+
+* Create 2 new components: dashboard (to be displayed after login), about (application details)
+* Add routing
+  * try: http://localhost:4200/login
+  * try: http://localhost:4200/about
+  * try: http://localhost:4200/contact
+  * try: http://localhost:4200/dashboard
+  
+
+PART 2: add security guard
+
+* Create class
+```ng generate class activable-when-logged-in```
+* Add @Injectable + implements CanActivate
+
+
+
 ## Useful links
 
 * [PrimeNG components](https://github.com/primefaces/primeng)

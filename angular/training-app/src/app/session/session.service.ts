@@ -10,7 +10,7 @@ export class SessionService {
   constructor(public httpClient: HttpClient, public sharedData: SharedData) { }
 
   // Login URL: POST   http://localhost:5000/api/session    (with JSON body)
-  login(userId: string, password: string) {
+  login(userId: string, password: string, callback: Function) {
     // See the Oxiane mocks ; SessionServices.js
     // JSON format expected, with 2 attributes: login, password
 
@@ -23,6 +23,8 @@ export class SessionService {
         data => {
           this.sharedData.sessionId = data['sessionId'];
           this.sharedData.clearError();
+          // notify caller
+          callback();
         },
         err => {
           this.sharedData.setError(err);
@@ -31,7 +33,7 @@ export class SessionService {
   }
 
   // Logout URL: DELETE   http://localhost:5000/api/session?id=abxcd-z18a-da8e-125af
-  logout() {
+  logout(callback: Function) {
     // See the Oxiane mocks ; SessionServices.js
     // JSON format expected, with 2 attributes: login, password
 
@@ -44,6 +46,7 @@ export class SessionService {
       data => {
         this.sharedData.sessionId = undefined;
         this.sharedData.errorMessage = undefined;
+        callback();
       },
       err => {
         this.sharedData.errorMessage = err.errorMessage;

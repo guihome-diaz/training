@@ -9,24 +9,7 @@
   <h1>Training app</h1>
   OXIANE training application
 
-  <!-- v3: use manual events [method isLogged()] -->
-  <!-- v4: use shared data -->
-  <!-- display component ONLY if not logged-in -->
-  <app-login *ngIf="!sharedData.sessionId" [defaultLogin]="'sponge-bob'">
-    Default text that appears if component is not loaded.
-  </app-login>
-
-  <!-- display component ONLY if logged-in -->
-  <div *ngIf="sharedData.sessionId">
-    <h2><span style="color: darkgreen">Access granted</span></h2>
-    <p>
-      {{welcomeMessage}}<br>
-    </p>
-    <app-logout></app-logout>
-
-    <app-contact-mgr></app-contact-mgr>
-
-  </div>
+  <router-outlet></router-outlet>
 
   <hr/>
 
@@ -71,6 +54,31 @@
     </li>
     <li>
       <strong>Create contact manager</strong><br>
+      Create simple CRUD - focus on GET for the moment.
+      <ul>
+        <li>Create <strong>new module</strong> contact</li>
+        <li>create <strong>new service</strong> CRUD to manage contacts + classes to host corresponding values (contact, address)</li>
+        <li><strong>Create new components</strong> to manage, list and view contacts.</li>
+        <li>Summary:<br>
+          <code>
+            ng generate module contact<br>
+            ng generate service contact/contact<br>
+            ng generate class contact/contact<br>
+            ng generate class contact/address<br>
+            # root component for contact management<br>
+            ng generate component contact/contact-mgr<br>
+            # display 1 contact summary, within a list<br>
+            ng generate component contact/contact-item<br>
+            # view 1 contact in particular<br>
+            ng generate component contact/contact-details<br>
+          </code>
+        </li>
+        <li>Part 1: list the contacts. >> <u>Use CALLBACK function</u></li>
+        <li>Part 2: handle contact selection >> use <u>event handling</u> + display details</li>
+      </ul>
+    </li>
+    <li>
+      <strong>Route management</strong><br>
       Create simple CRUD - focus on GET for the moment.
       <ul>
         <li>Create <strong>new module</strong> contact</li>
