@@ -1,0 +1,13 @@
+<div style="display: flex">
+  <div style="height: 80vh; overflow-y: scroll">
+    <app-contact-item *ngFor="let ctc of contactList; let evenRow=even"
+                      [contact]="ctc"
+                      [isEvenRow]="evenRow"
+                      (itemClicked)="onItemClicked($event)"
+                      [isSelected]="ctc?.id === selectedContact?.id"
+    ></app-contact-item>
+  </div>
+  <div>
+    Specific item
+  </div>
+</div>
