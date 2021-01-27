@@ -12,13 +12,13 @@
   <!-- v3: use manual events [method isLogged()] -->
   <!-- v4: use shared data -->
   <!-- display component ONLY if not logged-in -->
-  <app-login *ngIf="sharedData.sessionId === undefined" [defaultLogin]="'sponge-bob'">
+  <app-login *ngIf="!sharedData.sessionId" [defaultLogin]="'sponge-bob'">
     Default text that appears if component is not loaded.
   </app-login>
 
   <!-- display component ONLY if logged-in -->
-  <div *ngIf="sharedData.sessionId !== undefined">
-    <h2>Access granted</h2>
+  <div *ngIf="sharedData.sessionId">
+    <h2><span style="color: darkgreen">Access granted</span></h2>
     <p>
       {{welcomeMessage}}<br><br>
     </p>
