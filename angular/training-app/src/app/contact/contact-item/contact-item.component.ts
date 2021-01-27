@@ -8,7 +8,7 @@ import {Contact} from "../contact";
 })
 export class ContactItemComponent implements OnInit, OnChanges {
 
-  // Callbacks
+  // Input data
   @Input() contact: Contact;
   @Input() isEvenRow: boolean;
   @Input() isSelected: boolean;

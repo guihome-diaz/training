@@ -10,12 +10,7 @@ import {ContactService} from "../contact.service";
 export class ContactMgrComponent implements OnInit {
 
   contactList: Contact[];
-
-  // Incoming data/event
   selectedContact: Contact;
-
-  // Outgoing events
-
 
   constructor(public contactService: ContactService) { }
 

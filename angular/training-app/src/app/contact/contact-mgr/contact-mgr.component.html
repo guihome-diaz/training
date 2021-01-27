@@ -8,6 +8,7 @@
     ></app-contact-item>
   </div>
   <div>
-    Specific item
+    <app-contact-details *ngIf="selectedContact"
+                         [contact]="selectedContact"></app-contact-details>
   </div>
 </div>
