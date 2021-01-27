@@ -25,8 +25,7 @@ export class SessionService {
           this.sharedData.clearError();
         },
         err => {
-          this.sharedData.setHttpError(err);
-          this.sharedData.clearError();
+          this.sharedData.setError(err);
         }
       )
   }
