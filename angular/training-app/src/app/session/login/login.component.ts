@@ -1,5 +1,5 @@
 import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
-import {SharedData} from "../../shared-data";
+import {SessionService} from "../session.service";
 
 @Component({
   selector: 'app-login',
@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
   password: string;
   @Input()  defaultLogin: string;
 
-  constructor(public sharedData: SharedData) { }
+  constructor(public sessionService: SessionService) { }
 
   ngOnInit(): void {
     // This method is called every time the component is render
@@ -25,11 +25,7 @@ export class LoginComponent implements OnInit {
     // v2: send event to parent (login + password)
     // v3: send event to parent, only login, if credentials are ok
     // v4: adjust common shared data
-    if (this.login === this.password) {
-      this.sharedData.sessionId = 'fake session ID';
-      this.sharedData.errorMessage = undefined;
-    } else {
-      this.sharedData.errorMessage = 'KO - not authorized (bad credentials)';
-    }
+    // v5: call the dedicated service
+    this.sessionService.login(this.login, this.password);
   }
 }

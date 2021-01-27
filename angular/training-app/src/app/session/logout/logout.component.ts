@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {SharedData} from "../../shared-data";
+import {SessionService} from "../session.service";
 
 @Component({
   selector: 'app-logout',
@@ -8,12 +8,12 @@ import {SharedData} from "../../shared-data";
 })
 export class LogoutComponent implements OnInit {
 
-  constructor(public sharedData: SharedData) { }
+  constructor(public sessionService: SessionService) { }
 
   ngOnInit(): void {
   }
 
   logout() {
-    this.sharedData.sessionId = undefined;
+    this.sessionService.logout();
   }
 }

@@ -8,8 +8,8 @@
   <div *ngIf="sharedData.isLoggedIn()">
       <span style="color: green">Welcome</span>, sessionId: {{ sharedData.sessionId}} &nbsp; <app-logout></app-logout>
   </div>
-  <div *ngIf="!sharedData.isLoggedIn()">
-    Not logged-in
+  <div *ngIf="!sharedData.isLoggedIn() && !sharedData.errorMessage">
+    Please log-in
   </div>
 </div>
 <hr/>

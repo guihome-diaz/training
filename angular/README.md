@@ -67,6 +67,28 @@ ng serve --open
 * Create components StatusBar (display user info) + Footer
 * Let user logout from banner
 
+### Exercise 6: use OXIANE backend (http calls)
+
+* Fork [Backend mocks](https://gitlab.com/20-100-2fe/rest-mock)
+* Build and run the backend
+
+```
+# Build
+npm install
+npm run build
+# Start 
+npm run start
+```
+
+You can access the mock at [http://localhost:5000/api/contact](http://localhost:5000/api/contact)
+
+* Adjust the application 
+  * Create new service to use HTTP calls with 2 methods: login(..) + logout()
+    
+    ```ng generate service session/session```
+    
+  * Adjust module configuration (session.module.ts)
+  * Use this for login / logout
 
 ## Useful links
 
