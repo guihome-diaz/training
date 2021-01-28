@@ -5,6 +5,7 @@ import {HttpClientModule} from "@angular/common/http";
 import { ContactMgrComponent } from './contact-mgr/contact-mgr.component';
 import { ContactItemComponent } from './contact-item/contact-item.component';
 import { ContactDetailsComponent } from './contact-details/contact-details.component';
+import { ContactEditorComponent } from './contact-editor/contact-editor.component';
 
 
 
@@ -13,11 +14,13 @@ import { ContactDetailsComponent } from './contact-details/contact-details.compo
   declarations: [
     ContactMgrComponent,
     ContactItemComponent,
-    ContactDetailsComponent
+    ContactDetailsComponent,
+    ContactEditorComponent
   ],
   // Public component(s)
   exports: [
-    ContactMgrComponent
+    ContactMgrComponent,
+    ContactEditorComponent
   ],
   // Required dependencies
   imports: [

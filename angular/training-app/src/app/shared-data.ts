@@ -8,6 +8,13 @@ export class SharedData {
   }
 
   setError(err: any) {
+    // string
+    if (typeof err === 'string') {
+      this.errorMessage = err;
+      return;
+    }
+
+    // non string values
     if (err["status"] === 403) {
       this.errorMessage = 'Access denied'
     } else if (err["message"]) {

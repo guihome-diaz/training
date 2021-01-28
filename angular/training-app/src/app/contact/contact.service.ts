@@ -49,19 +49,11 @@ export class ContactService {
 
 
   // GET http://localhost:5000/api/contact?id=123456
-  fetchById(searchId: string) {
-    this.httpClient.get(
+  fetchById(searchId: string) : Observable<Contact> {
+    return this.httpClient.get<Contact>(
       this.backendUrl,
       { params: new HttpParams().set('id', searchId) }
-    ).subscribe(
-      data => {
-        this.sharedData.clearError();
-        return data['contactList'];
-      },
-      err => {
-        this.sharedData.setError(err);
-      }
-    )
+    );
   }
 
   // PUT http://localhost:5000/api/contact

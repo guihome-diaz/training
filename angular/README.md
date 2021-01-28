@@ -159,6 +159,15 @@ PART 2: add security guard
 * Add @Injectable + implements CanActivate
 
 
+### Exercise 9: parameter route + Observable
+
+* Create new component _contact-edit_ to be called with a parameter route
+* Adjust `ContactService` to call the backend with an ID parameter. This will return an `Observable`
+* Create 2 new buttons in status bar to view a particular contact (call this _contact-edit_ component)
+  * Success case
+  * Error case
+* Make sure the error disappear when you are back to dashboard  
+
 
 ## Useful links
 

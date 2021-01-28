@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {SharedData} from "../shared-data";
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private sharedData: SharedData) { }
 
   ngOnInit(): void {
+    // success display => clear error
+    this.sharedData.clearError();
   }
 
 }
