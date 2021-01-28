@@ -1,6 +1,6 @@
 import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import {SessionService} from "../session.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -13,12 +13,16 @@ export class LoginComponent implements OnInit {
   password: string;
   @Input()  defaultLogin: string;
 
-  constructor(public sessionService: SessionService, private router: Router) { }
+  constructor(public sessionService: SessionService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     // This method is called every time the component is render
     //  not just when the component is created!
-    this.login = this.defaultLogin;
+    if (this.defaultLogin) {
+      this.login = this.defaultLogin;
+    } else {
+      this.defaultLogin = '';
+    }
   }
 
   validateCredentials() {
