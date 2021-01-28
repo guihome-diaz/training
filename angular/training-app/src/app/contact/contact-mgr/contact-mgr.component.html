@@ -1,0 +1,19 @@
+<div style="display: flex">
+  <div style="margin-right: 50px">
+    <div style="margin-bottom: 25px"><h3>Available contacts</h3></div>
+    <div style="height: 80vh; overflow-y: scroll">
+      <app-contact-item *ngFor="let ctc of contactList; let evenRow=even"
+                        [contact]="ctc"
+                        [isEvenRow]="evenRow"
+                        (itemClicked)="onItemClicked($event)"
+                        [isSelected]="ctc?.id === selectedContact?.id"
+      ></app-contact-item>
+    </div>
+  </div>
+  <div>
+    <app-contact-details [contact]="selectedContact"
+                         (itemDeleted)="onItemDeleted($event)"
+                         (itemChanged)="onItemUpdated($event)"
+    ></app-contact-details>
+  </div>
+</div>

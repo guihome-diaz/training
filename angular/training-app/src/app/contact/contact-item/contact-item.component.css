@@ -1,0 +1,9 @@
+.evenRow {
+  background-color: cornsilk;
+}
+.oddRow {
+  background-color: lightsteelblue;
+}
+.selectedRow {
+  background-color: gold;
+}

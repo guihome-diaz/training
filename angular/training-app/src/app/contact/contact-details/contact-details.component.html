@@ -1,0 +1,74 @@
+<div>
+  <h3><i class="fas fa-user"></i> Contact details</h3>
+
+  <div style="display: flex">
+    <div style="width: 70%">
+        <p *ngIf="contactID.value">EDIT existing user</p>
+        <p *ngIf="!contactID.value">NEW user</p>
+        <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" id="contact-form" #zeForm>
+          <input type="hidden" [value]="contact?.id" id="contact-id" formControlName="id" readonly="true" #contactID/>
+          <div class="form-row">
+            <label for="contact-firstName">First name</label>
+            <input class="input-medium-size" type="text" id="contact-firstName" formControlName="firstName" />
+          </div>
+          <div class="form-row">
+            <label for="contact-lastName">Last name</label>
+            <input class="input-medium-size" type="text" id="contact-lastName" formControlName="lastName" />
+          </div>
+          <br>
+          <div class="form-row">
+            <label for="contact-profession">Profession</label>
+            <input class="input-medium-size" type="text" id="contact-profession" formControlName="profession"/>
+          </div>
+          <br>
+
+          <div class="form-row">
+            <label for="contact-social-security-number">Social security number</label>
+            <input class="input-medium-size" type="text" id="contact-social-security-number" formControlName="socialSecurityNumber" />
+          </div>
+          <br>
+
+          <div class="form-row">
+            <label for="contact-birthDate">Birth date</label>
+            <p-calendar id="contact-birthDate" formControlName="birthDate"></p-calendar>
+            <!-- input class="input-medium-size" type="text" id="contact-birthDate" formControlName="birthDate" / -->
+          </div>
+          <div>
+            <label for="contact-birthPlace">Birth place</label>
+            <input class="input-medium-size" type="text" id="contact-birthPlace" formControlName="birthPlace" />
+          </div>
+          <br>
+          <!-- Address -->
+          <div formGroupName="address">
+            <div class="form-row">
+              <label for="contact-address-street">Street</label>
+              <input class="input-medium-size" type="text" id="contact-address-street" formControlName="streetAddress1"/>
+            </div>
+            <div class="form-row">
+              <label for="contact-address-postal-code">PostalCode</label>
+              <input class="input-medium-size" type="text" id="contact-address-postal-code" formControlName="postalCode"/>
+            </div>
+            <div class="form-row">
+              <label for="contact-address-city">City</label>
+              <input class="input-medium-size" type="text" id="contact-address-city" formControlName="city"/>
+            </div>
+          </div>
+          <!-- Actions -->
+          <div>
+            <button type="reset">Reset</button>&nbsp;&nbsp;
+            <button type="submit">Submit</button>&nbsp;&nbsp;
+            <button (click)="onDelete()">Delete</button>
+          </div>
+
+          <!-- Errors -->
+          <div style="background-color: peachpuff" *ngIf="zeForm.invalid">
+            <span class="error">Form is not valid!</span>
+            {{zeForm.errors}}
+            <div *ngFor="let err of zeForm.errors">
+              {{err}}<br>
+            </div>
+          </div>
+        </form>
+    </div>
+  </div>
+</div>

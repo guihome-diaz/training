@@ -1,0 +1,18 @@
+h2 {
+  color: saddlebrown;
+}
+label {
+  color: black;
+}
+input {
+  color: black;
+}
+.ng-input {
+  color: black;
+}
+.ng-invalid {
+  color: darkred;
+}
+.ng-valid {
+  color: green;
+}

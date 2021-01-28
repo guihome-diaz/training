@@ -1,0 +1,145 @@
+<header>
+  Oxiane training - 2021-01
+</header>
+<div id="wrapper">
+  <div>
+    <app-status-bar></app-status-bar>
+  </div>
+
+  <p>OXIANE training application<br></p>
+
+  <div id="content">
+    <router-outlet></router-outlet>
+  </div>
+
+  <hr/>
+
+  <h2>Training plan</h2>
+  <ol>
+    <li><strong>Create login page</strong> (new component 'login', with validation inside)</li>
+    <li>Adjust login form to <strong>send event to parent</strong> (login/password)</li>
+    <li><strong>Dynamic display</strong>:
+      <ul>
+        <li>send event to parent ONLY if login == password</li>
+        <li>if login ok, display text + logout button</li>
+        <li>if login ko, display error</li>
+        <li>Add logout option to re-display the login form</li>
+      </ul>
+    </li>
+    <li><strong>Create module</strong>
+      <ul>
+        <li>Create new module session</li>
+        <li>move "login" _component_ to session _module_ (edit `app.module.ts` and `session.module.ts`, see "descriptions" and "imports/exports")</li>
+        <li>create new _component_ "logout" in session module</li>
+      </ul>
+    </li>
+    <li>
+      <strong>create new class to handle session ID and error</strong>
+      <ul>
+        <li>Create new class, at the root of the project</li>
+        <li>Add 2 attributes (sessionId, errorMessage)</li>
+        <li>Configure injection</li>
+        <li>Create components StatusBar (display user info) + Footer</li>
+        <li>Let user logout from banner</li>
+      </ul>
+    </li>
+    <li>
+      <strong>HTTP calls</strong>: use OXIANE backend
+      <ul>
+        <li>Fork Backend mocks: https://gitlab.com/20-100-2fe/rest-mock</li>
+        <li>Build and run the backend</li>
+        <li>Create new service to use HTTP calls with 2 methods: <code>login(..)</code> + <code>logout()</code></li>
+        <li>Adjust module configuration</li>
+        <li>Use this for login / logout in the whole application</li>
+      </ul>
+    </li>
+    <li>
+      <strong>Create contact manager</strong><br>
+      Create simple CRUD - focus on GET for the moment.
+      <ul>
+        <li>Create <strong>new module</strong> contact</li>
+        <li>create <strong>new service</strong> CRUD to manage contacts + classes to host corresponding values (contact, address)</li>
+        <li><strong>Create new components</strong> to manage, list and view contacts.</li>
+        <li>Summary:<br>
+          <code>
+            ng generate module contact<br>
+            ng generate service contact/contact<br>
+            ng generate class contact/contact<br>
+            ng generate class contact/address<br>
+            # root component for contact management<br>
+            ng generate component contact/contact-mgr<br>
+            # display 1 contact summary, within a list<br>
+            ng generate component contact/contact-item<br>
+            # view 1 contact in particular<br>
+            ng generate component contact/contact-details<br>
+          </code>
+        </li>
+        <li>Part 1: list the contacts. >> <u>Use CALLBACK function</u></li>
+        <li>Part 2: handle contact selection >> use <u>event handling</u> + display details</li>
+      </ul>
+    </li>
+    <li>
+      <strong>Route management</strong><br>
+      Adjust application to use ROUTING for navigation: menu bar, between pages
+      <ul>
+        <li>Adjust <code>app-routing.module.ts</code>: add routes to components</li>
+        <li>Adjust HTML templates accordingly with HTML link where applicable</li>
+        <li>Create <u>guard</u> to restrict access to certain pages</li>
+      </ul>
+    </li>
+    <li>
+      <u>parameter route + Observable&lt;T&gt;</u>
+      <ul>
+        <li>Create new component <i>contact-edit</i> to be called with a parameter route</li>
+        <li>Adjust <code>ContactService</code> to call the backend with an ID parameter. This will return an <code>Observable</code></li>
+        <li>Create 2 new buttons in status bar to view a particular contact (call this <i>contact-edit</i> component)</li>
+        <li>Success case</li>
+        <li>Error case</li>
+        <li>Make sure the error disappear when you are back to dashboard</li>
+      </ul>
+    </li>
+    <li>
+      <strong>use <u>HTML template</u> form</strong> (FormsModule)
+      <ul>
+        <li>Adjust the LOGIN form to use FormsModule with HTML template, bidirectional</li>
+        <li>Add import to <code>sessionModule</code> (forms)</li>
+        <li>Adjust login form</li>
+        <li>Add validation display</li>
+      </ul>
+    </li>
+    <li>
+      <strong>use Reactive form</strong> (ReactiveFormsModule), no validations
+      <ul>
+        <li>Adjust the contact-details form to use ReactiveFormsModule</li>
+        <li>Don't forget to adjust the onChanges() to set the user values</li>
+      </ul>
+    </li>
+    <li>
+      <strong>Add form validation</strong>
+      <ul>
+        <li>Add form validation on the contact-details form</li>
+        <li>Add a submit button, with simple function that does <code>console.log()</code></li>
+      </ul>
+    </li>
+    <li>
+      <strong>implements Update, Create and Delete functions</strong>
+      <ul>
+        <li>Implements DELETE, UPDATE and CREATE functions</li>
+        <li>Important: do NOT use the ROUTER in services!!</li>
+      </ul>
+    </li>
+    <li>
+      <strong>add 3rd party library</strong>: PrimeNG faces
+      <ul>
+        <li>Setup, see <a href="https://primefaces.org/primeng/showcase/#/setup">official documentation</a></li>
+        <li>edit <code>package.json</code></li>
+        <li>edit <code>angluar.json</code></li>
+        <li>run <code>npm install</code></li>
+        <li>Use the calendar, see <a href="https://primefaces.org/primeng/showcase/#/calendar">official documentation</a></li>
+      </ul>
+    </li>
+  </ol>
+</div>
+<footer>
+  <app-footer-bar></app-footer-bar>
+</footer>
