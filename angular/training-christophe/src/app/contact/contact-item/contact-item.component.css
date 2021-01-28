@@ -1,0 +1,40 @@
+.box {
+  display: flex;
+  margin-top: 0.5em;
+}
+
+.contact {;
+  border: 1px solid #000;
+  padding: 0.5em;
+}
+
+.contact:hover {
+  cursor: pointer;
+}
+
+.selected {
+  background-color: #24DE6A;
+}
+
+.even {
+  background-color: #2494DE;
+}
+
+.odd {
+  background-color: #DE244B;
+}
+
+.close {
+  background-color: #000;
+  color: #FFF;
+  border: 1px solid #FFF;
+  line-height: 2em;
+  margin: 0.1em;
+}
+
+.close:hover {
+  background-color: #FFF;
+  color: #000;
+  border: 1px solid #000;
+  cursor: pointer;
+}

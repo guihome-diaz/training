@@ -1,0 +1,63 @@
+<div class="detail">
+  <form [formGroup]="form" (ngSubmit)="submit()" *ngIf="contact">
+    <div class="row">
+      <label for="id">ID</label>
+      <span>{{contact?.id}}</span>
+      <input id="id" [value]="contact?.id" type="hidden">
+    </div>
+
+    <div class="row">
+      <label for="firstName">First name</label>
+      <input id="firstName" formControlName="firstName">
+    </div>
+
+    <div class="row">
+      <label for="lastName">Last name</label>
+      <input id="lastName" formControlName="lastName">
+    </div>
+
+    <div class="row">
+      <label for="profession">Profession</label>
+      <input id="profession" formControlName="profession">
+    </div>
+
+    <div class="row">
+      <label for="socialSecurityNumber">Social security number</label>
+      <input id="socialSecurityNumber" formControlName="socialSecurityNumber">
+    </div>
+
+    <div class="row">
+      <label for="birthDate">Birth date</label>
+      <input id="birthDate" formControlName="birthDate">
+    </div>
+
+    <div class="row">
+      <label for="birthPlace">Birth place</label>
+      <input id="birthPlace" formControlName="birthPlace">
+    </div>
+
+    <div class="space" formGroupName="address">
+      <div class="row">
+        <label for="streetAddress1">Street address 1</label>
+        <input id="streetAddress1" formControlName="streetAddress1">
+      </div>
+
+      <div class="row">
+        <label for="postalCode">Postal code</label>
+        <input id="postalCode" formControlName="postalCode">
+      </div>
+
+      <div class="row">
+        <label for="city">City</label>
+        <input id="city" formControlName="city">
+      </div>
+    </div>
+
+    <div class="row space">
+      <label></label>
+      <button type="submit" [disabled]="form.invalid">Apply</button>
+    </div>
+  </form>
+
+  <div *ngIf="!contact">No contact</div>
+</div>

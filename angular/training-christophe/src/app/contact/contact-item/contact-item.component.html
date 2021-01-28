@@ -1,0 +1,9 @@
+<div class="box">
+  <div class="close">
+    <span (click)="delete()">&nbsp;X&nbsp;</span>
+  </div>
+
+  <div class="contact" [ngClass]="selected ? 'selected' : (even ? 'even' : 'odd')" (click)="onMe()">
+    <span>{{contact.id}} - {{contact.firstName}} {{contact.lastName}}</span>
+  </div>
+</div>

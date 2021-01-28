@@ -1,0 +1,16 @@
+label {
+  display: inline-block;
+  width: 5em;
+}
+
+.row {
+  margin-top: 0.2em;
+}
+
+.ng-invalid {
+  border-color: red;
+}
+
+.ng-valid {
+  border-color: green;
+}

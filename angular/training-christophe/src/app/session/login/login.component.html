@@ -1,0 +1,16 @@
+<form #loginForm=ngForm (ngSubmit)="login(loginForm)">
+  <div class="row">
+    <label for="user">User</label>
+    <input #userInput="ngModel" id="user" name="user" [(ngModel)]="user" required>
+  </div>
+
+  <div class="row">
+    <label for="pwd">Password</label>
+    <input #pwdInput="ngModel" id="pwd" name="pwd" [(ngModel)]="pwd" required type="password">
+  </div>
+
+  <div class="row">
+    <label></label>
+    <button type="submit" [disabled]="!userInput.valid || !pwdInput.valid">Login</button>
+  </div>
+</form>

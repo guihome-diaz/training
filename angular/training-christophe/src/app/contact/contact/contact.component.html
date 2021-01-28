@@ -1,0 +1,22 @@
+<div class="contacts">
+  <div class="contact-list">
+    <div class="buttons">
+      <button (click)="loadList()">Refresh</button>
+      <button (click)="new()">New</button>
+    </div>
+
+    <app-contact-item *ngFor="let contact of contacts; even as even"
+                      [contact]="contact"
+                      [selected]="selectedContact?.id === contact.id"
+                      [even]="even"
+                      (clickOnMe)="select($event)"
+                      (clickOnDelete)="delete($event)">
+    </app-contact-item>
+  </div>
+
+  <div class="selected-contact" *ngIf="selectedContact">
+    <app-contact-detail [contact]="selectedContact"
+                        (updated)="update($event)">
+    </app-contact-detail>
+  </div>
+</div>
