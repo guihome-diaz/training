@@ -7,6 +7,7 @@ import { ContactItemComponent } from './contact-item/contact-item.component';
 import { ContactDetailsComponent } from './contact-details/contact-details.component';
 import { ContactEditorComponent } from './contact-editor/contact-editor.component';
 import {ReactiveFormsModule} from "@angular/forms";
+import {CalendarModule} from "primeng/calendar";
 
 
 
@@ -27,7 +28,8 @@ import {ReactiveFormsModule} from "@angular/forms";
   imports: [
     CommonModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CalendarModule
   ],
   // Public service
   providers: [

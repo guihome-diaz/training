@@ -193,6 +193,19 @@ PART 2: add security guard
 * Implements DELETE, UPDATE and CREATE functions
 * Important: do NOT use the ROUTER in services!!
 
+### Exercise 14: add PrimeNG faces
+
+Setup, see [official documentation](https://primefaces.org/primeng/showcase/#/setup)
+* edit `package.json` and update the __dependencies__
+* edit `angluar.json` and update the __styles__  
+* run `npm install`
+
+Use the calendar, see [official documentation](https://primefaces.org/primeng/showcase/#/calendar)
+* Adjust module(s) imports sections: `import {CalendarModule} from 'primeng/calendar';`
+* IMPORTANT!! Don't forget to adjust `app.module.ts` (application root) to enable/disable animations... ex: `NoopAnimationModule`
+
+
+* You can use PrimeNG
 
 
 ## Useful links

@@ -3,10 +3,10 @@
 
   <div style="display: flex">
     <div style="width: 70%">
-        <p *ngIf="contact.id">EDIT existing user</p>
-        <p *ngIf="!contact.id">NEW user</p>
+        <p *ngIf="contactID.value">EDIT existing user</p>
+        <p *ngIf="!contactID.value">NEW user</p>
         <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" id="contact-form" #zeForm>
-          <input type="hidden" [value]="contact?.id" id="contact-id" formControlName="id" readonly="true" />
+          <input type="hidden" [value]="contact?.id" id="contact-id" formControlName="id" readonly="true" #contactID/>
           <div class="form-row">
             <label for="contact-firstName">First name</label>
             <input class="input-medium-size" type="text" id="contact-firstName" formControlName="firstName" />
@@ -30,11 +30,12 @@
 
           <div class="form-row">
             <label for="contact-birthDate">Birth date</label>
-            <input class="input-medium-size" type="text" id="contact-birthDate" formControlName="birthDate" readonly="true"/>
+            <p-calendar id="contact-birthDate" formControlName="birthDate"></p-calendar>
+            <!-- input class="input-medium-size" type="text" id="contact-birthDate" formControlName="birthDate" / -->
           </div>
           <div>
             <label for="contact-birthPlace">Birth place</label>
-            <input class="input-medium-size" type="text" id="contact-birthPlace" formControlName="birthPlace" readonly="true"/>
+            <input class="input-medium-size" type="text" id="contact-birthPlace" formControlName="birthPlace" />
           </div>
           <br>
           <!-- Address -->

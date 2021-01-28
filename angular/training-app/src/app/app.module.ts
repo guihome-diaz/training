@@ -10,6 +10,7 @@ import { FooterBarComponent } from './footer-bar/footer-bar.component';
 import {ContactModule} from "./contact/contact.module";
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AboutComponent } from './about/about.component';
+import {NoopAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,9 @@ import { AboutComponent } from './about/about.component';
     AppRoutingModule,
     // Import custom module to perform login
     SessionModule,
-    ContactModule
+    ContactModule,
+    // Prime NG requires animations
+    NoopAnimationsModule
   ],
   providers: [SharedData],
   bootstrap: [AppComponent]

@@ -13,7 +13,6 @@ export class ContactMgrComponent implements OnInit {
   selectedContact: Contact;
 
   constructor(public contactService: ContactService) {
-    this.selectedContact = new Contact();
   }
 
   ngOnInit(): void {

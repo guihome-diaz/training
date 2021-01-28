@@ -1,7 +1,6 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
 import {Contact} from "../contact";
 import {FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from "@angular/forms";
-import {Address} from "../address";
 import {ContactService} from "../contact.service";
 import {SharedData} from "../../shared-data";
 
@@ -40,9 +39,15 @@ export class ContactDetailsComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
+    if (!this.contact) {
+      this.contact = new Contact();
+    }
   }
 
   ngOnChanges(): void {
+    if (!this.contact?.id) {
+      this.contact = new Contact();
+    }
     // Triggered on content changes: populate values
     this.contactForm.reset({
       id: this.contact.id,
@@ -50,7 +55,7 @@ export class ContactDetailsComponent implements OnInit, OnChanges {
       lastName: this.contact.lastName,
       profession:this.contact.profession,
       socialSecurityNumber: this.contact.socialSecurityNumber,
-      birthDate: this.contact.birthDate,
+      birthDate: new Date(this.contact.birthDate),
       birthPlace: this.contact.birthPlace,
       address: {
         streetAddress1: this.contact.address.streetAddress1,
