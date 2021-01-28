@@ -1,6 +1,7 @@
 import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import {SessionService} from "../session.service";
 import {ActivatedRoute, Router} from "@angular/router";
+import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-login',
@@ -32,6 +33,7 @@ export class LoginComponent implements OnInit {
     // v4: adjust common shared data
     // v5: call the dedicated service
     // v6: redirect user to default page on success
+    // v7: use NG form
     this.sessionService.login(this.login, this.password, () => { this.router.navigate(["/dashboard"] )});
   }
 }

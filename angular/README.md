@@ -169,6 +169,13 @@ PART 2: add security guard
 * Make sure the error disappear when you are back to dashboard  
 
 
+### Exercise 10: use HTML template form (ngForm)
+
+* Adjust the LOGIN form to use ngform with HTML template, __bidirectional__
+  * Add import to `sessionModule` (forms)
+  * Adjust login form
+* Add validation display
+
 ## Useful links
 
 * [PrimeNG components](https://github.com/primefaces/primeng)
