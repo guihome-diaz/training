@@ -1,0 +1,21 @@
+
+<hr/>
+<div style="display: flex">
+  Status bar | &nbsp;
+  <div *ngIf="sharedData.errorMessage">
+      <br>
+      <span style="color: red"><b>Error</b>: {{ sharedData.errorMessage}}</span>
+  </div>
+  <div *ngIf="sharedData.isLoggedIn()">
+      <span style="color: green">Welcome</span>, sessionId: {{ sharedData.sessionId}}
+      &nbsp;|&nbsp; <button (click)="viewDashboard()">Dashboard</button>
+      &nbsp;|&nbsp; <a [routerLink]="['/contact']">View contacts</a>
+      &nbsp;|&nbsp; <a [routerLink]="['/contact-edit', 'unknownUser']">Edit contact (unknown user)</a>
+      &nbsp;|&nbsp; <a [routerLink]="['/contact-edit', '15439069']">Edit contact (valid user)</a>
+      &nbsp;|&nbsp;<app-logout></app-logout>
+  </div>
+  <div *ngIf="!sharedData.isLoggedIn() && !sharedData.errorMessage">
+    Please log-in
+  </div>
+</div>
+<hr/>
