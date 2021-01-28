@@ -15,7 +15,10 @@ label {
   padding-right: 15px;
 }
 
-
 .input-medium-size {
   width: 250px;
+}
+
+.ng-invalid {
+  border: 2px solid red;
 }

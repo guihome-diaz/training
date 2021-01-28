@@ -1,6 +1,6 @@
 import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import {Contact} from "../contact";
-import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Address} from "../address";
 
 @Component({
@@ -20,11 +20,11 @@ export class ContactDetailsComponent implements OnInit, OnChanges {
     // Create form fields to map on the UI (HTML) later on
     this.contactForm = this.formBuilder.group({
       id: new FormControl(),
-      firstName: new FormControl(),
-      lastName: new FormControl(),
+      firstName: new FormControl(null, [Validators.required, Validators.min(2)]),
+      lastName: new FormControl(null, [Validators.required, Validators.min(2)]),
       profession: new FormControl(),
-      socialSecurityNumber: new FormControl(),
-      birthDate: new FormControl(),
+      socialSecurityNumber: new FormControl(null, [Validators.required, Validators.minLength(13), Validators.maxLength(13), Validators.pattern("[0-9]*")]),
+      birthDate: new FormControl(Validators.required),
       birthPlace: new FormControl(),
       address: new FormGroup({
         streetAddress1: new FormControl(),
@@ -48,9 +48,9 @@ export class ContactDetailsComponent implements OnInit, OnChanges {
       birthDate: this.contact.birthDate,
       birthPlace: this.contact.birthPlace,
       address: {
-        streetAddress1: this.contact.address?.streetAddress1,
-        postalCode: this.contact.address?.postalCode,
-        city: this.contact.address?.city
+        streetAddress1: this.contact.address.streetAddress1,
+        postalCode: this.contact.address ? this.contact.address.postalCode : null,
+        city: this.contact.address ? this.contact.address.city :null
       }
     });
   }
