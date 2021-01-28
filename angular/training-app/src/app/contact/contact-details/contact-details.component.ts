@@ -1,6 +1,6 @@
 import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import {Contact} from "../contact";
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from "@angular/forms";
 import {Address} from "../address";
 
 @Component({
@@ -56,7 +56,22 @@ export class ContactDetailsComponent implements OnInit, OnChanges {
   }
 
   onSubmit() {
-    // TODO handle form submit
+    // List errors
+    console.log('Valid form?' + this.contactForm.valid);
+    this.getFormValidationErrors()
   }
 
+  /**
+   * To list all errors
+   */
+  getFormValidationErrors() {
+    Object.keys(this.contactForm.controls).forEach(key => {
+      const controlErrors: ValidationErrors = this.contactForm.get(key).errors;
+      if (controlErrors != null) {
+        Object.keys(controlErrors).forEach(keyError => {
+          console.log('Form validation error # Field name: ' + key + ', error type: ' + keyError + ', error: ', controlErrors[keyError]);
+        });
+      }
+    });
+  }
 }

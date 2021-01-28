@@ -51,7 +51,10 @@
               <input class="input-medium-size" type="text" id="contact-address-city" formControlName="city"/>
             </div>
           </div>
+          <!-- Submit -->
+          <button type="submit">Submit</button>
 
+          <!-- Errors -->
           <div style="background-color: peachpuff" *ngIf="zeForm.invalid">
             <span class="error">Form is not valid!</span>
             {{zeForm.errors}}
