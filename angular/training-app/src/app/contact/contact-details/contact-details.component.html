@@ -3,9 +3,10 @@
 
   <div style="display: flex">
     <div style="width: 70%">
-      <ng-container *ngIf="contact">
+        <p *ngIf="contact.id">EDIT existing user</p>
+        <p *ngIf="!contact.id">NEW user</p>
         <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" id="contact-form" #zeForm>
-          <input type="hidden" [value]="contact?.id" id="contact-id" formControlName="id" />
+          <input type="hidden" [value]="contact?.id" id="contact-id" formControlName="id" readonly="true" />
           <div class="form-row">
             <label for="contact-firstName">First name</label>
             <input class="input-medium-size" type="text" id="contact-firstName" formControlName="firstName" />
@@ -51,8 +52,12 @@
               <input class="input-medium-size" type="text" id="contact-address-city" formControlName="city"/>
             </div>
           </div>
-          <!-- Submit -->
-          <button type="submit">Submit</button>
+          <!-- Actions -->
+          <div>
+            <button type="reset">Reset</button>&nbsp;&nbsp;
+            <button type="submit">Submit</button>&nbsp;&nbsp;
+            <button (click)="onDelete()">Delete</button>
+          </div>
 
           <!-- Errors -->
           <div style="background-color: peachpuff" *ngIf="zeForm.invalid">
@@ -63,7 +68,6 @@
             </div>
           </div>
         </form>
-      </ng-container>
     </div>
   </div>
 </div>

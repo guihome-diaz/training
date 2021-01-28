@@ -2,7 +2,12 @@ import {Address} from "./address";
 
 export class Contact {
 
-  id: number;
+  constructor() {
+    this.address = new Address();
+  }
+
+
+  id: string;
   firstName: string;
   lastName: string;
   profession: string;

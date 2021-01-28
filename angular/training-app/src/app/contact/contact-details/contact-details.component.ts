@@ -1,7 +1,9 @@
-import {Component, Input, OnChanges, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
 import {Contact} from "../contact";
 import {FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from "@angular/forms";
 import {Address} from "../address";
+import {ContactService} from "../contact.service";
+import {SharedData} from "../../shared-data";
 
 @Component({
   selector: 'app-contact-details',
@@ -12,11 +14,14 @@ export class ContactDetailsComponent implements OnInit, OnChanges {
 
   // input data
   @Input() contact: Contact;
+  // Output data
+  @Output() itemDeleted = new EventEmitter<string>();
+  @Output() itemChanged = new EventEmitter<Contact>();
 
   // UI values
   public contactForm: FormGroup;
 
-  constructor(public formBuilder: FormBuilder) {
+  constructor(public formBuilder: FormBuilder, private contactService: ContactService, private sharedData: SharedData) {
     // Create form fields to map on the UI (HTML) later on
     this.contactForm = this.formBuilder.group({
       id: new FormControl(),
@@ -55,10 +60,51 @@ export class ContactDetailsComponent implements OnInit, OnChanges {
     });
   }
 
-  onSubmit() {
-    // List errors
+  onDelete() {
     console.log('Valid form?' + this.contactForm.valid);
-    this.getFormValidationErrors()
+    if (!this.contactForm.valid) {
+      // List errors
+      this.getFormValidationErrors();
+      return;
+    }
+    // you can check using form value or object attribute: it is the same because the field is read only
+    if (!this.contactForm.get('id')) {
+      this.sharedData.setError('Cannot delete non persisted object (ID null)');
+      return;
+    }
+
+    // Delete
+    this.contactService.deleteContact(this.contact.id, () => {
+      this.sharedData.clearError();
+      this.itemDeleted.emit(this.contact.id);
+    });
+  }
+
+  onSubmit() {
+    this.sharedData.clearError();
+
+    console.log('Valid form?' + this.contactForm.valid);
+    if (!this.contactForm.valid) {
+      // List errors
+      this.getFormValidationErrors();
+      return;
+    }
+
+    const submitContact = this.contactForm.value;
+
+    if (submitContact.id) {
+      // update
+      this.contactService.updateContact(submitContact, (contact) => {
+        this.sharedData.clearError();
+        this.itemChanged.emit(contact);
+      });
+    } else {
+      // create
+      this.contactService.createContact(submitContact, (contact) => {
+        this.sharedData.clearError();
+        this.itemChanged.emit(contact);
+      });
+    }
   }
 
   /**

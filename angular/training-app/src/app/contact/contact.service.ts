@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Contact} from "./contact";
 import {SharedData} from "../shared-data";
-import {observable, Observable} from "rxjs";
+import {Observable} from "rxjs";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,8 @@ export class ContactService {
     ).subscribe(
       data => {
         this.sharedData.clearError();
+        newContact.id = data['id'];
+        callback(newContact);
       },
       err => {
         this.sharedData.setError(err);
@@ -57,14 +60,14 @@ export class ContactService {
   }
 
   // PUT http://localhost:5000/api/contact
-  updateContact(contactChanged: Contact) {
+  updateContact(contactChanged: Contact, callback: Function) {
     this.httpClient.put(
       this.backendUrl,
       contactChanged
     ).subscribe(
       data => {
         this.sharedData.clearError();
-        return contactChanged;
+        callback(contactChanged);
       },
       err => {
         this.sharedData.setError(err);
@@ -73,13 +76,15 @@ export class ContactService {
   }
 
   // DELETE http://localhost:5000/api/contact
-  deleteContact(searchId: string) {
+  deleteContact(searchId: string, callback: Function) {
     this.httpClient.delete(
       this.backendUrl,
       { params: new HttpParams().set('id', searchId) }
     ).subscribe(
       data => {
         this.sharedData.clearError();
+        // redirect to user list
+        callback();
       },
       err => {
         this.sharedData.setError(err);

@@ -11,7 +11,9 @@
     </div>
   </div>
   <div>
-    <app-contact-details *ngIf="selectedContact"
-                         [contact]="selectedContact"></app-contact-details>
+    <app-contact-details [contact]="selectedContact"
+                         (itemDeleted)="onItemDeleted($event)"
+                         (itemChanged)="onItemUpdated($event)"
+    ></app-contact-details>
   </div>
 </div>
