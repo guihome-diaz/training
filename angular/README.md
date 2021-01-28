@@ -183,7 +183,16 @@ PART 2: add security guard
 * Don't forget to adjust the onChanges() to set the user values
 
 
-### Exercise12: add form validation
+### Exercise 12: add form validation
+
+* Add form validation on the contact-details form
+* Add a submit button, with simple function that does `console.log()`
+
+### Exercise 13: implements Update and Delete functions
+
+* Implements DELETE, UPDATE and CREATE functions
+* Important: do NOT use the ROUTER in services!!
+
 
 
 ## Useful links
