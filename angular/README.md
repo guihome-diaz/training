@@ -161,7 +161,7 @@ PART 2: add security guard
 
 ### Exercise 9: parameter route + Observable
 
-* Create new component _contact-edit_ to be called with a parameter route
+* Create new component _contact-editor_ to be called with a parameter route
 * Adjust `ContactService` to call the backend with an ID parameter. This will return an `Observable`
 * Create 2 new buttons in status bar to view a particular contact (call this _contact-edit_ component)
   * Success case
@@ -169,12 +169,22 @@ PART 2: add security guard
 * Make sure the error disappear when you are back to dashboard  
 
 
-### Exercise 10: use HTML template form (ngForm)
+### Exercise 10: use HTML template form (FormsModule)
 
-* Adjust the LOGIN form to use ngform with HTML template, __bidirectional__
+* Adjust the LOGIN form to use FormsModule with HTML template, __bidirectional__
   * Add import to `sessionModule` (forms)
   * Adjust login form
 * Add validation display
+
+
+### Exercise 11: use Reactive form (ReactiveFormsModule)
+
+* Adjust the contact-details form to use ReactiveFormsModule
+* Don't forget to adjust the onChanges() to set the user values
+
+
+### Exercise12: add form validation
+
 
 ## Useful links
 

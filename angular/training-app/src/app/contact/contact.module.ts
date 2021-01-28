@@ -6,6 +6,7 @@ import { ContactMgrComponent } from './contact-mgr/contact-mgr.component';
 import { ContactItemComponent } from './contact-item/contact-item.component';
 import { ContactDetailsComponent } from './contact-details/contact-details.component';
 import { ContactEditorComponent } from './contact-editor/contact-editor.component';
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 
@@ -25,7 +26,8 @@ import { ContactEditorComponent } from './contact-editor/contact-editor.componen
   // Required dependencies
   imports: [
     CommonModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   // Public service
   providers: [
