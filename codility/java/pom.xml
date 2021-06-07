@@ -30,7 +30,7 @@
 		<!-- ## Other settings ## -->
 		<!-- Logging -->
 		<org.slf4j.version>1.7.7</org.slf4j.version>
-		<ch.qos.logback.version>1.1.2</ch.qos.logback.version>
+		<ch.qos.logback.version>1.2.0</ch.qos.logback.version>
 
 		<!-- Testing frameworks / libraries -->
 		<junit.version>4.13.1</junit.version>		
