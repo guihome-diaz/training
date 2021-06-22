@@ -35,4 +35,27 @@ public class BinaryGapTest {
         Assertions.assertEquals(Integer.toBinaryString(8595879), binaryGap.convertNumberToBase2(8595879));
     }
 
+    @Test
+    @DisplayName("Compute binary gap")
+    public void computeBinaryGap() {
+
+        // Brute force for all integers: compare with default java algo
+        /*
+        for (int i = 0 ; i < Integer.MAX_VALUE; i++) {
+            Assertions.assertEquals(Integer.toBinaryString(i), binaryGap.convertNumberToBase2(i));
+        }
+        */
+
+        // Given values in examples
+        Assertions.assertEquals(2, binaryGap.computeBinaryGap(9));
+        Assertions.assertEquals(4, binaryGap.computeBinaryGap(529));
+        Assertions.assertEquals(1, binaryGap.computeBinaryGap(20));
+        Assertions.assertEquals(0, binaryGap.computeBinaryGap(15));
+        Assertions.assertEquals(0, binaryGap.computeBinaryGap(32));
+        Assertions.assertEquals(5, binaryGap.computeBinaryGap(1041));
+
+        // Limits
+        Assertions.assertEquals(0, binaryGap.computeBinaryGap(0));
+        Assertions.assertEquals(0, binaryGap.computeBinaryGap(Integer.MAX_VALUE));
+    }
 }
