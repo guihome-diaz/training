@@ -1,7 +1,7 @@
 package eu.daxiongmao.codility.lesson3;
 
 /**
- * Frog jump exercice
+ * Frog jump exercise
  * @author Guillaume
  * @version 2021/06
  */
