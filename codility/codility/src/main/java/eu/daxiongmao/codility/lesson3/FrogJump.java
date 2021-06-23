@@ -24,14 +24,11 @@ public class FrogJump {
         if (startPointX == targetPointY) { return 0; }
 
         // Do computation
-        int newEndpoint = startPointX;
-        int jumpCounter = 0;
-        do {
-            newEndpoint = newEndpoint + jumpSize;
-            jumpCounter++;
-        } while(newEndpoint < targetPointY);
+        int distanceToJump = targetPointY - startPointX;
+        int numberOfJumpRequired = (distanceToJump / jumpSize);
+        boolean hasRemainingDistance = (distanceToJump % jumpSize != 0);
 
-        return jumpCounter;
+        return  numberOfJumpRequired + (hasRemainingDistance ? 1 : 0);
     }
 
     private boolean isInvalidInput(int input) {
