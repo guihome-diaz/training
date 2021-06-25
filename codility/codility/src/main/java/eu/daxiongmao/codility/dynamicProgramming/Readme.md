@@ -35,3 +35,10 @@ Write an efficient algorithm for the following assumptions:
 
 Copyright 2009–2021 by Codility Limited. All Rights Reserved. Unauthorized copying, publication or disclosure prohibited.
 See https://app.codility.com/programmers/lessons/17-dynamic_programming/min_abs_sum/
+
+
+### Careful
+
+Here are some key points I discovered during the coding:
+* The array is not always of even size
+* sequence can be anything, as long as it is only {-1, 1} values. Ex: [1,1,1,1,-1] is ok

@@ -1,5 +1,6 @@
 package eu.daxiongmao.codility.dynamicProgramming;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -11,99 +12,95 @@ public class DynamicProgramming {
 
     public int computeMinimumSum(int[] input) {
         if (input.length == 0) { return 0; }
-        // Array should be odd size
-        if (input.length % 2 != 0) {
-            throw new IllegalArgumentException("Input array must be of even size");
+        if (input.length == 1) { return Math.abs(input[0]);}
+
+        final int[] sequence = new int[input.length];
+        // Populate items list
+        final List<ArrayItem> items = new ArrayList<>();
+        for (int i = 0; i < input.length; i++) {
+            items.add(new ArrayItem(i, input[i]));
         }
+        // Sort items list
+        Collections.sort(items);
 
-        // extract odd and even values
-        // Default assumption is S[-1,1,-1,1,-1,1,..,-1,1]
-        final int middleSize = input.length / 2;
-        int sumOddNumbers = 0;
-        int [] oddNumbers = new int[middleSize];
-        int sumEvenNumbers = 0;
-        int [] evenNumbers = new int[middleSize];
-        boolean[] invertSequence = new boolean[middleSize];
-        final Map<Integer, List<Integer>> differenceOddEven = new HashMap<>();
+        int sum = 0;
+        for (int i = items.size() - 1; i >= 0; i--) {
+            final ArrayItem item = items.get(i);
+            System.out.println(item);
 
-        int currentIndex = 0;
-        for (int i = 0 ; i < input.length; i++) {
-            if (i % 2 == 0) {
-                // Even numbers
-                evenNumbers[currentIndex] = input[i];
-                sumEvenNumbers += input[i];
-            } else {
-                // Odd numbers
-                oddNumbers[currentIndex] = input[i];
-                sumOddNumbers += input[i];
-                // Compute difference between odd / even
-                final int difference = evenNumbers[currentIndex] - oddNumbers[currentIndex];
-                if (differenceOddEven.containsKey(difference)) {
-                    differenceOddEven.get(difference).add(currentIndex);
-                } else {
-                    final List<Integer> indexesToInvert = new ArrayList<>();
-                    indexesToInvert.add(currentIndex);
-                    differenceOddEven.put(difference, indexesToInvert);
-                }
-                // Move on the cursor
-                currentIndex++;
+            if (sum == 0) {
+                // apply current value
+                sum = item.value;
+                sequence[item.index] = item.isNegative() ? -1 : 1;
+                continue;
             }
+
+            // Compute sequence and new sum
+            int minDifferenceAbs = getMinDifferenceAbs(sum, item.absoluteValue);
+            int sequenceValue = setSequence(sum, item, minDifferenceAbs, sequence);
+            sum = sum + (item.value * sequenceValue);
         }
 
-        // Best case: odd and even numbers are equals. Do nothing: we keep the original sequence
-        int difference = sumEvenNumbers - sumOddNumbers;
-        if (difference == 0) {
-            System.out.println("Result: S[-1,1,-1,1,-1,1,..,-1,1] # default sequence is the best one");
-            return 0;
-        }
-
-        // Compute available differences
-        final List<Integer> differencesValues = new ArrayList<>();
-        for (int diff : differenceOddEven.keySet()) {
-            differencesValues.add(diff);
-        }
-        Collections.sort(differencesValues);
-
-        // Compute alternatives sequences
-        int index = differencesValues.size() - 1;
-        while (index != 0 && difference != 0) {
-            // Find the next suitable value
-            while (index > 0 && differencesValues.get(index) > difference) {
-                index--;
-            }
-            if (index != 0) {
-                // retrieve index to invert in the sequence S {-1,1}
-                int diff = differencesValues.get(index);
-                int indexToInvert = differenceOddEven.get(diff).get(0);
-                // cleanup map
-                differenceOddEven.get(diff).remove(indexToInvert);
-                if (differenceOddEven.get(diff).isEmpty()) {
-                    differenceOddEven.remove(diff);
-                }
-                // Apply changes
-                invertSequence[indexToInvert] = true;
-                difference = difference - diff;
-            }
-        }
-
-        // build sequence and result
-        int result = 0;
-        final StringBuilder sequence = new StringBuilder();
-        for (int i = 0; i < invertSequence.length; i++) {
-            if (invertSequence[i]) {
-                result += (evenNumbers[i] - oddNumbers[i]);
-                sequence.append("1,-1");
-            } else {
-                result += (-evenNumbers[i] + oddNumbers[i]);
-                sequence.append("-1,1");
-            }
-        }
-        System.out.println("Result: S[" + sequence.toString() + "]");
-
-
-        // smallest difference is the rest
-        return difference;
+        // print sequence
+        System.out.println("sequence S: " + Arrays.toString(sequence));
+        return Math.abs(sum);
     }
 
+    private int getMinDifferenceAbs(final int sum, final int itemValueAbs) {
+        return Math.abs(Math.abs(sum) - itemValueAbs);
+    }
+
+    private int setSequence(final int sum, final ArrayItem item, final int minDifferenceAbs, final int[] sequence) {
+        int sequenceValue = 0;
+        if (Math.abs(sum + item.value) == minDifferenceAbs) {
+            sequenceValue = 1;
+        } else {
+            sequenceValue = -1;
+        }
+        sequence[item.index] = sequenceValue;
+        return sequenceValue;
+    }
+
+    class ArrayItem implements Serializable, Comparable {
+        public final int index;
+        public final int value;
+        public final int absoluteValue;
+
+        public ArrayItem(final int index, final int value) {
+            this.index = index;
+            this.value = value;
+            this.absoluteValue = Math.abs(value);
+        }
+
+        public boolean isNegative() {
+            return this.value < 0;
+        }
+
+        @Override
+        public int compareTo(Object other) {
+            if (!(other instanceof ArrayItem)) {
+                return 1;
+            }
+            return Integer.compare(this.absoluteValue, ((ArrayItem) other).absoluteValue);
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) { return true; }
+            if (o == null || getClass() != o.getClass()) { return false;}
+            ArrayItem arrayItem = (ArrayItem) o;
+            return index == arrayItem.index && value == arrayItem.value && absoluteValue == arrayItem.absoluteValue;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(index, value, absoluteValue);
+        }
+
+        @Override
+        public String toString() {
+            return String.format("item[%s]=%s | abs: %s", index, value, absoluteValue);
+        }
+    }
 
 }
