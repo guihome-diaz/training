@@ -15,7 +15,7 @@ public class MaxCountersTest {
         // Single size
         Assertions.assertTrue(compareArrays(new int[] {5}, service.computeCounters(1, new int[] {1,2,1,2,1,2,1,2,1,2})));
         // No increase
-        Assertions.assertTrue(compareArrays(new int[] {0, 0, 0, 0, 0}, service.computeCounters(5, new int[] {1,2,1,2,1,2,1,2,1,2})));
+        Assertions.assertTrue(compareArrays(new int[] {0, 0, 0, 0, 0}, service.computeCounters(5, new int[] {6,6,6,6,6,6,6})));
     }
 
     private boolean compareArrays(int[] expectations, int[] result) {

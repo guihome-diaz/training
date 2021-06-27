@@ -28,28 +28,44 @@ public class MaxCounters {
         }
 
         // Processing
+        // Option 1:
+        //   Not efficient but correct: the O(n²) solution = for loop over input + another for loop to set the counters
+        //   see previous commits, this is rated at 77% performance
+        // Option 2:
+        //   Keep a reference to MIN and MAX values. MIN value is the minimum to apply (it replaces the 2nd for loop)
+        //   this is the correct solution
+
         int[] counters = new int[nbOfCounters];
         int currentMax = 0;
-        for (int i = 0 ; i < input.length ; i++) {
+        int currentMin = 0;
+        for (int i = 0; i < input.length ; i++) {
             if ((input[i] == nbOfCounters + 1)) {
-                // do nothing if counter length is 1
-                if (counters.length > 1) {
-                    // Max value: set all counters to current max
-                    for (int k = 0; k < counters.length; k++) {
-                        counters[k] = currentMax;
-                    }
-                }
+                // Current max becomes the MIN value to apply everywhere
+                // The minimum will be set at the end of the current loop.
+                currentMin = currentMax;
             } else {
+                // counter index to process (-use 1 because array's index start at 0)
                 int indexItemInput = input[i] - 1;
-                // Set counter value. Careful: index start at '0'
-                counters[indexItemInput] = counters[indexItemInput] + 1;
+                // Apply counter value. We must use the current MIN as reference
+                if (counters[indexItemInput] < currentMin) {
+                    counters[indexItemInput] = currentMin + 1;
+                } else {
+                    counters[indexItemInput] = counters[indexItemInput] +1;
+                }
+                // Set new maximum
                 if (counters[indexItemInput] > currentMax) {
                     currentMax = counters[indexItemInput];
                 }
             }
-
             // Logging # do not put that in production!
             //System.out.println("Output: " + Arrays.toString(counters));
+        }
+
+        // Apply minimum
+        for (int i = 0; i < counters.length ; i++) {
+            if (counters[i] < currentMin) {
+                counters[i] = currentMin;
+            }
         }
 
         System.out.println("Result: " + Arrays.toString(counters));
