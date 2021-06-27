@@ -10,10 +10,10 @@ public class MissingIntegerTest {
     @Test
     public void findMissingPositiveInteger() {
         // No positive value
-        //Assertions.assertEquals(1, service.getPositiveMissingInteger(new int[] {-1, -3}));
-        //Assertions.assertEquals(1, service.getPositiveMissingInteger(new int[] {-1, -2, -3, 0, 0}));
+        Assertions.assertEquals(1, service.getPositiveMissingInteger(new int[] {-1, -3}));
+        Assertions.assertEquals(1, service.getPositiveMissingInteger(new int[] {-1, -2, -3, 0, 0}));
         // Missing minimum (1)
-        //Assertions.assertEquals(1, service.getPositiveMissingInteger(new int[] {2,3,4,5,6}));
+        Assertions.assertEquals(1, service.getPositiveMissingInteger(new int[] {2,3,4,5,6}));
         // Missing next
         Assertions.assertEquals(4, service.getPositiveMissingInteger(new int[] {2,1,3}));
         // Processing
