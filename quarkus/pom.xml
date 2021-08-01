@@ -19,6 +19,7 @@
     <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
   </properties>
 
+  <!-- Like Spring-Boot, this is required to import common settings and dependencies -->
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -30,20 +31,29 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
+
   <dependencies>
+    <!-- Core module mandatory (dependency injection): ArC, the CDI container, is bootstrapped at build time. -->
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-arc</artifactId>
     </dependency>
+    <!-- To develop REST web-services -->
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-resteasy</artifactId>
     </dependency>
+
+    <!-- ####################### -->
+    <!-- ##      TESTING      ## -->
+    <!-- ####################### -->
+    <!-- Unit tests -->
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-junit5</artifactId>
       <scope>test</scope>
     </dependency>
+    <!-- REST web-services tests -->
     <dependency>
       <groupId>io.rest-assured</groupId>
       <artifactId>rest-assured</artifactId>
@@ -53,6 +63,8 @@
 
   <build>
     <plugins>
+      <!-- This is responsible of the packaging of the application
+           and also providing the development mode. -->
       <plugin>
         <groupId>${quarkus.platform.group-id}</groupId>
         <artifactId>quarkus-maven-plugin</artifactId>
@@ -75,6 +87,9 @@
           <parameters>${maven.compiler.parameters}</parameters>
         </configuration>
       </plugin>
+      <!-- As mentioned on the official Quarkus page: https://quarkus.io/guides/getting-started -->
+      <!-- Quarkus supports Junit 5 tests.
+           Because of this, the version of the Surefire Maven Plugin must be set, as the default version does not support Junit 5 -->
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>${surefire-plugin.version}</version>
