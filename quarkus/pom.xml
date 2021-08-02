@@ -89,7 +89,9 @@
       </plugin>
       <!-- As mentioned on the official Quarkus page: https://quarkus.io/guides/getting-started -->
       <!-- Quarkus supports Junit 5 tests.
-           Because of this, the version of the Surefire Maven Plugin must be set, as the default version does not support Junit 5 -->
+           Because of this, the version of the Surefire Maven Plugin must be set, as the default version does not support Junit 5
+           This will play UNIT tests
+      -->
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>${surefire-plugin.version}</version>
@@ -104,6 +106,8 @@
   </build>
 
   <profiles>
+
+    <!-- To produce a native executable (.exe or .sh) -->
     <profile>
       <id>native</id>
       <activation>
@@ -113,6 +117,7 @@
       </activation>
       <build>
         <plugins>
+          <!-- To play INTEGRATION tests at package generation time -->
           <plugin>
             <artifactId>maven-failsafe-plugin</artifactId>
             <version>${surefire-plugin.version}</version>
