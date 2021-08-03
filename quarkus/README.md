@@ -11,34 +11,6 @@ You need:
 Environments variables:
 * `JAVA_HOME` must point to GraalVM
 * `GRAALVM_HOME` must point to GraalVM too
-  
-### Native image (all platforms)
-
-Install the native-image tool using gu install:
-```shell script
-${GRAALVM_HOME}/bin/gu install native-image
-```
-(i) _native-image_ is no longer included by default; it must be installed as a second step after GraalVM itself is installed. 
-
-### Windows libraries
-
-You need some extra DLLs to work on Windows. 
-You must download and install [Visual Studio 2019 or later](https://visualstudio.microsoft.com/fr/downloads) to build the _native_ executable.
-  * Download the "Community" version
-
-    ![MVSC step 1](/documentation/setup_msvc_1.PNG)
-
-  * Then execute the installation and choose:
-    * Individual components (2nd tab headers)
-    * Search for "**MSVC**" (Microsoft Visual Studio C++ compiler)
-    * Install latest MSVC versions
-  
-    ![MVSC step 2](/documentation/setup_msvc_2.PNG)
-
-  * Add MVSC to the PATH
-
-    `PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.16.27023\bin\HostX64\x64`
-
 
 
 ## Compilation
@@ -91,6 +63,35 @@ You need to kill the process
 ## Creating a native executable
 
 (i) Before packaging, make sure to install the GraalVM "native-image" first.
+
+### Native image (all platforms)
+
+Install the native-image tool using gu install:
+```shell script
+${GRAALVM_HOME}/bin/gu install native-image
+```
+(i) _native-image_ is no longer included by default; it must be installed as a second step after GraalVM itself is installed.
+
+### Windows libraries
+
+You need some extra DLLs to work on Windows.
+You must download and install [Visual Studio 2019 or later](https://visualstudio.microsoft.com/fr/downloads) to build the _native_ executable.
+* Download the "Community" version
+
+  ![MVSC step 1](/documentation/setup_msvc_1.PNG)
+
+* Then execute the installation and choose:
+    * Individual components (2nd tab headers)
+    * Search for "**MSVC**" (Microsoft Visual Studio C++ compiler)
+    * Install latest MSVC versions
+
+  ![MVSC step 2](/documentation/setup_msvc_2.PNG)
+
+* Add MVSC to the PATH
+
+  `PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.16.27023\bin\HostX64\x64`
+
+### Build native image
 
 You can create a native executable using: 
 ```shell script
