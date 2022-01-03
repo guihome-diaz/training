@@ -150,6 +150,9 @@ A *container* can only work on a Linux kernel. Therefore, Docker is kind of a **
 
 ![docker architecture overview](images/06_docker_architecture_overview.png "docker architecture overview")
 
+
+# Docker basics commands (lifecycle)
+
 ## Docker run
 
 This command will spawn a new *container* for a particular *image*. `docker run` command is based on: 
@@ -165,46 +168,55 @@ To showcase the `docker run` command, we rely on ***[BusyBox](https://hub.docker
 * execute long process `ping`: 
    ```docker run busybox ping google.com```
 
+## Docker create
+
+To **create** a new container from a specific _docker image_: `docker create {imageName}
+![docker create](images/08_docker_create_command.png "docker create")
+
+* example: `docker create busybox`
+* This will:
+    - Download / retrieve the corresponding _image_
+    - Assign _resources_ to that particular "instance" (memory, hard-drive, etc.). This will apply _namespacing_ and _control group_ paradigms
+    - Unpack the image content (files and folders) into this new space
+    - Assign a particular _container ID_
+
+## Docker start
+
+To **start** an existing container, use its _container ID_: `docker start`
+![docker start](images/09_docker_start.png "docker start")
+
+* example: `docker start -a 5327241a353256083f18a90383acc2b7bd856e45a7490ae553375e6fc9a5af6e`
+* Key points:
+  - Everytime you *start* a container, the corresponding _startup command_ will be executed. 
+  - :fire: you **cannot override** the default startup command
+  - You can restart a stopped container
+  - Don't forget to use the `-a` argument to redirect container's console (System.Out) to your local terminal!
+
+## Docker run VS docker start
+
+Docker **run** is just a shortcut: `docker run` = `docker create`+ `docker start`
+
+:fire: Careful :fire:
+* `docker run`
+  * **redirect** all container's **output** to the current terminal. You can see logs and errors.
+  * you can **override** the default **_startup command_** with something else
+* `docker start`
+  * **does NOT print anything by default**, unless you use `-a` argument
+  * you **cannot change default startup** command
+
+
+## Docker stop
+
+To **stop** a container, use its _container ID_: `docker stop`
+
+
 ## Docker ps
 
 This is one of the key command for Docker. By default, it will list all **running** containers that are currently available on the machine. But it can do so much more! 
 
 * View **running** containers: ```docker ps```
-* View all containers: ```docker ps --all```
+* View **all** containers: ```docker ps --all```
 
-# Container lifecycle
-
-1. To **create** a new container from a specific _docker image_: `docker create {imageName}
-  ![docker create](images/08_docker_create_command.png "docker create")
-  - example: `docker create busybox`
-  - This will:
-    - Download / retrieve the corresponding _image_  
-    - Assign _resources_ to that particular "instance" (memory, hard-drive, etc.). This will apply _namespacing_ and _control group_ paradigms
-    - Unpack the image content (files and folders) into this new space
-    - Assign a particular _container ID_
-
-
-2. To **start** an existing container, use its _container ID_: `docker start`
-  ![docker start](images/09_docker_start.png "docker start")
-  - example: `docker start -a 5327241a353256083f18a90383acc2b7bd856e45a7490ae553375e6fc9a5af6e`
-  - Key points:
-    - Everytime you *start* a container, the corresponding _startup command_ will be executed. :fire: **you cannot override the default startup command** :fire:
-    - You can restart a stopped container
-    - Don't forget to use the `-a` argument to redirect container's console (System.Out) to your local terminal!
-
-> Docker **run** is just a shortcut: `docker run` = `docker create`+ `docker start`
-> 
-> :fire: Careful :fire:
-> 
-> * `docker run` 
->   * **redirect** all container's **output** to the current terminal. You can see logs and errors.
->   * you can **override** the default **_startup command_** with something else
-> 
-> * `docker start`
->   * **does NOT print anything by default**, unless you use `-a` argument
->   * you **cannot change default startup** command
-
-3. To **stop** a container, use its _container ID_: `docker stop` 
 
 ## Cleanup containers
 
