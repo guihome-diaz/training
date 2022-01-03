@@ -98,7 +98,7 @@ Start the Docker Desktop again and it should work
 (i) You may delete the `D:\Dev\docker\wsl\docker-desktop-data.tar` file (NOT the ext4.vhdx file) if everything looks good for you after verifying
 
 
-# Docker principle
+# Docker principles
 
 ## Hello-world: get image and spawn container
 
@@ -149,3 +149,67 @@ A container relies on 2 concepts:
 A *container* can only work on a Linux kernel. Therefore, Docker is kind of a **Linux Virtual Machine** that allows us to isolate resources through *namespacing* and *control groups*.
 
 ![docker architecture overview](images/06_docker_architecture_overview.png "docker architecture overview")
+
+## Docker run
+
+This command will spawn a new *container* for a particular *image*. `docker run` command is based on: 
+
+![docker run basis](images/07_docker_run_basis.png "docker run basis")
+
+To showcase the `docker run` command, we rely on ***[BusyBox](https://hub.docker.com/_/busybox/)*** a very small linux distro (between 1 to 5 Mb) with only core utilities.
+
+* execute simple `echo`:
+  ```docker run busybox echo this is test```
+* execute simple `ls`: 
+   ```docker run busybox ls```
+* execute long process `ping`: 
+   ```docker run busybox ping google.com```
+
+## Docker ps
+
+This is one of the key command for Docker. By default, it will list all **running** containers that are currently available on the machine. But it can do so much more! 
+
+* View **running** containers: ```docker ps```
+* View all containers: ```docker ps --all```
+
+# Container lifecycle
+
+1. To **create** a new container from a specific _docker image_: `docker create {imageName}
+  ![docker create](images/08_docker_create_command.png "docker create")
+  - example: `docker create busybox`
+  - This will:
+    - Download / retrieve the corresponding _image_  
+    - Assign _resources_ to that particular "instance" (memory, hard-drive, etc.). This will apply _namespacing_ and _control group_ paradigms
+    - Unpack the image content (files and folders) into this new space
+    - Assign a particular _container ID_
+
+
+2. To **start** an existing container, use its _container ID_: `docker start`
+  ![docker start](images/09_docker_start.png "docker start")
+  - example: `docker start -a 5327241a353256083f18a90383acc2b7bd856e45a7490ae553375e6fc9a5af6e`
+  - Key points:
+    - Everytime you *start* a container, the corresponding _startup command_ will be executed. :fire: **you cannot override the default startup command** :fire:
+    - You can restart a stopped container
+    - Don't forget to use the `-a` argument to redirect container's console (System.Out) to your local terminal!
+
+> Docker **run** is just a shortcut: `docker run` = `docker create`+ `docker start`
+> 
+> :fire: Careful :fire:
+> 
+> * `docker run` 
+>   * **redirect** all container's **output** to the current terminal. You can see logs and errors.
+>   * you can **override** the default **_startup command_** with something else
+> 
+> * `docker start`
+>   * **does NOT print anything by default**, unless you use `-a` argument
+>   * you **cannot change default startup** command
+
+3. To **stop** a container, use its _container ID_: `docker stop` 
+
+## Cleanup containers
+
+To clean containers that are STOPPED and delete all their content: `docker system prune`
+* remove stopped _containers_
+* remove all _virtual networks interfaces_ that are not used anymore by at least 1 container
+* clear out docker _build cache_ (this might remove also the not used local images)
+
