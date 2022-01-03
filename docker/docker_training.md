@@ -5,19 +5,33 @@ DOCKER training
   - [Diagrams](#diagrams)
 - [Docker installation](#docker-installation)
   - [Tools](#tools)
-  - [Adjust storage path for images and containers=](#adjust-storage-path-for-images-and-containers)
-- [Docker principle](#docker-principle)
+  - [Adjust storage path for images and containers](#adjust-storage-path-for-images-and-containers)
+- [Docker principles](#docker-principles)
   - [Hello-world: get image and spawn container](#hello-world-get-image-and-spawn-container)
   - [What is a container ?](#what-is-a-container-)
     - [Core concepts](#core-concepts)
     - [Container definition](#container-definition)
     - [Image definition](#image-definition)
     - [Docker application principle](#docker-application-principle)
+- [Docker basics commands (lifecycle)](#docker-basics-commands-lifecycle)
+  - [Docker run](#docker-run)
+  - [Docker create](#docker-create)
+  - [Docker start](#docker-start)
+  - [Docker run VS docker start](#docker-run-vs-docker-start)
+  - [Docker log](#docker-log)
+  - [Docker stop](#docker-stop)
+  - [Docker exec](#docker-exec)
+    - [Key points](#key-points)
+    - [Docker exec example: redis server + redis-cli](#docker-exec-example-redis-server--redis-cli)
+  - [Docker kill](#docker-kill)
+  - [Docker ps](#docker-ps)
+  - [Cleanup containers](#cleanup-containers)
 
 
 # Training notes
 
 * Course: https://www.udemy.com/course/docker-and-kubernetes-the-complete-guide/
+* Trainer: Stephen Grider
 * Training period: 2022-01-03
 * Docker setup: Windows 11 with WSL2, docker desktop v4.3.2 (72729) | docker cli v20.10.11
 
@@ -57,7 +71,7 @@ Make sure Virtualization is enabled in your Bios! This is one of the requirement
 * [Git (with gitBash)](https://git-scm.com/downloads)
 
 
-## Adjust storage path for images and containers=
+## Adjust storage path for images and containers
 
 !! **This is for Windows WSL 2 only** !!
 
@@ -128,7 +142,15 @@ A container relies on 2 concepts:
 
 ![core concepts behing Docker](images/03_core_concepts_behind_docker.png "core concepts behing Docker")
 
-!! These particular concepts are Linux specific features. Therefore each container will run on Linux. 
+!! These particular concepts are Linux specific features. Therefore **each container will run on Linux**. 
+
+Each container, like any Linux machine, has the following input/output:
+- STDIN: keyboard + mouse
+- STDOUT: console output
+- STDERR: error messages
+
+You can acces the some or all input/output with Docker, depending on the command you gonna execute and its arguments.
+
 
 ### Container definition
 
@@ -170,10 +192,10 @@ To showcase the `docker run` command, we rely on ***[BusyBox](https://hub.docker
 
 ## Docker create
 
-To **create** a new container from a specific _docker image_: `docker create {imageName}
+To **create** a new container from a specific _docker image_: `docker create {imageName}`
 ![docker create](images/08_docker_create_command.png "docker create")
 
-* example: `docker create busybox`
+* example: `docker create busybox echo hi there`
 * This will:
     - Download / retrieve the corresponding _image_
     - Assign _resources_ to that particular "instance" (memory, hard-drive, etc.). This will apply _namespacing_ and _control group_ paradigms
@@ -182,7 +204,7 @@ To **create** a new container from a specific _docker image_: `docker create {im
 
 ## Docker start
 
-To **start** an existing container, use its _container ID_: `docker start`
+To **start** an existing container, use its _container ID_: `docker start {containerId}`
 ![docker start](images/09_docker_start.png "docker start")
 
 * example: `docker start -a 5327241a353256083f18a90383acc2b7bd856e45a7490ae553375e6fc9a5af6e`
@@ -190,7 +212,7 @@ To **start** an existing container, use its _container ID_: `docker start`
   - Everytime you *start* a container, the corresponding _startup command_ will be executed. 
   - :fire: you **cannot override** the default startup command
   - You can restart a stopped container
-  - Don't forget to use the `-a` argument to redirect container's console (System.Out) to your local terminal!
+  - Don't forget to use the `-a` argument to redirect container's outputs (STDOUT, STDERR) to your local terminal!
 
 ## Docker run VS docker start
 
@@ -198,16 +220,75 @@ Docker **run** is just a shortcut: `docker run` = `docker create`+ `docker start
 
 :fire: Careful :fire:
 * `docker run`
-  * **redirect** all container's **output** to the current terminal. You can see logs and errors.
+  * **redirect** all container's **output** to the current terminal automatically.
   * you can **override** the default **_startup command_** with something else
 * `docker start`
-  * **does NOT print anything by default**, unless you use `-a` argument
+  * **does NOT print anything by default**, unless you use `-a` argument. Do view the STDOUT or STDERR you must use `docker logs`
   * you **cannot change default startup** command
+
+
+## Docker log
+
+To **view** what happen inside a specific container that you did not start with `-a`, you can use `docker log {containerId}` to access the logs and all outputs (STDOUT, STDERR).
+![docker logs](images/10_docker_logs.png "docker logs")
+
+
+* example: `docker logs 5327241a353256083f18a90383acc2b7bd856e45a7490ae553375e6fc9a5af6e`
+* Key points:
+  - You can view logs from an active or stopped container 
+  - `docker logs` does NOT trigger any process. It just display the system outputs
+  
 
 
 ## Docker stop
 
-To **stop** a container, use its _container ID_: `docker stop`
+To gracefully **stop** a container, use its _container ID_: `docker stop {containerId}`
+
+This will send a _SIGTERM_ message to the process and shut the container down in a clean way - cleaning temporary values, saving state, etc.
+
+> :fire: if the container does NOT stop 10 seconds max after `docker stop`, then a `docker kill` is automatically trigger by Docker Cli
+
+
+## Docker exec
+
+To **execute** an _additional_ command/process inside an existing container.
+![docker exec](images/11_docker_exec.png "docker exec")
+
+### Key points
+
+* Don't forget to add the `-it` to forward the STDIN to the new process
+* `-i` to attach the current terminal to the new process, and use STDIN
+* `-t` make sure that all input text is nicely formatted (including encoding, keyboard layout, shortcuts, auto-completion, etc.)
+
+
+### Docker exec example: redis server + redis-cli
+
+[Redis](https://redis.io/) is an open source, in-memory data storage used as database, cache and message broker. The purpose of this training is NOT to learn Redis, but this is a very good example of a docker application.
+
+Process to showcase _docker exec_:
+* Get Redis server
+* By default the Redis server does NOT include the `redis-cli` command
+* Manually execute a new process inside the Redis server
+
+```bash
+# Start Redis server
+docker run redis
+
+# Get Redis server container ID
+docker ps
+
+# Exec new command "redis-cli" in container
+docker exec -it efb6f31109ac redis-cli
+```
+
+
+
+## Docker kill
+
+To **kill** a container, use its _container ID_: `docker kill {containerId}`
+
+This will send a _SIGKILL_ message to the process and trigger a brute-force stop.
+
 
 
 ## Docker ps
@@ -224,4 +305,3 @@ To clean containers that are STOPPED and delete all their content: `docker syste
 * remove stopped _containers_
 * remove all _virtual networks interfaces_ that are not used anymore by at least 1 container
 * clear out docker _build cache_ (this might remove also the not used local images)
-
