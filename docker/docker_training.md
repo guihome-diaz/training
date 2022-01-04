@@ -33,8 +33,9 @@ DOCKER training
   - [Docker build command](#docker-build-command)
     - [Principle](#principle)
     - [Build lifecycle](#build-lifecycle)
-  - [> Final image is created when there is no more docker instructions to follow.](#-final-image-is-created-when-there-is-no-more-docker-instructions-to-follow)
-  - [Example: create a redis-server image](#example-create-a-redis-server-image)
+    - [Example: create a redis-server image](#example-create-a-redis-server-image)
+  - [Docker build cache](#docker-build-cache)
+  - [Create a container](#create-a-container)
 - [Resources](#resources)
 
 
@@ -378,8 +379,12 @@ Use `docker build` to generate the new image.
 * This will parse the `Dockerfile` and apply its configuration. 
 * All files and folders located in the `Dockerfile` directory will be included in the image.
 * At the end of the process you shall see the container ID.
+* You can name an image with the `-t {imageName}` attribute. 
+  .. Later on you can spaw a new instance with `docker run {imageName}`
 
-`docker build {path-to-Dockerfile}`
+Usage examples:
+* Create a new image: `docker build {path-to-Dockerfile}`
+* Create a new image with a particular name: `docker build -t {imageName} {path-to-Dockerfile}`
 
 
 ### Build lifecycle
@@ -415,7 +420,6 @@ When `docker build` parse the content of the `Dockerfile`, it performs the follo
 > * Temporary container is dropped
 >
 > Final image is created when there is no more docker instructions to follow.
-----------
 
 That's why, it is VERY IMPORTANT to avoid many docker operations. 
 
@@ -433,9 +437,7 @@ Many `RUN` will result in:
 Source: [Google Cloud Architecture, best-practices-for-building-containers](https://cloud.google.com/architecture/best-practices-for-building-containers)
 
 
-
-
-## Example: create a redis-server image
+### Example: create a redis-server image
 
 1. create a new folder on your local machine to host the configuration (ex: `exercices/section3`)
 2. create a new configuration file inside that folder: `Dockerfile` (no file extension). 
@@ -472,6 +474,15 @@ Source: [Google Cloud Architecture, best-practices-for-building-containers](http
 
 Diagram to represent what occurred: 
 !["docker build process overview"](images/13_docker_build_simple_sequence.png "docker build process overview")
+
+## Docker build cache
+
+Docker has a local cache. It means that when you run the same `Dockerfile` multiple times it will be much faster! The local cache is one of the key to Docker's performances.
+
+The cache is based on **ordered operations**. So, if something changed in the _RUN_ instruction(s) then a new build will be triggered.
+
+
+## Create a container
 
 
 # Resources
