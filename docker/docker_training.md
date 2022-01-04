@@ -22,10 +22,14 @@ DOCKER training
   - [Docker stop](#docker-stop)
   - [Docker exec](#docker-exec)
     - [Key points](#key-points)
+    - [Access container's command prompt (SH / BASH)](#access-containers-command-prompt-sh--bash)
     - [Docker exec example: redis server + redis-cli](#docker-exec-example-redis-server--redis-cli)
   - [Docker kill](#docker-kill)
   - [Docker ps](#docker-ps)
   - [Cleanup containers](#cleanup-containers)
+- [Create custom docker image](#create-custom-docker-image)
+  - [Introduction to _DockerFile_](#introduction-to-dockerfile)
+  - [Example: create a redis-server image](#example-create-a-redis-server-image)
 
 
 # Training notes
@@ -152,6 +156,11 @@ Each container, like any Linux machine, has the following input/output:
 You can acces the some or all input/output with Docker, depending on the command you gonna execute and its arguments.
 
 
+> :fire: !! Important 
+> 
+> As a result of previous paradigms, _container are **completly isolated** and **separated** from each other_.
+
+
 ### Container definition
 
 > *A **container** is a process or set of processes that have a grouping of resources specifically assign to it.*
@@ -189,6 +198,8 @@ To showcase the `docker run` command, we rely on ***[BusyBox](https://hub.docker
    ```docker run busybox ls```
 * execute long process `ping`: 
    ```docker run busybox ping google.com```
+* start simple linux and access the prompt directly
+   ```docker run -it busybox sh```
 
 ## Docker create
 
@@ -260,6 +271,18 @@ To **execute** an _additional_ command/process inside an existing container.
 * `-i` to attach the current terminal to the new process, and use STDIN
 * `-t` make sure that all input text is nicely formatted (including encoding, keyboard layout, shortcuts, auto-completion, etc.)
 
+### Access container's command prompt (SH / BASH)
+
+With _docker exec_ you can access the container's command prompt. 
+
+```bash
+# SH default shell. It is always present.
+docker exec -it {container_id} sh
+
+# BASH, depends on the image content
+docker exec -it {container_id} bash
+``` 
+
 
 ### Docker exec example: redis server + redis-cli
 
@@ -280,7 +303,6 @@ docker ps
 # Exec new command "redis-cli" in container
 docker exec -it efb6f31109ac redis-cli
 ```
-
 
 
 ## Docker kill
@@ -305,3 +327,44 @@ To clean containers that are STOPPED and delete all their content: `docker syste
 * remove stopped _containers_
 * remove all _virtual networks interfaces_ that are not used anymore by at least 1 container
 * clear out docker _build cache_ (this might remove also the not used local images)
+
+
+# Create custom docker image
+
+## Introduction to _DockerFile_
+
+To create a custom docker image we have to generate a `DockerFile`. 
+> This **configuration file** defines how our container should behave. 
+
+![docker image principle](images/11_docker_image_principle.png "docker image principle")
+
+More specifically, this configuration file describes: 
+* what different programs it is going to contain
+* what it does when a container starts up
+
+Every _DockerFile_ contains:
+- Base image
+- Add additionals commands and programs
+- Specify a startup command to be executed after boot
+
+
+![docker file overview](images/12_docker_file_principle.png "docker file overview")
+
+
+## Example: create a redis-server image
+
+1. create a new folder on your local machine to host the configuration (ex: `redis-image`)
+2. create a new configuration file inside that folder: `DockerFile` (no file extension). It must contains the following structure:
+   ```docker
+   # Use an existing image as a base
+   FROM ........
+
+   # Download and install a dependencies
+   RUN ........
+
+   # Tell the image what to do when it starts as a container
+   CMD ["........"]
+   ```
+3. Build the image
+   ```docker build .```
+4. 
