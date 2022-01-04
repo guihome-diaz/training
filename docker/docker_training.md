@@ -427,6 +427,8 @@ Many `RUN` will result in:
 - Harder maintenance
 
 > Always prefer a single RUN operation
+> 
+>  ... even though it might reduce a little the usage of the local cache.
 
 Source: [Google Cloud Architecture, best-practices-for-building-containers](https://cloud.google.com/architecture/best-practices-for-building-containers)
 
@@ -467,6 +469,9 @@ Source: [Google Cloud Architecture, best-practices-for-building-containers](http
    ```bash
    docker run 61f0bf35e165cbef3dc696b08d777c860aa036f40599cc429f1c75c94c67334f
    ```
+
+Diagram to represent what occurred: 
+!["docker build process overview"](images/13_docker_build_simple_sequence.png "docker build process overview")
 
 
 # Resources
