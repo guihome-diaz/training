@@ -28,8 +28,14 @@ DOCKER training
   - [Docker ps](#docker-ps)
   - [Cleanup containers](#cleanup-containers)
 - [Create custom docker image](#create-custom-docker-image)
-  - [Introduction to _DockerFile_](#introduction-to-dockerfile)
+  - [Introduction to _Dockerfile_](#introduction-to-dockerfile)
+  - [ALPINE as base image](#alpine-as-base-image)
+  - [Docker build command](#docker-build-command)
+    - [Principle](#principle)
+    - [Build lifecycle](#build-lifecycle)
+  - [> Final image is created when there is no more docker instructions to follow.](#-final-image-is-created-when-there-is-no-more-docker-instructions-to-follow)
   - [Example: create a redis-server image](#example-create-a-redis-server-image)
+- [Resources](#resources)
 
 
 # Training notes
@@ -331,9 +337,9 @@ To clean containers that are STOPPED and delete all their content: `docker syste
 
 # Create custom docker image
 
-## Introduction to _DockerFile_
+## Introduction to _Dockerfile_
 
-To create a custom docker image we have to generate a `DockerFile`. 
+To create a custom docker image we have to generate a `Dockerfile`. 
 > This **configuration file** defines how our container should behave. 
 
 ![docker image principle](images/11_docker_image_principle.png "docker image principle")
@@ -342,22 +348,104 @@ More specifically, this configuration file describes:
 * what different programs it is going to contain
 * what it does when a container starts up
 
-Every _DockerFile_ contains:
-- Base image
-- Add additionals commands and programs
-- Specify a startup command to be executed after boot
+Every _Dockerfile_ contains, at least:
+| | item | docker instruction |Addition info|
+|-|--------------------|---------------------|----------|
+|1| Base image | **FROM** | For simple stuff use the _Alpine_ base image |
+|2| Add additionals commands and programs | **RUN** | There shall be only 1 RUN with `\` to chain operations |
+|3| Specify a startup command to be executed after boot | **CMD** | It must be unique!! Only 1 CMD will be executed, and it is always the last one. syntax: `CMD["command", "arg1", "arg2"]` |
 
 
 ![docker file overview](images/12_docker_file_principle.png "docker file overview")
 
 
+## ALPINE as base image
+
+[Alpine](https://hub.docker.com/_/alpine/) Alpine Linux is a security-oriented, lightweight Linux distribution based on [musl libc](https://www.musl-libc.org/) and [busybox](https://www.busybox.net/). It contains all utilities to interact with other systems, resources and repositories + core programs. **This is the smallest and most efficient Linux kernel**. Since it is small, it is go-to choice for small containers and it can be used in production.
+
+Key points:
+* It uses its own package manager called *`apk`*
+* Crystal-clear Linux environment without all the noise. Only the bare minimum (8 Mb). It keeps your environment *as small and efficient as possible*
+* Alpine Linux was designed with security in mind
+
+> `Alpine` is often use with Docker containers because of its small footprint and security.
+
+
+## Docker build command
+
+### Principle
+Use `docker build` to generate the new image.
+* This will parse the `Dockerfile` and apply its configuration. 
+* All files and folders located in the `Dockerfile` directory will be included in the image.
+* At the end of the process you shall see the container ID.
+
+`docker build {path-to-Dockerfile}`
+
+
+### Build lifecycle
+
+:fire: :fire: !! IMPORTANT !! :fire: :fire:
+
+When `docker build` parse the content of the `Dockerfile`, it performs the following actions: 
+
+* FROM
+  1. Retrieve from local cache/Download from docker-hub the **base image**
+* RUN
+  1. **Spawn a new temporary _container_** with the base image
+  2. **Start** the temporary container
+  3. **Execute all RUN instructions** _inside_ that temporary container.
+  4. **Stop** the temporary container
+  5. Take a **file system snapshot** of this temporary container
+  6. **Save** snaphsot as a **temporary image**
+  7. **Drop** temporary _container_
+* CMD
+  1. Create a **new temporary _container_ based on temporary _image_**
+  2. Set the **primary command** to execute + its arguments (= content of the `CMD` instruction)
+  3. **Stop** the temporary container
+  4. Take a **file system + startup command snapshot** of this temporary container
+  5. **Save** the snapshot as **new image**
+  6. **Drop** temporary _container_
+
+----------
+> Build principle: every docker instruction relies on the previous one. 
+> 
+> * Each Docker instruction will spawn a **temporary container** based on last Docker instruction's result
+> * It will **apply its own configuration and commands**
+> * The result of these operations (filesystem + startup command) will be **saved in a temporary image** for the next Docker instruction
+> * Temporary container is dropped
+>
+> Final image is created when there is no more docker instructions to follow.
+----------
+
+That's why, it is VERY IMPORTANT to avoid many docker operations. 
+
+!["docker build optimisation"](images/12_docker_build_single_instruction.png "docker build optimisation")
+
+Many `RUN` will result in: 
+- Bigger image filesize
+- Longer builds
+- Harder maintenance
+
+> Always prefer a single RUN operation
+
+Source: [Google Cloud Architecture, best-practices-for-building-containers](https://cloud.google.com/architecture/best-practices-for-building-containers)
+
+
+
+
 ## Example: create a redis-server image
 
-1. create a new folder on your local machine to host the configuration (ex: `redis-image`)
-2. create a new configuration file inside that folder: `DockerFile` (no file extension). It must contains the following structure:
+1. create a new folder on your local machine to host the configuration (ex: `exercices/section3`)
+2. create a new configuration file inside that folder: `Dockerfile` (no file extension). 
+   ```bash 
+   mkdir -p ./exercices/section3
+   vim ./exercices/section3/Dockerfile
+   ```
+
+   It must contains the following structure:
    ```docker
    # Use an existing image as a base
-   FROM ........
+   FROM alpine
 
    # Download and install a dependencies
    RUN ........
@@ -366,5 +454,22 @@ Every _DockerFile_ contains:
    CMD ["........"]
    ```
 3. Build the image
-   ```docker build .```
-4. 
+   ```bash
+   docker build .
+   ```
+   :information_source: All files and folder located in the build directory will be included in the image.
+
+   At the end of the process you shall see the container ID.
+   ```bash 
+   writing image sha256:61f0bf35e165cbef3dc696b08d777c860aa036f40599cc429f1c75c94c67334f
+   ```
+4. Create and start a new container for that particular image
+   ```bash
+   docker run 61f0bf35e165cbef3dc696b08d777c860aa036f40599cc429f1c75c94c67334f
+   ```
+
+
+# Resources
+
+* [Google cloud best practices with Docker](https://cloud.google.com/architecture/best-practices-for-building-containers#build-the-smallest-image-possible)
+
