@@ -33,9 +33,11 @@ DOCKER training
   - [Docker build command](#docker-build-command)
     - [Principle](#principle)
     - [Build lifecycle](#build-lifecycle)
+    - [How to tag an image (naming conventions)](#how-to-tag-an-image-naming-conventions)
     - [Example: create a redis-server image](#example-create-a-redis-server-image)
-  - [Docker build cache](#docker-build-cache)
-  - [Create a container](#create-a-container)
+    - [Docker build cache](#docker-build-cache)
+  - [Create new image from container's snapshot (docker commit)](#create-new-image-from-containers-snapshot-docker-commit)
+- [Simple application example](#simple-application-example)
 - [Resources](#resources)
 
 
@@ -207,6 +209,8 @@ To showcase the `docker run` command, we rely on ***[BusyBox](https://hub.docker
    ```docker run busybox ping google.com```
 * start simple linux and access the prompt directly
    ```docker run -it busybox sh```
+* use a particular version of an image (default version is _latest_)
+   ```docker run -it busybox:1.34.1 sh```
 
 ## Docker create
 
@@ -436,6 +440,22 @@ Many `RUN` will result in:
 
 Source: [Google Cloud Architecture, best-practices-for-building-containers](https://cloud.google.com/architecture/best-practices-for-building-containers)
 
+### How to tag an image (naming conventions)
+
+If you want to name (_tag_) an image you must use the `-t {imageName}` flag. You should follow some conventions: 
+
+```
+imageName = {dockerId} / {projectName} : {version}
+```
+
+
+- **dockerId**: name of your docker user (ex: _guihomediaz_)
+- **projectName** : name of the current project
+- **version**: either a version number or `latest`
+
+:information_source: Only the Open Source projects (such as _busybox, Alpine, Redis, etc._) have a simple name without dockerId.
+
+
 
 ### Example: create a redis-server image
 
@@ -459,7 +479,7 @@ Source: [Google Cloud Architecture, best-practices-for-building-containers](http
    ```
 3. Build the image
    ```bash
-   docker build .
+   docker build -t guihomediaz/redis:latest .
    ```
    :information_source: All files and folder located in the build directory will be included in the image.
 
@@ -475,17 +495,57 @@ Source: [Google Cloud Architecture, best-practices-for-building-containers](http
 Diagram to represent what occurred: 
 !["docker build process overview"](images/13_docker_build_simple_sequence.png "docker build process overview")
 
-## Docker build cache
+### Docker build cache
 
 Docker has a local cache. It means that when you run the same `Dockerfile` multiple times it will be much faster! The local cache is one of the key to Docker's performances.
 
 The cache is based on **ordered operations**. So, if something changed in the _RUN_ instruction(s) then a new build will be triggered.
 
 
-## Create a container
+## Create new image from container's snapshot (docker commit)
+
+You can create an image from an existing running container (Snapshot). Use `docker commit` with `-c` to set the startup command. 
+
+Ex: ```docker commit -c "CMD ['bash']" {containerId}```
+
+> !!!! :fire::fire::fire: !!!
+> 
+> In real life, do **not** use `docker commit`, it is _much_ better to use a Dockerfile !
+> 
+> !!!! :fire::fire::fire: !!!
+
+
+```bash
+#################################################
+# (example) create a simple container with data #
+##################################################
+# New container with just alpine on it
+docker run -it alpine sh
+# Add application
+apk add --update vim
+apk add --update bash
+apk add --update redis
+
+
+##################################################
+# Create snapshot                                #
+##################################################
+# Get the containerId of the running container you'd like to save as an image
+docker ps
+
+# Create a Snapshot
+#### Linux
+docker commit -c 'CMD ["redis-server"]' {containerId}
+#### Windows
+docker commit -c "CMD ['redis-server']" {containerId}
+```
+
+# Simple application example 
+
 
 
 # Resources
 
 * [Google cloud best practices with Docker](https://cloud.google.com/architecture/best-practices-for-building-containers#build-the-smallest-image-possible)
+
 
