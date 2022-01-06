@@ -14,6 +14,8 @@ DOCKER training
     - [Docker application principle](#docker-application-principle)
 - [Docker basics commands (lifecycle)](#docker-basics-commands-lifecycle)
   - [Docker run](#docker-run)
+    - [Definition](#definition)
+    - [Examples](#examples)
   - [Docker create](#docker-create)
   - [Docker start](#docker-start)
   - [Docker run VS docker start](#docker-run-vs-docker-start)
@@ -36,7 +38,11 @@ DOCKER training
     - [Example: create a redis-server image](#example-create-a-redis-server-image)
     - [Docker build cache](#docker-build-cache)
   - [Create new image from container's snapshot (docker commit)](#create-new-image-from-containers-snapshot-docker-commit)
+  - [Add files inside the image (docker copy)](#add-files-inside-the-image-docker-copy)
+  - [Port mapping](#port-mapping)
 - [Simple application example](#simple-application-example)
+  - [Objectives](#objectives)
+  - [Requirements](#requirements)
 - [Resources](#resources)
 
 
@@ -188,12 +194,22 @@ A *container* can only work on a Linux kernel. Therefore, Docker is kind of a **
 
 ## Docker run
 
+### Definition
+
 This command will spawn a new *container* for a particular *image*. `docker run` command is based on: 
 
 ![docker run basis](images/07_docker_run_basis.png "docker run basis")
 
+Use the `-p` argument to forward incoming request _FROM_ local workstation's port number _TO_ a container's port.
+
+![docker run port mapping](images/16_docker_port_mapping_run_argument.png "docker run port mapping")
+
+### Examples
+
 To showcase the `docker run` command, we rely on ***[BusyBox](https://hub.docker.com/_/busybox/)*** a very small linux distro (between 1 and 5 Mb) with only core utilities.
 
+* Run busybox image with default command
+  ```docker run busybox```
 * execute simple `echo`:
   ```docker run busybox echo this is test```
 * execute simple `ls`: 
@@ -204,6 +220,9 @@ To showcase the `docker run` command, we rely on ***[BusyBox](https://hub.docker
    ```docker run -it busybox sh```
 * use a particular version of an image (default version is _latest_)
    ```docker run -it busybox:1.34.1 sh```
+* redirect _local_ port 5000 to _container_ port 8080
+   ```docker run -it -p 5000:8080 node:17-alpine sh```
+
 
 ## Docker create
 
@@ -431,7 +450,7 @@ When `docker build` parse the content of the `Dockerfile`, it performs the follo
 
 That's why, it is VERY IMPORTANT to avoid many docker operations. 
 
-!["docker build optimisation"](images/12_docker_build_single_instruction.png "docker build optimisation")
+![docker build optimisation](images/12_docker_build_single_instruction.png "docker build optimisation")
 
 Many `RUN` will result in: 
 - Bigger image filesize
@@ -497,7 +516,7 @@ imageName = {dockerId} / {projectName} : {version}
    ```
 
 Diagram to represent what occurred: 
-!["docker build process overview"](images/13_docker_build_simple_sequence.png "docker build process overview")
+![docker build process overview](images/13_docker_build_simple_sequence.png "docker build process overview")
 
 ### Docker build cache
 
@@ -544,7 +563,77 @@ docker commit -c 'CMD ["redis-server"]' {containerId}
 docker commit -c "CMD ['redis-server']" {containerId}
 ```
 
+## Add files inside the image (docker copy)
+
+To add specific files inside the image, such as application's files | images | etc., you must use `docker copy {workstation_hdd_path} {docker_image_target_path}`
+* `workstation_hdd_path` : path where the **sources files** are located on the workstation hard drive at the moment of the build. 
+    This is relative to the build context - where you execute _docker build_ command!
+* `docker_image_target_path` : **target** path where to copy these files inside the image
+
+![docker copy](images/14_docker_copy.png "docker copy")
+
+
+## Port mapping
+
+**The container has its own isolated set of ports that can receive traffic**.
+
+> By default no trafic that is coming from your local network or computer is routed to the container. 
+>
+> You cannot reach any endpoint without **explicit port mapping**
+> 
+
+**Port mapping definition**: 
+* To forward all incoming requests on a particular workstation/server port number to a particular container's port number. 
+* Port mapping only applies to **incoming requests**. By default a container can contact any remote web-site: there is no output filtering
+* The **local port number is NOT necessary the as the container**. For instance, you can redirect workstation's `localhost:5000` to `container:8080`
+
+![docker port mapping principle](images/15_docker_port_mapping_principle.png "docker port mapping principle")
+
+:fire::fire: !! port forwarding is strictly a **runtime constraint** !!
+> Port forwarding is set with `docker run` command, not in the `Dockerfile`!!
+
+
 # Simple application example 
+
+## Objectives
+
+Create a simple NodeJS application to demonstrate how to encapsulate a real application in Docker. This is:
+* Expose a web-service that will return a String (~ like hello-world) on HTTP GET `/`
+* Do a `server-side console log` at each web-service call
+* `Listen` for incoming queries on `port 8080`
+
+
+## Requirements
+
+1. `Dockerfile` specifications
+  To fufill the objects, the new `Dockerfile` shall include: 
+  * FROM 
+    * Use base image: official node image, _alpine_ based
+  * COPY 
+    * to copy application's files into the new image, to a specific location (`/usr/app`)
+  * WORKDIR
+    * To set the working directory for our application in runtime, when the container start.
+  * RUN 
+    * Add missing dependencies 
+    * Sources compilation
+  * CMD
+    * Application start: `npm start`
+2. `docker build` : the new image shall have a tag that follows the convention: `dockerID/appName` (ex: _guihomediaz/simplewebapp_)
+3. `docker run` : when you create the container, don't forget to forward a local port to container's `8080` with the `-p` argument
+
+
+
+```bash
+# Build the image base on the Dockerfile
+docker build -t guihomediaz/simplewebapp .
+
+# Spawn new container
+# !! Don't forget the port mapping !!
+docker run -p 5000:8080 guihomediaz/simplewebapp
+
+# Check-out the browser from local workstation
+curl http://localhost:5000
+```
 
 
 
