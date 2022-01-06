@@ -1,7 +1,6 @@
 DOCKER training
 
 - [Training notes](#training-notes)
-  - [Finished Code](#finished-code)
   - [Diagrams](#diagrams)
 - [Docker installation](#docker-installation)
   - [Tools](#tools)
@@ -49,12 +48,6 @@ DOCKER training
 * Docker setup: Windows 11 with WSL2, docker desktop v4.3.2 (72729) | docker cli v20.10.11
 
 
-## Finished Code
-Finished code is attached to each applicable lecture throughout the course. 
-
-If you get stuck at any point you can download the code and compare it against yours with a diff tool like Diffchecker or VSCode's built-in comparison tool.
-
-
 ## Diagrams
 The [diagrams](./diagrams.zip) shown in the course are attached as a zip file.
 * Download the file and extract it somewhere on your computer.
@@ -94,7 +87,7 @@ Make sure Virtualization is enabled in your Bios! This is one of the requirement
 The WSL 2 `docker-desktop-data` vm disk image would normally reside in: `%USERPROFILE%\AppData\Local\Docker\wsl\data\ext4.vhdx`
 
 To relocate it to other drive/directory, with all existing docker data preserved:
-* First, **shut down your docker desktop** by right click on the Docker Desktop icon and select Quit Docker Desktop
+* First, **shut down your docker desktop** by right-click on the Docker Desktop icon and select Quit Docker Desktop
 * Then, open your command prompt (GitBash)
   `wsl --list -v`
 
@@ -153,21 +146,21 @@ A container relies on 2 concepts:
 * **Namespacing**: to isolate resources per process or group processes. A "resource" can be physical (hard-drive, network card, etc.) or logic (communication between processes, users, files rights, etc.)
 * **Control group**: to limit the amount of resources used by process. To ensure a particular process stays within its limits. A "resource" can be CPU, memory, hard-drive size, etc.
 
-![core concepts behing Docker](images/03_core_concepts_behind_docker.png "core concepts behing Docker")
+![core concepts behind Docker](images/03_core_concepts_behind_docker.png "core concepts behind Docker")
 
-!! These particular concepts are Linux specific features. Therefore **each container will run on Linux**. 
+!! These particular concepts are Linux specific features. Therefore, **each container will run on Linux**. 
 
 Each container, like any Linux machine, has the following input/output:
 - STDIN: keyboard + mouse
 - STDOUT: console output
 - STDERR: error messages
 
-You can acces the some or all input/output with Docker, depending on the command you gonna execute and its arguments.
+You can access some or all input/output with Docker, depending on the command you are going to execute and its arguments.
 
 
 > :fire: !! Important 
 > 
-> As a result of previous paradigms, _container are **completly isolated** and **separated** from each other_.
+> As a result of previous paradigms, _container are **completely isolated** and **separated** from each other_.
 
 
 ### Container definition
@@ -199,7 +192,7 @@ This command will spawn a new *container* for a particular *image*. `docker run`
 
 ![docker run basis](images/07_docker_run_basis.png "docker run basis")
 
-To showcase the `docker run` command, we rely on ***[BusyBox](https://hub.docker.com/_/busybox/)*** a very small linux distro (between 1 to 5 Mb) with only core utilities.
+To showcase the `docker run` command, we rely on ***[BusyBox](https://hub.docker.com/_/busybox/)*** a very small linux distro (between 1 and 5 Mb) with only core utilities.
 
 * execute simple `echo`:
   ```docker run busybox echo this is test```
@@ -258,7 +251,7 @@ To **view** what happen inside a specific container that you did not start with 
 * example: `docker logs 5327241a353256083f18a90383acc2b7bd856e45a7490ae553375e6fc9a5af6e`
 * Key points:
   - You can view logs from an active or stopped container 
-  - `docker logs` does NOT trigger any process. It just display the system outputs
+  - `docker logs` does NOT trigger any process. It just displays the system outputs
   
 
 
@@ -312,7 +305,7 @@ docker exec -u 0 -it {container_id} bash
 
 Process to showcase _docker exec_:
 * Get Redis server
-* By default the Redis server does NOT include the `redis-cli` command
+* By default, the Redis server does NOT include the `redis-cli` command
 * Manually execute a new process inside the Redis server
 
 ```bash
@@ -347,7 +340,7 @@ This is one of the key command for Docker. By default, it will list all **runnin
 
 To clean containers that are STOPPED and delete all their content: `docker system prune`
 * remove stopped _containers_
-* remove all _virtual networks interfaces_ that are not used anymore by at least 1 container
+* remove all _virtual networks interfaces_ that are not used any more by at least 1 container
 * clear out docker _build cache_ (this might remove also the not used local images)
 
 
@@ -368,7 +361,7 @@ Every _Dockerfile_ contains, at least:
 | | item | docker instruction |Addition info|
 |-|--------------------|---------------------|----------|
 |1| Base image | **FROM** | For simple stuff use the _Alpine_ base image |
-|2| Add additionals commands and programs | **RUN** | There shall be only 1 RUN with `\` to chain operations |
+|2| Add additional commands and programs | **RUN** | There shall be only 1 RUN with `\` to chain operations |
 |3| Specify a startup command to be executed after boot | **CMD** | It must be unique!! Only 1 CMD will be executed, and it is always the last one. syntax: `CMD["command", "arg1", "arg2"]` |
 
 
@@ -377,7 +370,7 @@ Every _Dockerfile_ contains, at least:
 
 ## ALPINE as base image
 
-[Alpine](https://hub.docker.com/_/alpine/) Alpine Linux is a security-oriented, lightweight Linux distribution based on [musl libc](https://www.musl-libc.org/) and [busybox](https://www.busybox.net/). It contains all utilities to interact with other systems, resources and repositories + core programs. **This is the smallest and most efficient Linux kernel**. Since it is small, it is go-to choice for small containers and it can be used in production.
+[Alpine](https://hub.docker.com/_/alpine/) Linux is a security-oriented, lightweight Linux distribution based on [musl libc](https://www.musl-libc.org/) and [busybox](https://www.busybox.net/). It contains all utilities to interact with other systems, resources and repositories + core programs. **This is the smallest and most efficient Linux kernel**. Since it is small, it is go-to choice for small containers, and it can be used in production.
 
 Key points:
 * It uses its own package manager called *`apk`*
@@ -395,7 +388,7 @@ Use `docker build` to generate the new image.
 * All files and folders located in the `Dockerfile` directory will be included in the image.
 * At the end of the process you shall see the container ID.
 * You can name an image with the `-t {imageName}` attribute. 
-  .. Later on you can spaw a new instance with `docker run {imageName}`
+  .. Later on you can spawn a new instance with `docker run {imageName}`
 
 Usage examples:
 * Create a new image: `docker build {path-to-Dockerfile}`
@@ -416,7 +409,7 @@ When `docker build` parse the content of the `Dockerfile`, it performs the follo
   3. **Execute all RUN instructions** _inside_ that temporary container.
   4. **Stop** the temporary container
   5. Take a **file system snapshot** of this temporary container
-  6. **Save** snaphsot as a **temporary image**
+  6. **Save** snapshot as a **temporary image**
   7. **Drop** temporary _container_
 * CMD
   1. Create a **new temporary _container_ based on temporary _image_**
@@ -477,7 +470,7 @@ imageName = {dockerId} / {projectName} : {version}
    vim ./exercices/section3/Dockerfile
    ```
 
-   It must contains the following structure:
+   It must contain the following structure:
    ```docker
    # Use an existing image as a base
    FROM alpine
