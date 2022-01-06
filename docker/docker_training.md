@@ -28,7 +28,7 @@ DOCKER training
   - [Docker ps](#docker-ps)
   - [Cleanup containers](#cleanup-containers)
 - [Create custom docker image](#create-custom-docker-image)
-  - [Introduction to _Dockerfile_](#introduction-to-dockerfile)
+  - [Introduction to Dockerfile](#introduction-to-dockerfile)
   - [ALPINE as base image](#alpine-as-base-image)
   - [Docker build command](#docker-build-command)
     - [Principle](#principle)
@@ -278,9 +278,17 @@ To **execute** an _additional_ command/process inside an existing container.
 
 ### Key points
 
-* Don't forget to add the `-it` to forward the STDIN to the new process
-* `-i` to attach the current terminal to the new process, and use STDIN
-* `-t` make sure that all input text is nicely formatted (including encoding, keyboard layout, shortcuts, auto-completion, etc.)
+* You can forward computer's inputs to the new process
+  * `-i` to attach the current terminal to the new process, and use STDIN
+  * `-t` make sure that all input text is nicely formatted (including encoding, keyboard layout, shortcuts, auto-completion, etc.)
+
+> Don't forget to add the `-it` to forward the STDIN to the new process (= to attach local mouse and keyboard)
+
+* `-u` to specify a particular Linux UserId to connect with.
+  * root _(id = 0)_ is the default user within a container. 
+  * The image developer can create additional users. Those users are accessible by name. 
+  * When passing a numeric ID, the user does not have to exist in the container.
+  > to use the root account, set `-u 0` 
 
 ### Access container's command prompt (SH / BASH)
 
@@ -290,8 +298,11 @@ With _docker exec_ you can access the container's command prompt.
 # SH default shell. It is always present.
 docker exec -it {container_id} sh
 
-# BASH, depends on the image content
+# BASH, depends on the image content (default user)
 docker exec -it {container_id} bash
+
+# Access BASH with root account
+docker exec -u 0 -it {container_id} bash
 ``` 
 
 
@@ -342,7 +353,7 @@ To clean containers that are STOPPED and delete all their content: `docker syste
 
 # Create custom docker image
 
-## Introduction to _Dockerfile_
+## Introduction to Dockerfile
 
 To create a custom docker image we have to generate a `Dockerfile`. 
 > This **configuration file** defines how our container should behave. 
