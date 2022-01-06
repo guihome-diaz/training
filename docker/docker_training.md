@@ -43,6 +43,7 @@ DOCKER training
 - [Simple application example](#simple-application-example)
   - [Objectives](#objectives)
   - [Requirements](#requirements)
+  - [Execution steps](#execution-steps)
 - [Resources](#resources)
 
 
@@ -622,6 +623,9 @@ Create a simple NodeJS application to demonstrate how to encapsulate a real appl
 3. `docker run` : when you create the container, don't forget to forward a local port to container's `8080` with the `-p` argument
 
 
+## Execution steps
+
+See application's files + `Dockerfile` in [section 4 files](./exercices/section_4/simple-app)
 
 ```bash
 # Build the image base on the Dockerfile
