@@ -689,6 +689,8 @@ If you package the application along the data repository, _inside_ the same cont
 > 
 > data becomes inconsistent over time!! 
 
+:fire: This is NOT a correct architecture!!
+
 
 ## Architecture option 2: multiple containers
 
@@ -699,7 +701,7 @@ To scale easier, it is better to:
 
 !["section 5 target architecture"](images/22_multiple_containes_architecture.png "section 5 target architecture")
 
-With this kind of architecture you can easily scale up without data inconsistency or data loss.
+:white_check_mark: With this kind of architecture you can easily scale up without data inconsistency or data loss.
 
 
 
