@@ -21,12 +21,13 @@
 # See https://hub.docker.com/_/node
 FROM node:17-alpine
 
-###### Resources (files) to include in the new image
-COPY ./app /usr/app
-
 ###### Metadata (ex: image maintainer, variables, etc.)
 # Application working directory
 WORKDIR /usr/app
+
+###### STATIC resources (files) to include in the new image
+## put here static resources or the ones that are required for later instructions. (ex: package.json)
+COPY ./app/package.json /usr/app
 
 # Download and install dependencies (not required)
 RUN apk update \ 
@@ -34,6 +35,11 @@ RUN apk update \
 
 # Build the application
 RUN npm install
+
+
+###### Application content
+COPY ./app/index.js /usr/app
+
 
 ##### Tell the image what to do when it starts as a container
 CMD ["npm", "start"]

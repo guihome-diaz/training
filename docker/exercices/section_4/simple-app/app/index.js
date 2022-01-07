@@ -6,7 +6,7 @@ const app = express();
 
 // Simple web-service at the root
 app.get('/', (req, res) => {
-    res.send('Hi there, this is a simple application');
+    res.send('<html><body>Hi there, this is a simple application.<br>;) with a little change</body></html>');
 });
 
 // Listen on port

@@ -39,7 +39,9 @@ DOCKER training
     - [Docker build cache](#docker-build-cache)
   - [Create new image from container's snapshot (docker commit)](#create-new-image-from-containers-snapshot-docker-commit)
   - [Add files inside the image (docker copy)](#add-files-inside-the-image-docker-copy)
-  - [Port mapping](#port-mapping)
+- [Docker port mapping](#docker-port-mapping)
+  - [Principle](#principle-1)
+  - [How to forward a local port to the container?](#how-to-forward-a-local-port-to-the-container)
 - [Simple application example](#simple-application-example)
   - [Objectives](#objectives)
   - [Requirements](#requirements)
@@ -574,7 +576,9 @@ To add specific files inside the image, such as application's files | images | e
 ![docker copy](images/14_docker_copy.png "docker copy")
 
 
-## Port mapping
+# Docker port mapping
+
+## Principle
 
 **The container has its own isolated set of ports that can receive traffic**.
 
@@ -582,6 +586,8 @@ To add specific files inside the image, such as application's files | images | e
 >
 > You cannot reach any endpoint without **explicit port mapping**
 > 
+
+## How to forward a local port to the container?
 
 **Port mapping definition**: 
 * To forward all incoming requests on a particular workstation/server port number to a particular container's port number. 
@@ -613,7 +619,10 @@ Create a simple NodeJS application to demonstrate how to encapsulate a real appl
   * COPY 
     * to copy application's files into the new image, to a specific location (`/usr/app`)
   * WORKDIR
-    * To set the working directory for our application in runtime, when the container start.
+    * To set the working directory for our application in runtime, when the container start. In other words: 
+      * At build, it affects _all following `Dockerfile` commands_ will be executed relative to this folder
+      * In runtime, _all `docker exec` commands_ will be executed from that folder too
+    * If the folder does not already exists inside the container it will be created for us
   * RUN 
     * Add missing dependencies 
     * Sources compilation
@@ -637,7 +646,7 @@ docker run -p 5000:8080 guihomediaz/simplewebapp
 
 # Check-out the browser from local workstation
 curl http://localhost:5000
-```
+```  
 
 
 
