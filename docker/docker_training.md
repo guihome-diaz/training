@@ -42,10 +42,14 @@ DOCKER training
 - [Docker port mapping](#docker-port-mapping)
   - [Principle](#principle-1)
   - [How to forward a local port to the container?](#how-to-forward-a-local-port-to-the-container)
-- [Simple application example](#simple-application-example)
+- [Simple web-application example](#simple-web-application-example)
   - [Objectives](#objectives)
   - [Requirements](#requirements)
   - [Execution steps](#execution-steps)
+- [Create an application with multiples containers](#create-an-application-with-multiples-containers)
+  - [Objectives](#objectives-1)
+  - [Architecture option 1: single container](#architecture-option-1-single-container)
+  - [Architecture option 2: multiple containers](#architecture-option-2-multiple-containers)
 - [Resources](#resources)
 
 
@@ -600,11 +604,14 @@ To add specific files inside the image, such as application's files | images | e
 > Port forwarding is set with `docker run` command, not in the `Dockerfile`!!
 
 
-# Simple application example 
+# Simple web-application example
+
+:information_source: This is the _section 4_ exercice from the Udemy training
 
 ## Objectives
 
 Create a simple NodeJS application to demonstrate how to encapsulate a real application in Docker. This is:
+* `single container` application
 * Expose a web-service that will return a String (~ like hello-world) on HTTP GET `/`
 * Do a `server-side console log` at each web-service call
 * `Listen` for incoming queries on `port 8080`
@@ -637,6 +644,9 @@ Create a simple NodeJS application to demonstrate how to encapsulate a real appl
 See application's files + `Dockerfile` in [section 4 files](./exercices/section_4/simple-app)
 
 ```bash
+# Open files
+cd ./exercices/section_4/simplewebapp
+
 # Build the image base on the Dockerfile
 docker build -t guihomediaz/simplewebapp .
 
@@ -647,6 +657,52 @@ docker run -p 5000:8080 guihomediaz/simplewebapp
 # Check-out the browser from local workstation
 curl http://localhost:5000
 ```  
+
+# Create an application with multiples containers
+
+:information_source: This is the _section 5_ exercice from the Udemy training
+
+## Objectives
+
+Create a NodeJS application that will count the number of times a web-page has been visited accross multiple instances.
+* `multi containers` application
+* NodeJS web-service
+  * Expose a web-service that will return a String (~ like hello-world) on HTTP GET `/`
+  * Do a `server-side console log` at each web-service call
+  * `Listen` for incoming queries on `port 8080`
+  * Increment the visit counter at each call
+* Redis server
+  * Save the visit counter
+
+The solution must be able to scale-up!
+
+!["section 5 objectives"](images/20_objectives_section_5.png "section 5 objectives")
+
+
+## Architecture option 1: single container
+
+If you package the application along the data repository, _inside_ the same container, you might end-up in such a situation: 
+
+!["section 5 single container issue"](images/21_single_container_issues.png "section 5 single container issue")
+
+> Assuming there are many instances behind a load-balancer, and because **data repository is not unique and shared**:
+> 
+> data becomes inconsistent over time!! 
+
+
+## Architecture option 2: multiple containers
+
+To scale easier, it is better to:
+* separate concerns: **1 container for 1 purpose**. 
+* **Isolate data repositories** and datasources
+* Only duplicate application's logic and treatment. Not the data!
+
+!["section 5 target architecture"](images/22_multiple_containes_architecture.png "section 5 target architecture")
+
+With this kind of architecture you can easily scale up without data inconsistency or data loss.
+
+
+
 
 
 
