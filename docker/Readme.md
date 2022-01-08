@@ -1,4 +1,5 @@
 DOCKER and KUBERNETES training notes
+==============
 
 * Course: https://www.udemy.com/course/docker-and-kubernetes-the-complete-guide/
 * Trainer: Stephen Grider
@@ -9,6 +10,7 @@ DOCKER and KUBERNETES training notes
 * The **text** is my **personal notes**. Since I have a fish memory, I've put enough details to remember quickly next time I will read it. It is not as exhaustive as the training (but I hope it's close enough). 
 
 * **Diagrams** comes **from the training**. I only added some annotations or colors when needed. They are the work of _Stephen Grider_
+
 
 # Docker training
 
