@@ -8,9 +8,13 @@ services:
   # Data repository container (based on remote image)
   redis-server:
     image: 'redis'
+    # Only restart if the container stops with an error code (exit code != 0)
+    restart: on-failure
 
   # Our application (build image from sources)
   node-app:
+    # To always restart the container after a crash, no matter the reason
+    restart: always
     build: .
     ports:
       # Map workstation's local port 5000 to container's 8081      

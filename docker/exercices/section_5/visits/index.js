@@ -9,6 +9,8 @@
 // Ensure the Express & Redis client libraries are present
 const express = require('express');
 const redis = require('redis');
+// Import "process" library to simulate a crash later on
+const process = require('process');
 
 // Initialise new Express application
 const app = express();
@@ -42,6 +44,11 @@ redisClient.set('visits', 0);
 
 // *** Web-services ***
 app.get('/', (req, res) => {
+    // ~~!~~!~~!~~!~~!~~!~~!~~!
+    // To simulate a crash, just uncomment the line below
+    //process.exit(2);
+    // ~~!~~!~~!~~!~~!~~!~~!~~!
+
     // Retrieve number of visits
     redisClient.get('visits', (error, nbOfVisits) => {
         // Increment counter
