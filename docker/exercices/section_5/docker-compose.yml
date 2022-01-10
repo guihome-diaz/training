@@ -1,0 +1,23 @@
+# Declare the docker-compose file sytax version to use
+version: '3'
+
+# A service is a _type of container_. Each service is usally a different Docker container.
+# Reminder: all containers created by docker-compose are in the *same network* and they're going to have *free access to communicate to each other* in any way they want.
+services:
+
+  # Data repository container (based on remote image)
+  redis-server:
+    image: 'redis'
+    # Only restart if the container stops with an error code (exit code != 0)
+    restart: on-failure
+
+  # Our application (build image from sources)
+  node-app:
+    # To always restart the container after a crash, no matter the reason
+    restart: always
+    build: .
+    ports:
+      # Map workstation's local port 5000 to container's 8081      
+      - "5000:8081"
+    # Name of the image that has been build, for later re-use
+    image: guihomediaz/visits

@@ -1,0 +1,11 @@
+.footer {
+  display: flex;
+}
+
+.error {
+  color: red;
+}
+
+.last {
+  margin-left: auto;
+}

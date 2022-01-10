@@ -1,0 +1,31 @@
+label {
+  display: inline-block;
+  width: 10em;
+  text-align: right;
+  padding-right: 0.5em;
+}
+
+input {
+  width: 50%;
+}
+
+.detail {
+  display: flex;
+  flex-direction: column;
+}
+
+.row + .row {
+  margin-top: 0.2em;
+}
+
+.space {
+  margin-top: 0.2em;
+}
+
+.ng-invalid {
+  border-color: red;
+}
+
+.ng-valid {
+  border-color: green;
+}
