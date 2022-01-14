@@ -1,0 +1,36 @@
+#####################################
+# Section 6: simple REACT application
+#
+# @author Stephen Grider (trainer)
+# @author Guillaume Diaz (trainee)
+# @version 1.0, 2022/01
+#
+# This container will start the application on the port 3000 (`npm run start`)
+#####################################
+
+# Use an existing image as a base
+#  !! careful !! When you work with NodeJS it is better to use a specific version of the base image
+FROM node:17-alpine
+
+# Application working directory inside the container
+WORKDIR '/opt/app'
+
+# Copy project description and dependencies list to target working directory
+COPY package.json .
+
+# Retrieve project dependinces
+RUN npm install
+
+# Copy all projects files inside the container
+#######
+###### !!! Careful !!! 
+####### This will also copy (and replace) the node_modules folder! 
+####### To avoid that: 
+#######    Solution 1. Remove your local folder 'node_modules' (preferred option). It means you will only compile on Docker
+#######    Solution 2. Do the files copy BEFORE the 'npm install'
+#######
+COPY . .
+
+# Start project in development mode
+CMD [ "npm", "run", "start" ]
+
