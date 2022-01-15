@@ -4,9 +4,23 @@
 # @author Stephen Grider (trainer)
 # @author Guillaume Diaz (trainee)
 # @version 1.0, 2022/01
+#####################################
 #
 # This container will start the application on the port 3000 (`npm run start`)
+#
+# Port forwaring rules, This application listens on:
+# TCP 3000        |     NodeJS REACT application
+#
+#
 #####################################
+# WARNING WARNING WARNING WARNING WARNING 
+#####################################
+#
+# This will NOT forward development changes inside the container!!! 
+# Because there is no volume attached, you must BUILD EVERY TIME to push your changes !!
+# 
+#####################################
+
 
 # Use an existing image as a base
 #  !! careful !! When you work with NodeJS it is better to use a specific version of the base image
@@ -16,6 +30,7 @@ FROM node:17-alpine
 WORKDIR '/opt/app'
 
 # Copy project description and dependencies list to target working directory
+# Isolate package.json to detect dependencies changes by docker
 COPY package.json .
 
 # Retrieve project dependinces
