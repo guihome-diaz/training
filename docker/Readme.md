@@ -33,7 +33,7 @@ This section covers:
 * Docker in action: multiple containers application
 
 
-## [Use Docker to develop, build and deploy a real applicaton with Docker volumes](3.3.Docker_workflow_and_volumes.md)
+## [Use Docker to develop, build and deploy a real applicaton with Docker volumes](3.Docker_workflow_and_volumes.md)
 
 This section explains HOW to use Docker to speed up development, build and deployment of a real application. 
 * Docker as a _development_ tool
