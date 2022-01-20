@@ -1,0 +1,38 @@
+# Declare the docker-compose file sytax version to use
+version: '3'
+
+# A service is a _type of container_. Each service is usally a different Docker container.
+# Reminder: all containers created by docker-compose are in the *same network* and they're going to have *free access to communicate to each other* in any way they want.
+services:
+  
+  # Our main container (REACT application)
+  react-app:
+    # To always restart the container after a crash, no matter the reason
+    restart: "no"
+    # Use a local Dockerfile
+    build: 
+      # Where shall we build from and retrieve project's file?
+      context: .
+      # Path of the Dockerfile to use
+      dockerfile: ./Dockerfile.dev
+    # Map workstation's local port 4000 to container's 3000
+    ports:
+      - "4000:3000"
+    volumes:
+      # Bookmark: always use container's content for that particular path
+      - /opt/app/node_modules
+      # Use local content as "/opt/app"
+      - .:/opt/app
+
+  # To run the tests in parallel of the real stuff
+  react-tests:
+    # use same build configuration and volumes as the runtime settings
+    build: 
+      context: .
+      dockerfile: ./Dockerfile.dev
+    volumes:
+      - /opt/app/node_modules
+      - .:/opt/app
+    # Override the default starting command to use "npm run test"
+    command: ["npm", "run", "test"]
+    

@@ -28,9 +28,9 @@ FROM node:17-alpine
 WORKDIR '/opt/app'
 
 # Install REACT core libraries
-RUN npm install -D react-scripts \ 
+RUN npm install react-scripts \ 
    # Listen for files changes. If so, re-build the app and apply changes
-   npm install -g nodemon
+   npm install nodemon
 
 # Copy project description and dependencies list to target working directory
 # Isolate package.json to detect dependencies changes by docker
@@ -48,6 +48,8 @@ RUN npm install
 ####### To avoid that: 
 #######    Solution 1. Remove your local folder 'node_modules' (preferred option). It means you will only compile on Docker
 #######    Solution 2. Do the files copy BEFORE the 'npm install'
+#######
+####### !!! USE VOLUMES INSTEAD !!! 
 #######
 #COPY . .
 
