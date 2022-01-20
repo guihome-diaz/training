@@ -12,10 +12,10 @@
     "web-vitals": "^2.1.3"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "/opt/app/node_modules/.bin/react-scripts start",
+    "build": "/opt/app/node_modules/.bin/react-scripts build",
+    "test": "/opt/app/node_modules/.bin/react-scriptss test",
+    "eject": "/opt/app/node_modules/.bin/react-scripts eject"
   },
   "eslintConfig": {
     "extends": [

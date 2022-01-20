@@ -11,14 +11,12 @@
 # Port forwaring rules, This application listens on:
 # TCP 3000        |     NodeJS REACT application
 #
+# Build with: 
+# docker build . -f .\Dockerfile.dev -t guihomediaz/section_6_frontend
 #
-#####################################
-# WARNING WARNING WARNING WARNING WARNING 
-#####################################
+# Run with: 
+# docker run --name section6_react -p 4000:3000 -v /opt/app/node_modules -v ${pwd}:/opt/app guihomediaz/section_6_frontend
 #
-# This will NOT forward development changes inside the container!!! 
-# Because there is no volume attached, you must BUILD EVERY TIME to push your changes !!
-# 
 #####################################
 
 
@@ -29,12 +27,19 @@ FROM node:17-alpine
 # Application working directory inside the container
 WORKDIR '/opt/app'
 
+# Install REACT core libraries
+RUN npm install -D react-scripts \ 
+   # Listen for files changes. If so, re-build the app and apply changes
+   npm install -g nodemon
+
 # Copy project description and dependencies list to target working directory
 # Isolate package.json to detect dependencies changes by docker
-COPY package.json .
+# Isolate package-lock.json to ensure we always build with the same dependencies version
+COPY package*.json .
 
-# Retrieve project dependinces
+# Build project dependinces
 RUN npm install
+
 
 # Copy all projects files inside the container
 #######
@@ -44,8 +49,10 @@ RUN npm install
 #######    Solution 1. Remove your local folder 'node_modules' (preferred option). It means you will only compile on Docker
 #######    Solution 2. Do the files copy BEFORE the 'npm install'
 #######
-COPY . .
+#COPY . .
 
-# Start project in development mode
+# Expose port explicitly
+EXPOSE 3000
+
+# Start project in development mode (listen for files changes as well)
 CMD [ "npm", "run", "start" ]
-
