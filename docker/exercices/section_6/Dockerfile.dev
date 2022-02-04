@@ -1,0 +1,60 @@
+#####################################
+# Section 6: simple REACT application
+#
+# @author Stephen Grider (trainer)
+# @author Guillaume Diaz (trainee)
+# @version 1.0, 2022/01
+#####################################
+#
+# This container will start the application on the port 3000 (`npm run start`)
+#
+# Port forwaring rules, This application listens on:
+# TCP 3000        |     NodeJS REACT application
+#
+# Build with: 
+# docker build . -f .\Dockerfile.dev -t guihomediaz/section_6_frontend
+#
+# Run with: 
+# docker run --name section6_react -p 4000:3000 -v /opt/app/node_modules -v ${pwd}:/opt/app guihomediaz/section_6_frontend
+#
+#####################################
+
+
+# Use an existing image as a base
+#  !! careful !! When you work with NodeJS it is better to use a specific version of the base image
+FROM node:17-alpine
+
+# Application working directory inside the container
+WORKDIR '/opt/app'
+
+# Install REACT core libraries
+RUN npm install react-scripts \ 
+   # Listen for files changes. If so, re-build the app and apply changes
+   npm install nodemon
+
+# Copy project description and dependencies list to target working directory
+# Isolate package.json to detect dependencies changes by docker
+# Isolate package-lock.json to ensure we always build with the same dependencies version
+COPY package*.json .
+
+# Build project dependinces
+RUN npm install
+
+
+# Copy all projects files inside the container
+#######
+###### !!! Careful !!! 
+####### This will also copy (and replace) the node_modules folder! 
+####### To avoid that: 
+#######    Solution 1. Remove your local folder 'node_modules' (preferred option). It means you will only compile on Docker
+#######    Solution 2. Do the files copy BEFORE the 'npm install'
+#######
+####### !!! USE VOLUMES INSTEAD !!! 
+#######
+#COPY . .
+
+# Expose port explicitly
+EXPOSE 3000
+
+# Start project in development mode (listen for files changes as well)
+CMD [ "npm", "run", "start" ]
