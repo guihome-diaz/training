@@ -4,11 +4,14 @@ version: '3'
 # A service is a _type of container_. Each service is usally a different Docker container.
 # Reminder: all containers created by docker-compose are in the *same network* and they're going to have *free access to communicate to each other* in any way they want.
 services:
-  
   # Our main container (REACT application)
   react-app:
     # To always restart the container after a crash, no matter the reason
     restart: "no"
+    # Name of the container
+    container_name: react-app
+    # Name of the image
+    image: guihomediaz/section6/react-app
     # Use a local Dockerfile
     build: 
       # Where shall we build from and retrieve project's file?
@@ -26,6 +29,10 @@ services:
 
   # To run the tests in parallel of the real stuff
   react-tests:
+    # Name of the container
+    container_name: react-tests
+    # Name of the image
+    image: guihomediaz/section6/react-tests
     # use same build configuration and volumes as the runtime settings
     build: 
       context: .
