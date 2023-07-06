@@ -4,14 +4,15 @@ version: '3'
 # A service is a _type of container_. Each service is usally a different Docker container.
 # Reminder: all containers created by docker-compose are in the *same network* and they're going to have *free access to communicate to each other* in any way they want.
 services:
+
   # Our main container (REACT application)
   react-app:
     # To always restart the container after a crash, no matter the reason
     restart: "no"
     # Name of the container
-    container_name: react-app
+    container_name: s6-app-dev
     # Name of the image
-    image: guihomediaz/section6/react-app
+    image: guihomediaz/section6/react-app-dev
     # Use a local Dockerfile
     build: 
       # Where shall we build from and retrieve project's file?
@@ -40,6 +41,7 @@ services:
     volumes:
       - /opt/app/node_modules
       - .:/opt/app
-    # Override the default starting command to use "npm run test"
+    # Override the default starting command to use "npm run test" 
+    # TEST phase
     command: ["npm", "run", "test"]
     

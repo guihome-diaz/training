@@ -6,19 +6,22 @@
 # @version 1.0, 2022/01
 #####################################
 #
+# (=| DEVELOPMENT AND TESTS CONTAINER |=)
+#
 # This container will start the application on the port 3000 (`npm run start`)
 #
-# Port forwaring rules, This application listens on:
-# TCP 3000        |     NodeJS REACT application
-#
-# Build with: 
-# docker build . -f .\Dockerfile.dev -t guihomediaz/section_6_frontend
-#
-# Run with: 
-# docker run --name section6_react -p 4000:3000 -v /opt/app/node_modules -v ${pwd}:/opt/app guihomediaz/section_6_frontend
+# Key points: 
+#    a) Development files are located inside a VOLUME, therefore changes are dynamic. 
+#    b) Build files (/node_modules) is not available, it is only inside the container
+#    c) You can access nodeJS server directly through container's port 3000
 #
 #####################################
-
+# Build with: 
+# docker build . -f .\Dockerfile.dev -t guihomediaz/section_6/react-app-dev
+#
+# Run with: 
+# docker run --name s6-app-dev -p 4000:3000 -v /opt/app/node_modules -v ${pwd}:/opt/app guihomediaz/section_6/react-app-dev
+#####################################
 
 # Use an existing image as a base
 #  !! careful !! When you work with NodeJS it is better to use a specific version of the base image
@@ -40,7 +43,6 @@ COPY package*.json .
 # Build project dependinces
 RUN npm install
 
-
 # Copy all projects files inside the container
 #######
 ###### !!! Careful !!! 
@@ -57,4 +59,5 @@ RUN npm install
 EXPOSE 3000
 
 # Start project in development mode (listen for files changes as well)
+# Build project in START phase, to apply development policies and hot reload
 CMD [ "npm", "run", "start" ]
